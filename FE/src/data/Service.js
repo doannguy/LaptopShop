@@ -1,7 +1,7 @@
 const ServiceData = [
     {
         icon: "/images/icons/service1.png",
-        title: "Fast & Secure Delivery",
+        title: "Giao hàng nhanh chóng",
         text: "Tell about your service."
     },
     {
@@ -11,19 +11,19 @@ const ServiceData = [
     },
     {
         icon: "/images/icons/service3.png",
-        title: "24 Hour Return Policy",
+        title: "Chính sách hoàn tiền đẩy đủ",
         text: "No question ask."
     },
     {
         icon: "/images/icons/service4.png",
-        title: "Pro Quality Support",
+        title: "Hỗ trợ người dùng 24/7",
         text: "24/7 Live support."
     },
     {
         icon: "/images/icons/service5.png",
-        title: "Next Level Pro Quality",
+        title: "Chất lượng sản phẩm cao",
         text: "Exclusive Premium Service."
     }
 ]
 
-export {ServiceData};
+export { ServiceData };

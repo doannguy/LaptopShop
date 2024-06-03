@@ -1,86 +1,86 @@
 const FooterData = {
     footerLink: [
         {
-            label: "Account",
+            label: "Tài khoản",
             linkList: [
                 {
-                    name: "My Account",
+                    name: "Tài khoản của tôi",
                     url: "/dashboard"
                 },
                 {
-                    name: "Login",
+                    name: "Đăng nhập",
                     url: "/sign-in"
                 },
                 {
-                    name: "Cart",
+                    name: "Giỏ hàng",
                     url: "/cart"
                 },
                 {
-                    name: "Wishlist",
+                    name: "Danh sách mong ước",
                     url: "/wishlist"
                 },
                 {
-                    name: "Shop",
+                    name: "Khám phá cửa hàng",
                     url: "/shop"
                 }
             ]
         },
         {
-            label: "Quick Link",
+            label: "Liên kết",
             linkList: [
                 {
-                    name: "About Us",
+                    name: "Về chúng tôi",
                     url: "/about"
                 },
                 {
-                    name: "Privacy Policy",
+                    name: "Chính sách",
                     url: "/privacy-policy"
                 },
                 {
-                    name: "Terms Of Use",
+                    name: "Chính sách của người dùng",
                     url: "/terms-of-use"
                 },
                 {
-                    name: "Contact",
+                    name: "Liên hệ",
                     url: "/contact"
                 },
             ]
         },
         {
-            label: "Quick Link",
+            label: "Liên kết",
             linkList: [
                 {
-                    name: "About Us",
+                    name: "Về chúng tôi",
                     url: "/about"
                 },
                 {
-                    name: "Privacy Policy",
+                    name: "Chính sách",
                     url: "/privacy-policy"
                 },
                 {
-                    name: "Terms Of Use",
+                    name: "Chính sách của người dùng",
                     url: "/terms-of-use"
                 },
                 {
-                    name: "Contact",
+                    name: "Liên hệ",
                     url: "/contact"
                 },
             ]
-        }
+        },
     ],
     footerInfo: {
-        address: "685 Market Street, <br /> Las Vegas, LA 95820, <br /> United States.",
-        email: "example@domain.com",
-        phone: "(+01) 850-315-5862"
+        address: "Số nhà 16, <br /> Đoàn Kết, Thuận Thành, <br /> Phổ Yên.",
+        email: "ductrieuhoang@gmail.com",
+        phone: "0793157708"
     },
     footerAppInfo: {
         title: "Save $3 With App & New User only",
         qrCode: "/images/others/qr.png",
-        appStoreLink:"https://apps.apple.com/",
+        appStoreLink: "https://apps.apple.com/",
         appStoreLogo: "/images/others/app-store.png",
-        googlePlayLink:'https://play.google.com/',
+        googlePlayLink: 'https://play.google.com/',
         googlePlayLogo: "/images/others/play-store.png",
     }
 }
 
-export {FooterData};
+export { FooterData };

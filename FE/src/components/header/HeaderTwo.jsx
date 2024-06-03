@@ -14,10 +14,10 @@ import ProductSearchModal from "./elements/ProductSearchModal";
 
 const HeaderTwo = () => {
   const menuOption = useSelector((state) => state.menu);
-	const [searchToggle, setSearchToggle] = useState(false);
-	const searchBoxToggleHandler = () => {
-		setSearchToggle((toggler) => !toggler);
-	};
+  const [searchToggle, setSearchToggle] = useState(false);
+  const searchBoxToggleHandler = () => {
+    setSearchToggle((toggler) => !toggler);
+  };
 
   return (
     <header className="header axil-header header-style-2">
@@ -26,7 +26,7 @@ const HeaderTwo = () => {
           <CountDown unit unitShort date="2024-10-01T23:59:59" />
         </div>
         <p>
-          Open Doors To A World Of Fashion <Link href="/">Get Your Offer</Link>
+          Rất nhiều ưu đãi hấp dẫn <Link href="/">Get Your Offer</Link>
         </p>
       </HeaderTopNotify>
       <div className="axil-header-top">
@@ -42,7 +42,7 @@ const HeaderTwo = () => {
                     type="search"
                     className="placeholder product-search-input"
                     name="search2"
-                    placeholder="What are you looking for?"
+                    placeholder="Bạn muốn tìm kiếm?"
                     autoComplete="off"
                   />
                   <button type="submit" className="icon wooc-btn-search">
@@ -61,14 +61,14 @@ const HeaderTwo = () => {
         <div className="container">
           <div className="header-navbar">
             <HeaderAsideMenu />
-            <div className={`header-main-nav ${menuOption.isMobileMenuOpen ? "open": ""}`}>
+            <div className={`header-main-nav ${menuOption.isMobileMenuOpen ? "open" : ""}`}>
               <Nav />
             </div>
             <HeaderActions />
           </div>
         </div>
       </div>
-	  { searchToggle && (
+      {searchToggle && (
         <ProductSearchModal
           toggleHandler={searchBoxToggleHandler}
           toggler={searchToggle}

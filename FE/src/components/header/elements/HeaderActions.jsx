@@ -23,9 +23,9 @@ const HeaderActions = (props) => {
     dispatch(miniCartHandler(data));
   }
 
-const mobileMneuHandler = (data) => {
-  dispatch(mobileMenu(data))
-}
+  const mobileMneuHandler = (data) => {
+    dispatch(mobileMenu(data))
+  }
   return (
     <div className="header-action">
       <ul className="action-list">
@@ -35,7 +35,7 @@ const mobileMneuHandler = (data) => {
               type="search"
               className="placeholder product-search-input"
               name="search2"
-              placeholder="What are you looking for?"
+              placeholder="Bạn muốn tìm kiếm?"
               autoComplete="off"
             />
             <button type="submit" className="icon wooc-btn-search">
@@ -56,7 +56,7 @@ const mobileMneuHandler = (data) => {
 
         <li className="wishlist">
           <Link href="/wishlist">
-            {getProducts.wishListQuantity > 0 && 
+            {getProducts.wishListQuantity > 0 &&
               <span className="cart-count">{getProducts.wishListQuantity}</span>
             }
             <i className="far fa-heart" />

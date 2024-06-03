@@ -1,36 +1,36 @@
 const HeaderMenu = [
     {
-        name: "Home",
+        name: "Trang chủ",
         url: "#",
         hasChildren: true,
         children: [
-            {
-                name: "Electronics",
-                url: "/home/electronics"
-            },
-            
-            {
-                name: "Jewellery",
-                url: "/home/jewellery"
-            },
-           
-            {
-                name: "Fashion",
-                url: "/home/fashion"
-            },
-           
-            {
-                name: "Furniture",
-                url: "/home/furniture"
-            },
-            {
-                name: "NFT",
-                url: "/home/nft"
-            },
+            // {
+            //     name: "Electronics",
+            //     url: "/home/electronics"
+            // },
+
+            // {
+            //     name: "Jewellery",
+            //     url: "/home/jewellery"
+            // },
+
+            // {
+            //     name: "Fashion",
+            //     url: "/home/fashion"
+            // },
+
+            // {
+            //     name: "Furniture",
+            //     url: "/home/furniture"
+            // },
+            // {
+            //     name: "NFT",
+            //     url: "/home/nft"
+            // },
         ]
     },
     {
-        name: "Shop",
+        name: "Sản phẩm",
         url: "#",
         hasChildren: true,
         children: [
@@ -92,13 +92,13 @@ const HeaderMenu = [
         ]
     },
     {
-        name: "About",
+        name: "Về chúng tôi",
         url: "/about",
         hasChildren: false,
-        
+
     },
     {
-        name: "Blog",
+        name: "Tin tức",
         url: "#",
         hasChildren: true,
         children: [
@@ -133,18 +133,18 @@ const HeaderMenu = [
         ]
     },
     {
-        name: "Contact",
+        name: "Liên hệ",
         url: "/contact",
         hasChildren: false,
-        
+
     },
 ]
 
 const CateMenu = [
     {
-        name: "Fashion",
+        name: "Laptop & PC",
         url: "/shop?category=fashion",
-        icon: "/images/product/categories/cat-01.png",
+        icon: "/images/product/categories/cat-02.png",
         hasChildren: true,
         children: [
             {
@@ -217,33 +217,33 @@ const CateMenu = [
         ],
         featured: [
             {
-                thumb:"/images/product/product-feature1.png",
+                thumb: "/images/product/product-feature1.png",
                 url: "/"
             },
             {
-                thumb:"/images/product/product-feature2.png",
+                thumb: "/images/product/product-feature2.png",
                 url: "/"
             },
             {
-                thumb:"/images/product/product-feature3.png",
+                thumb: "/images/product/product-feature3.png",
                 url: "/"
             },
             {
-                thumb:"/images/product/product-feature4.png",
+                thumb: "/images/product/product-feature4.png",
                 url: "/"
             },
-            
+
         ]
 
     },
     {
         name: "Electronics",
         url: "/shop?category=electronics",
-        icon: "/images/product/categories/cat-02.png",
+        icon: "/images/product/categories/cat-01.png",
         hasChildren: false
     },
     {
-        name: "Home Decor",
+        name: "Đồ gia dụng",
         url: "/",
         icon: "/images/product/categories/cat-03.png",
         hasChildren: false
@@ -282,30 +282,30 @@ const CateMenu = [
 
 const DashboardAsideMenu = [
     {
-      icon: "fas fa-th-large",
-      name: "Dashboard",
-      slug: ""
+        icon: "fas fa-th-large",
+        name: "Dashboard",
+        slug: ""
     },
     {
-      icon: "fas fa-shopping-basket",
-      name: "Orders",
-      slug: "orders"
+        icon: "fas fa-shopping-basket",
+        name: "Orders",
+        slug: "orders"
     },
     {
-      icon: "fas fa-file-download",
-      name: "Downloads",
-      slug: "downloads"
+        icon: "fas fa-file-download",
+        name: "Downloads",
+        slug: "downloads"
     },
     {
-      icon: "fas fa-home",
-      name: "Addresses",
-      slug: "addresses-edit"
+        icon: "fas fa-home",
+        name: "Addresses",
+        slug: "addresses-edit"
     },
     {
-      icon: "fas fa-user",
-      name: "Account Details",
-      slug: "account-details" 
+        icon: "fas fa-user",
+        name: "Account Details",
+        slug: "account-details"
     }
 ]
 
-export {HeaderMenu, CateMenu, DashboardAsideMenu};
+export { HeaderMenu, CateMenu, DashboardAsideMenu };

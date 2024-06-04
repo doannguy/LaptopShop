@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('dashboard')->middleware('auth');
 
+Route::namespace('App\Http\Controllers\Admin')->middleware('auth')->group(function () {
+    Route::prefix('category')->group(function () {
+        Route::get('/', 'CategoryController@index')->name('category.index');
+        Route::post('datatable', 'CategoryController@datatable')->name('category.datatable');
+        Route::post('delete', 'CategoryController@delete')->name('category.delete');
+        Route::post('store', 'CategoryController@store')->name('category.store');
+        Route::post('update', 'CategoryController@update')->name('category.update');
+    });
+});
 
 include "auth.php";

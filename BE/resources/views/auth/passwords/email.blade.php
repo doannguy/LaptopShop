@@ -1,47 +1,45 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <form class="form w-100" method="POST" action="{{ route('password.email') }}">
+        @csrf
+        <div class="card-body">
+            <div class="text-start mb-10">
+                <h1 class="text-dark mb-3 fs-3x">
+                    Quên mật khẩu
+                </h1>
+                <div class="text-gray-400 fw-semibold fs-6">
+                    Nhập email của bạn để thiết lập lại mật khẩu của bạn.
+                </div>
+            </div>
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+            <div class="fv-row mb-8">
+                <input type="text" placeholder="Email" name="email" value="{{ old('email') }}" required
+                    autocomplete="email" autofocus
+                    class="form-control form-control-solid @error('email') is-invalid @enderror" />
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+            <div class="d-flex flex-stack">
+                <div class="m-0">
+                    <button class="btn btn-primary me-2">
+                        <span class="indicator-label">Xác nhận</span>
+                        <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                    <a href="{{ route('login') }}" class="btn btn-lg btn-light-primary fw-bold">Quay lại</a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </form>
 @endsection

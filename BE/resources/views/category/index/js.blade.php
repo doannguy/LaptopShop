@@ -24,6 +24,15 @@
             return datatable.row(row).data();
         }
 
+        const handleSearchDatatable = () => {
+            $('#category-search').on("keyup", (function(e) {
+                clearTimeout(timeoutSearch)
+                timeoutSearch = setTimeout(function() {
+                    datatable.draw();
+                }, 500)
+            }));
+        }
+
         const initEditAction = () => {
             $(document).on('click', '.btn-edit', function() {
                 const data = getRowData($(this).closest('tr'));
@@ -155,6 +164,7 @@
                 initEditAction();
                 initDeleteAction();
             });
+            handleSearchDatatable();
         }
 
         return {

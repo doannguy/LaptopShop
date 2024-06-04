@@ -25,6 +25,13 @@ Route::namespace('App\Http\Controllers\Admin')->middleware('auth')->group(functi
         Route::post('store', 'CategoryController@store')->name('category.store');
         Route::post('update', 'CategoryController@update')->name('category.update');
     });
+    Route::prefix('brand')->group(function () {
+        Route::get('/', 'BrandController@index')->name('brand.index');
+        Route::post('datatable', 'BrandController@datatable')->name('brand.datatable');
+        Route::post('delete', 'BrandController@delete')->name('brand.delete');
+        Route::post('store', 'BrandController@store')->name('brand.store');
+        Route::post('update', 'BrandController@update')->name('brand.update');
+    });
 });
 
 include "auth.php";

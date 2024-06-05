@@ -4,29 +4,29 @@ const HeaderMenu = [
         url: "#",
         hasChildren: true,
         children: [
-            // {
-            //     name: "Electronics",
-            //     url: "/home/electronics"
-            // },
+            {
+                name: "Electronics",
+                url: "/home/electronics"
+            },
 
-            // {
-            //     name: "Jewellery",
-            //     url: "/home/jewellery"
-            // },
+            {
+                name: "Jewellery",
+                url: "/home/jewellery"
+            },
 
-            // {
-            //     name: "Fashion",
-            //     url: "/home/fashion"
-            // },
+            {
+                name: "Fashion",
+                url: "/home/fashion"
+            },
 
-            // {
-            //     name: "Furniture",
-            //     url: "/home/furniture"
-            // },
-            // {
-            //     name: "NFT",
-            //     url: "/home/nft"
-            // },
+            {
+                name: "Furniture",
+                url: "/home/furniture"
+            },
+            {
+                name: "NFT",
+                url: "/home/nft"
+            },
         ]
     },
     {

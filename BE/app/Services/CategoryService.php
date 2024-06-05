@@ -56,4 +56,9 @@ class CategoryService
         $category = Category::find($data['id']);
         return $category->update($data);
     }
+
+    public function getCategories()
+    {
+        return Category::select(['id', 'name'])->get();
+    }
 }

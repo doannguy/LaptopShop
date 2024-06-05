@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\Category;
+use App\Models\ProductSeri;
 
-class CategoryService
+class ProductSeriService
 {
     public function filterDatatable(array $data)
     {
@@ -13,7 +13,7 @@ class CategoryService
         $skip = ($pageNumber - 1) * $pageLength;
         $sort = $data['order'][0]['dir'] ?? 'desc';
 
-        $query = Category::query();
+        $query = ProductSeri::query();
 
         if (isset($data['search'])) {
             $search = $data['search'];
@@ -23,7 +23,7 @@ class CategoryService
         $query->orderBy('id', $sort);
         $recordsFiltered = $recordsTotal = $query->count();
         $categories = $query->skip($skip)
-            // ->withCount(['products'])
+            ->with(['category'])
             ->take($pageLength)
             ->get();
 
@@ -37,28 +37,23 @@ class CategoryService
 
     public function delete($data)
     {
-        $category = Category::find($data['id']);
-        if ($data['delete_type'] == Category::DELETE_TYPE['hard']) {
-            // $category->products()->delete();
-            return $category->delete();
-        } else if ($data['delete_type'] == Category::DELETE_TYPE['soft']) {
-            // $category->products()->update(['category_id' => null]);
-            return $category->delete();
+        $productSeeri = ProductSeri::find($data['id']);
+        if ($data['delete_type'] == ProductSeri::DELETE_TYPE['hard']) {
+            // $productSeeri->products()->delete();
+            return $productSeeri->delete();
+        } else if ($data['delete_type'] == ProductSeri::DELETE_TYPE['soft']) {
+            // $productSeeri->products()->update(['productSeeri_id' => null]);
+            return $productSeeri->delete();
         }
     }
 
     public function store($data)
     {
-        return Category::create($data);
+        return ProductSeri::create($data);
     }
 
     public function update($data)
     {
-        return Category::find($data['id'])->update($data);
-    }
-
-    public function getCategories()
-    {
-        return Category::select(['id', 'name'])->get();
+        return ProductSeri::find($data['id'])->update($data);
     }
 }

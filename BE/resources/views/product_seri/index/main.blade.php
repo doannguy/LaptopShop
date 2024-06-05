@@ -8,7 +8,7 @@
                 class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5 mb-lg-0">
 
                 <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                    Danh mục
+                    Dòng sản phẩm
                 </h1>
 
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -18,7 +18,7 @@
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
-                    <li class="breadcrumb-item text-muted">Danh mục</li>
+                    <li class="breadcrumb-item text-muted">Dòng sản phẩm</li>
                 </ul>
             </div>
         </div>
@@ -34,24 +34,25 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i>
-                            <input type="text" id="category-search" class="form-control form-control-solid w-250px ps-12"
-                                placeholder="Tìm kiếm" />
+                            <input type="text" id="product-seri-search"
+                                class="form-control form-control-solid w-250px ps-12" placeholder="Tìm kiếm" />
                         </div>
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end base">
                             <button type="button" class="btn btn-primary btn-add-customer me-2" data-bs-toggle="modal"
-                                data-bs-target="#category-modal">Tạo mới</button>
+                                data-bs-target="#product-seri-modal">Tạo mới</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
                     <table class="table table-reponsive align-middle table-row-dashed table-bordered fs-6 gy-5"
-                        id="category-table">
+                        id="product-seri-table">
                         <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="text-center w-10px">STT</th>
                                 <th class="text-center min-w-125px">Tên</th>
+                                <th class="text-center min-w-125px">Danh mục</th>
                                 <th class="text-center min-w-125px">Số lượng sản phẩm</th>
                                 <th class="text-center min-w-100px">Hành động</th>
                             </tr>
@@ -65,9 +66,9 @@
 @endsection
 
 @section('modal')
-    @include('category.modal.main')
+    @include('product_seri.modal.main')
 @endsection
 
 @section('script')
-    @include('category.index.js')
+    @include('product_seri.index.js')
 @endsection

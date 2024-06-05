@@ -33,7 +33,7 @@ class LoginRequest extends FormRequest
         $errors = $validator->errors();
 
         throw new HttpResponseException(
-            jsonResponse(0, $errors, "Thông tin đăng nhập không hợp lệ")
+            jsonResponse(0, $errors->all(), "Thông tin đăng nhập không hợp lệ")
         );
     }
 }

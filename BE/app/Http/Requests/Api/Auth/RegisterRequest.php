@@ -45,7 +45,7 @@ class RegisterRequest extends FormRequest
         $errors = $validator->errors();
 
         throw new HttpResponseException(
-            jsonResponse(0, $errors, "Thông tin đăng ký không hợp lệ")
+            jsonResponse(0, $errors->all(), "Thông tin đăng ký không hợp lệ")
         );
     }
 }

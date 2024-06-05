@@ -57,4 +57,7 @@ class BrandService
         $category = Brand::find($data['id']);
         return $category->update($data);
     }
+    public function getAll() {
+        return Brand::all();
+    }
 }

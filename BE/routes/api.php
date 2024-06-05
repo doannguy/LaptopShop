@@ -19,9 +19,9 @@ Route::post('/login',[AuthController::class,'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::get('category', 'CategoryController@getCategories');
+    Route::get('brand', 'BrandController@getBrands');
 });

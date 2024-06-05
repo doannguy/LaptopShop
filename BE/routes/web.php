@@ -25,6 +25,14 @@ Route::namespace('App\Http\Controllers\Admin')->middleware('auth')->group(functi
         Route::post('store', 'CategoryController@store')->name('category.store');
         Route::post('update', 'CategoryController@update')->name('category.update');
     });
+
+    Route::prefix('product-seri')->group(function () {
+        Route::get('/', 'ProductSeriController@index')->name('product_seri.index');
+        Route::post('datatable', 'ProductSeriController@datatable')->name('product_seri.datatable');
+        Route::post('delete', 'ProductSeriController@delete')->name('product_seri.delete');
+        Route::post('store', 'ProductSeriController@store')->name('product_seri.store');
+        Route::post('update', 'ProductSeriController@update')->name('product_seri.update');
+    });
     Route::prefix('brand')->group(function () {
         Route::get('/', 'BrandController@index')->name('brand.index');
         Route::post('datatable', 'BrandController@datatable')->name('brand.datatable');

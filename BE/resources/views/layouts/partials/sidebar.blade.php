@@ -28,7 +28,7 @@
                 <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu"
                     data-kt-menu="true" data-kt-menu-expand="false">
                     <div class="menu-item">
-                        <a class="menu-link  @if (Route::currentRouteName() == 'dashboard') active @endif"
+                        <a class="menu-link @if (Route::currentRouteName() == 'dashboard') active @endif"
                             href="{{ route('dashboard') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-2 fs-2">
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="menu-item">
-                        <a class="menu-link  @if (Route::currentRouteName() == 'category.index') active @endif"
+                        <a class="menu-link @if (Route::currentRouteName() == 'category.index') active @endif"
                             href="{{ route('category.index') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-2 fs-2">
@@ -54,6 +54,21 @@
                             <span class="menu-title">Danh mục</span>
                         </a>
                     </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link @if (Route::currentRouteName() == 'product_seri.index') active @endif"
+                            href="{{ route('product_seri.index') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-graph-2 fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Dòng sản phẩm</span>
+                        </a>
+                    </div>
+
                     <div class="menu-item">
                         <a class="menu-link  @if (request()->routeIs('brand.*')) active @endif"
                             href="{{ route('brand.index') }}">

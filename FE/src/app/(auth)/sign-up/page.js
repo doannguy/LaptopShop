@@ -13,7 +13,7 @@ const SignUp = () => {
     const onSubmit = (data, e) => {
         setSignupData(data);
     }
-
+    
     return ( 
         <div className="axil-signin-form">
             <h3 className="title">I&apos;m New Here</h3>

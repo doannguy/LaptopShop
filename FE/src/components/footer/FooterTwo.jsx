@@ -15,7 +15,7 @@ const FooterTwo = () => {
         <div className="footer-top separator-top">
           <div className="container">
             <div className="row">
-              <div className="col-lg-3 col-sm-6 ">
+              <div className="col-lg-4 col-sm-12">
                 <div className="axil-footer-widget">
                   <h5 className="widget-title">Hỗ trợ</h5>
                   <div className="inner">
@@ -42,7 +42,7 @@ const FooterTwo = () => {
                 </div>
               </div>
               {FooterData.footerLink.slice(0, 2).map((items, index) => (
-                <div className="col-lg-3 col-sm-6" key={index}>
+                <div className="col-lg-4 col-sm-12" key={index}>
                   <div className="axil-footer-widget">
                     <h5 className="widget-title">{items.label}</h5>
                     <div className="inner">
@@ -87,9 +87,7 @@ const FooterTwo = () => {
                   <ul className="quick-link">
                     <li>
                       © {new Date().getFullYear()}. All rights reserved by {" "}
-                      <a target="_blank" href="https://axilthemes.com/">
-                        Axilthemes
-                      </a>
+                      Nguyễn Đoàn
                       .
                     </li>
                   </ul>

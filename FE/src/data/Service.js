@@ -6,7 +6,7 @@ const ServiceData = [
     },
     {
         icon: "/images/icons/service2.png",
-        title: "Money Back Guarantee",
+        title: "Khuyến mãi hấp dẫn",
         text: "Within 10 days."
     },
     {

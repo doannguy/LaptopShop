@@ -9,24 +9,24 @@ import SplashSupport from "@/components/splash/SplashSupport";
 
 export const metadata = {
 	title: 'eTrade Multipurpose eCommerce Next JS Template',
-  description: 'eTrade Multipurpose eCommerce Nextjs Template',
+	description: 'eTrade Multipurpose eCommerce Nextjs Template',
 }
 
 const HomeOne = () => {
-  return ( 
-    <>
-	<SplashHeader />
-	<main className="main-wrapper pv-main-wrapper">
-		<SplashBanner />
-		<SplashHomeDemo />
-		<SplashInnerDemo />
-		<SplashFeatures />
-		<SplashSupport />
-		<SplashCta />
-	</main>
-	<SplashFooter />
-    </>
-   );
+	return (
+		<>
+			<SplashHeader />
+			<main className="main-wrapper pv-main-wrapper">
+				<SplashBanner />
+				<SplashHomeDemo />
+				<SplashInnerDemo />
+				<SplashFeatures />
+				<SplashSupport />
+				<SplashCta />
+			</main>
+			<SplashFooter />
+		</>
+	);
 }
- 
+
 export default HomeOne;

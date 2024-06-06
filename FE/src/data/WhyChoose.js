@@ -5,7 +5,7 @@ const WhyChooseData = [
     },
     {
         icon: "/images/icons/service7.png",
-        title: "Money Back Guarantee"
+        title: "Khuyến mãi hấp dẫn"
     },
     {
         icon: "/images/icons/service8.png",

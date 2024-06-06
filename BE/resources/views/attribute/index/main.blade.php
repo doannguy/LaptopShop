@@ -8,7 +8,7 @@
                 class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5 mb-lg-0">
 
                 <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                    Danh mục
+                    Cấu hình sản phẩm
                 </h1>
 
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -18,7 +18,7 @@
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
-                    <li class="breadcrumb-item text-muted">Danh mục</li>
+                    <li class="breadcrumb-item text-muted">Cấu hình sản phẩm</li>
                 </ul>
             </div>
         </div>
@@ -34,25 +34,26 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i>
-                            <input type="text" id="category-search" class="form-control form-control-solid w-250px ps-12"
+                            <input type="text" id="attribute-search" class="form-control form-control-solid w-250px ps-12"
                                 placeholder="Tìm kiếm" />
                         </div>
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end base">
-                            <button type="button" class="btn btn-primary btn-add-customer me-2" data-bs-toggle="modal"
-                                data-bs-target="#category-modal">Tạo mới</button>
+                            <button type="button" class="btn btn-primary btn-add-customer me-2 open-add-modal"
+                              >Thêm cấu hình</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
                     <table class="table table-reponsive align-middle table-row-dashed table-bordered fs-6 gy-5"
-                        id="category-table">
+                        id="attribute-table">
                         <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="text-center w-10px">STT</th>
                                 <th class="text-center min-w-125px">Tên</th>
-                                <th class="text-center min-w-125px">Số lượng sản phẩm</th>
+                                <th class="text-center min-w-125px">Giá trị</th>
+                                <th class="text-center min-w-100px">Trạng thái</th>
                                 <th class="text-center min-w-100px">Hành động</th>
                             </tr>
                         </thead>
@@ -65,10 +66,12 @@
 @endsection
 
 @section('modal')
-    @include('category.modal.main')
+    <script>
+         var repeater = null;
+    </script>
+    @include('attribute.modal.main')
 @endsection
 
 @section('script')
-
-    @include('category.index.js')
+    @include('attribute.index.js')
 @endsection

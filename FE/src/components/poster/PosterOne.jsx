@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const PosterOne = (props) => {
   return (
-    <div className="axil-poster-countdown">
+    <div className="axil-poster-countdown mb--100">
       <div className="container">
         <div className="poster-countdown-wrap bg-lighter">
           <div className="row">

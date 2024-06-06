@@ -1,48 +1,48 @@
 const ElectronicsSlider = [
     {
-        title: "Roco Wireless Headphone",
-        subTitle: "Hot Deal In This Week",
+        title: "Tai nghe Roco Wireless",
+        subTitle: "Sản phẩm đặc biệt trong tuần này",
         subIcon: "fas fa-fire",
-        price: "$49.00",
+        price: "49.000đ",
         thumb: "/images/product/product-38.png"
     },
     {
-        title: "Smart Digital Watch",
-        subTitle: "Hot Deal In This Week",
+        title: "Đồng hồ thông minh",
+        subTitle: "Sản phẩm đặc biệt trong tuần này",
         subIcon: "fas fa-fire",
-        price: "$89.00",
+        price: "89.000đ",
         thumb: "/images/product/product-39.png"
     },
     {
-        title: "Smart Digital Watch",
-        subTitle: "Hot Deal In This Week",
+        title: "Đồng hồ thông minh",
+        subTitle: "Sản phẩm đặc biệt trong tuần này",
         subIcon: "fas fa-fire",
-        price: "$89.00",
+        price: "89.000đ",
         thumb: "/images/product/product-39.png"
     }
 ]
 const NftSlider = {
-    subtitle: "Largest NFT marketplace",
+    subtitle: "Thị trường NFT lớn nhất",
     subIcon: "fas fa-fire",
-    title: "Discover, collect, and sell extraordinary NFTs",
+    title: "Khám phá, thu thập và bán sản phẩm NFT kỳ diệu",
 }
 
 const FashionSlider = [
     {
-        title: "Bloosom Smat Watch",
-        subTitle: "Smartwatch",
+        title: "Đồng hồ thông minh Bloosom",
+        subTitle: "Đồng hồ thông minh",
         subIcon: "fal fa-watch",
         thumb: "/images/product/product-40.png"
     },
     {
-        title: "Delux Brand Watch",
-        subTitle: "Smartwatch",
+        title: "Đồng hồ thông minh Delux Brand",
+        subTitle: "Đồng hồ thông minh",
         subIcon: "fal fa-watch",
         thumb: "/images/product/product-46.png"
     },
     {
-        title: "Delux Brand Watch",
-        subTitle: "Smartwatch",
+        title: "Đồng hồ thông minh Delux Brand",
+        subTitle: "Đồng hồ thông minh",
         subIcon: "fal fa-watch",
         thumb: "/images/product/product-40.png"
     }
@@ -50,35 +50,35 @@ const FashionSlider = [
 
 const FashionSliderProduct = {
     thumbnail: "/images/product/product-41.png",
-    title: "Yantiti Leather Bags",
-    price: "$29.99"
+    title: "Túi xách da Yantiti",
+    price: "29.990đ"
 
 }
 
 const JewellerySlider = {
-    subtitle: "Hot Deal In Diamond",
+    subtitle: "Sản phẩm đặc biệt trong xạ",
     subIcon: "fas fa-fire",
-    title: "Exclusive Design Collection",
-    text: "Casual line with short design in 100% suede Diamond"
+    title: "Bộ sưu tập thiết kế chuyên nghiệp",
+    text: "Dòng sỉ nên với thiết kế ngắn gọn trên suối suê xạ"
 }
 
 const FurnitureSlider = [
     {
-        subTitle: "Hot Deal In This Week",
+        subTitle: "Sản phẩm đặc biệt trong tuần này",
         subIcon: "fas fa-fire",
-        title: "Neon Stylish Sofa Chair",
+        title: "Bàn ghế sofa chuyên dụng",
         thumbnail: "/images/product/product-47.png"
     },
     {
-        subTitle: "Hot Deal In This Week",
+        subTitle: "Sản phẩm đặc biệt trong tuần này",
         subIcon: "fas fa-fire",
-        title: "Sofa Chair with Lamp",
+        title: "Bàn ghế sofa với bàn lampion",
         thumbnail: "/images/product/product-48.png"
     },
     {
-        subTitle: "Hot Deal In This Week",
+        subTitle: "Sản phẩm đặc biệt trong tuần này",
         subIcon: "fas fa-fire",
-        title: "Neon Stylish Sofa Chair",
+        title: "Bàn ghế sofa chuyên dụng",
         thumbnail: "/images/product/product-47.png"
     },
 ]

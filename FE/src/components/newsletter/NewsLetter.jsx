@@ -8,7 +8,7 @@ const NewsLetter = (props) => {
           <div className="newsletter-content">
             <SectionTitle
               pClass="pr--0"
-              title="Get weekly update"
+              title="Cập nhật tin tức mới hàng tuần"
               subtitle="Bản tin"
               subtitleIcon="fas fa-envelope-open"
               subColor="highlighter-primary2"

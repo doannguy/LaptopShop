@@ -75,27 +75,27 @@ const HeaderActions = (props) => {
           <div
             className={`my-account-dropdown ${accountDropdown ? "open" : ""}`}
           >
-            <span className="title">QUICKLINKS</span>
+            <span className="title">Liên kết nhanh</span>
             <ul>
               <li>
-                <Link href="/dashboard">My Account</Link>
+                <Link href="/dashboard">Tài khoản của tôi</Link>
               </li>
               <li>
-                <Link href="dashboard/orders">Orders</Link>
+                <Link href="dashboard/orders">Chi tiết đơn hàng</Link>
               </li>
               <li>
-                <Link href="dashboard/account-details">Settings</Link>
+                <Link href="dashboard/account-details">Cài đặt</Link>
               </li>
             </ul>
             <div className="login-btn">
               <Link href="/sign-in" className="axil-btn btn-bg-primary">
-                Login
+                Đăng nhập
               </Link>
             </div>
             <div className="reg-footer text-center">
-              No account yet?
+              Bạn không có tài khoản?
               <Link href="/sign-up" className="btn-link">
-                REGISTER HERE.
+                ĐĂNG KÝ NGAY.
               </Link>
             </div>
           </div>

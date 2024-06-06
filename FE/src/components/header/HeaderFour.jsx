@@ -3,8 +3,6 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import Nav from "@/components/header/elements/Nav";
-import LangDropdown from "@/components/header/elements/LangDropdown";
-import CuurencyDropdown from "@/components/header/elements/CurrencyDropdown";
 import HeaderTopNotify from "@/components/header/elements/HeaderTopNotify";
 import HeaderBrand from "@/components/header/elements/HeaderBrand";
 import HeaderActions from "@/components/header/elements/HeaderActions";
@@ -47,8 +45,7 @@ const HeaderFour = () => {
           <div className="row align-items-center">
             <div className="col-md-4 col-12">
               <div className="header-top-dropdown dropdown-box-style">
-                <CuurencyDropdown />
-                <LangDropdown />
+
               </div>
             </div>
             <div className="col-md-4 col-5">

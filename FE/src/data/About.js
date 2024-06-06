@@ -22,11 +22,11 @@ const AboutStore = {
     thumbnail: "/images/about/about-01.png",
     subtitle: "About Store",
     subtitleIcon: "far fa-shopping-basket",
-    title: "Online shopping includes both buying things online.",
-    higlightLine: "Salesforce B2C Commerce can help you create unified, intelligent digital commerce experiences — both online and in the store.",
+    title: "Thương mại điện tử bao gồm cả mua sắm trực tuyến.",
+    higlightLine: "Salesforce B2C Commerce giúp bạn tạo ra các trải nghiệm thương mại điện tử hợp nhất, trí tuệ nhân tạo trong việc tạo ra các giao dịch thương mại điện tử — trực tuyến và tại cửa hàng.",
     description: [
-        "Empower your sales teams with industry tailored solutions that support manufacturers as they go digital, and adapt to changing markets & customers faster by creating new business.",
-        "Salesforce B2B Commerce offers buyers the seamless, self-service experience of online shopping with all the B2B"
+        "Tạo ra các giải pháp được thiết kế riêng biệt cho ngành hàng để giúp các nhà sản xuất đi vào thế giới điện tử, và phù hợp với thị trường và khách hàng thay đổi nhanh chóng bằng cách tạo ra các doanh nghiệp mới.",
+        "Salesforce B2B Commerce cung cấp cho người mua trải nghiệm thương mại điện tử ổn định, tự động, đa dạng với tất cả các B2B"
     ]
 }
 
@@ -48,21 +48,6 @@ const AboutAchievment = [
     }
 ]
 
-const AboutFeatures = [
-    {
-        subtitle:"Features #01",
-        title: "Solutions that work together",
-        text: "Publish your eCommerce site quickly with our easy-to-use store builder— no coding required. Migrate your items from your point of sale system or turn your Instagram feed into a shopping site and start selling fast. Square Online works for all kinds of businesses—retail, restaurants, services.",
-        thumbnail: "/images/about/about-02.png"
-    },
-    {
-        subtitle:"Features #02",
-        title: "Solutions that work together",
-        text: "Publish your eCommerce site quickly with our easy-to-use store builder— no coding required. Migrate your items from your point of sale system or turn your Instagram feed into a shopping site and start selling fast. Square Online works for all kinds of businesses—retail, restaurants, services.",
-        thumbnail: "/images/about/about-03.png"
-    }
 
-]
-    
 
-export{WhoAreData, WhoAreGallery, AboutFeatures, AboutStore, AboutAchievment};
+export { WhoAreData, WhoAreGallery, AboutStore, AboutAchievment };

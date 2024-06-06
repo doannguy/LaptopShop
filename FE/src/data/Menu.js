@@ -2,32 +2,32 @@ const HeaderMenu = [
     {
         name: "Trang chủ",
         url: "#",
-        hasChildren: true,
-        children: [
-            {
-                name: "Electronics",
-                url: "/home/electronics"
-            },
+        hasChildren: false,
+        // children: [
+        //     {
+        //         name: "Electronics",
+        //         url: "/home/electronics"
+        //     },
 
-            {
-                name: "Jewellery",
-                url: "/home/jewellery"
-            },
+        //     {
+        //         name: "Jewellery",
+        //         url: "/home/jewellery"
+        //     },
 
-            {
-                name: "Fashion",
-                url: "/home/fashion"
-            },
+        //     {
+        //         name: "Fashion",
+        //         url: "/home/fashion"
+        //     },
 
-            {
-                name: "Furniture",
-                url: "/home/furniture"
-            },
-            {
-                name: "NFT",
-                url: "/home/nft"
-            },
-        ]
+        //     {
+        //         name: "Furniture",
+        //         url: "/home/furniture"
+        //     },
+        //     {
+        //         name: "NFT",
+        //         url: "/home/nft"
+        //     },
+        // ]
     },
     {
         name: "Sản phẩm",
@@ -65,30 +65,30 @@ const HeaderMenu = [
         ]
     },
     {
-        name: "Pages",
+        name: "Trang",
         url: "#",
         hasChildren: true,
         children: [
             {
-                name: "Wishlist",
+                name: "Danh sách mong ước",
                 url: "/wishlist"
             },
             {
-                name: "Cart",
+                name: "Giỏ hàng",
                 url: "/cart"
             },
             {
-                name: "Sign Up",
+                name: "Đăng ký",
                 url: "/sign-up"
             },
             {
-                name: "Privacy Policy",
+                name: "Chính sách bảo mật",
                 url: "/privacy-policy"
             },
-            {
-                name: "Coming Soon",
-                url: "/coming-soon"
-            },
+            // {
+            //     name: "Sắp ra mắt",
+            //     url: "/coming-soon"
+            // },
         ]
     },
     {
@@ -97,41 +97,41 @@ const HeaderMenu = [
         hasChildren: false,
 
     },
-    {
-        name: "Tin tức",
-        url: "#",
-        hasChildren: true,
-        children: [
-            {
-                name: "Blog Grid",
-                url: "/blog"
-            },
-            {
-                name: "Blog List",
-                url: "/blog?blog=list"
-            },
-            {
-                name: "Standard Post",
-                url: "/blog/important-updates-for-listing-and-delisting-your-nfts"
-            },
-            {
-                name: "Gallery Post",
-                url: "/blog/apple-presents-app-best-of-2020-winners"
-            },
-            {
-                name: "Video Post",
-                url: "/blog/keeping-yourself-safe-when-buying-nfts-on-etrade"
-            },
-            {
-                name: "Audio Post",
-                url: "/blog/how-to-generate-blog-ideas-are-great-for-businesses-that-sell-both-b2b-and-d2c"
-            },
-            {
-                name: "Quote Post",
-                url: "/blog/an-oral-history-of-the-aim-away-message-by-the-people-who-were-there"
-            }
-        ]
-    },
+    // {
+    //     name: "Tin tức",
+    //     url: "#",
+    //     hasChildren: true,
+    //     children: [
+    //         {
+    //             name: "Blog Grid",
+    //             url: "/blog"
+    //         },
+    //         {
+    //             name: "Blog List",
+    //             url: "/blog?blog=list"
+    //         },
+    //         {
+    //             name: "Standard Post",
+    //             url: "/blog/important-updates-for-listing-and-delisting-your-nfts"
+    //         },
+    //         {
+    //             name: "Gallery Post",
+    //             url: "/blog/apple-presents-app-best-of-2020-winners"
+    //         },
+    //         {
+    //             name: "Video Post",
+    //             url: "/blog/keeping-yourself-safe-when-buying-nfts-on-etrade"
+    //         },
+    //         {
+    //             name: "Audio Post",
+    //             url: "/blog/how-to-generate-blog-ideas-are-great-for-businesses-that-sell-both-b2b-and-d2c"
+    //         },
+    //         {
+    //             name: "Quote Post",
+    //             url: "/blog/an-oral-history-of-the-aim-away-message-by-the-people-who-were-there"
+    //         }
+    //     ]
+    // },
     {
         name: "Liên hệ",
         url: "/contact",
@@ -288,22 +288,18 @@ const DashboardAsideMenu = [
     },
     {
         icon: "fas fa-shopping-basket",
-        name: "Orders",
+        name: "Chi tiết hàng hoá",
         slug: "orders"
     },
-    {
-        icon: "fas fa-file-download",
-        name: "Downloads",
-        slug: "downloads"
-    },
+
     {
         icon: "fas fa-home",
-        name: "Addresses",
+        name: "Địa chỉ",
         slug: "addresses-edit"
     },
     {
         icon: "fas fa-user",
-        name: "Account Details",
+        name: "Chi tiết tài khoản",
         slug: "account-details"
     }
 ]

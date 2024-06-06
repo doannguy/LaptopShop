@@ -22,7 +22,7 @@ class BrandService
 
         $query->orderBy('id', 'desc');
         $recordsFiltered = $recordsTotal = $query->count();
-        $categories = $query->skip($skip)
+        $brands = $query->skip($skip)
             // ->withCount(['products'])
             ->take($pageLength)
             ->get();
@@ -31,7 +31,7 @@ class BrandService
             "draw" => $data['draw'] ?? 1,
             "recordsTotal" => $recordsTotal,
             "recordsFiltered" => $recordsFiltered,
-            'data' => $categories
+            'data' => $brands
         ];
     }
 

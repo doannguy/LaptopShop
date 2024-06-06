@@ -3,7 +3,7 @@
         <div class="modal-content">
             <form class="form" action="#" id="category-form">
                 <div class="modal-header" id="modal-header">
-                    <h2 class="fw-bold">Thêm danh mục mới</h2>
+                    <h2 class="fw-bold">Thông tin danh mục</h2>
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Close">
                         <i class="ki-duotone ki-cross fs-1">
                             <span class="path1"></span>

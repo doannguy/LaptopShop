@@ -33,6 +33,14 @@ Route::
                 Route::post('store', 'BrandController@store')->name('brand.store');
                 Route::post('update', 'BrandController@update')->name('brand.update');
             });
+
+            Route::prefix('attribute')->group(function () {
+                Route::get('/', 'AttributeController@index')->name('attribute.index');
+                Route::post('datatable', 'AttributeController@datatable')->name('attribute.datatable');
+                Route::post('delete', 'AttributeController@delete')->name('attribute.delete');
+                Route::post('store', 'AttributeController@store')->name('attribute.store');
+                Route::post('update', 'AttributeController@update')->name('attribute.update');
+            });
         });
 
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('product_series', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
         });
     }

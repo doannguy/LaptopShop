@@ -2,28 +2,28 @@
 
 namespace App\Services;
 
-use App\Models\Brand;
-use App\Models\Category;
+use App\Models\ProductSeri;
 
-class BrandService
+class ProductSeriService
 {
     public function filterDatatable(array $data)
     {
         $pageNumber = ($data['start'] ?? 0) / ($data['length'] ?? 1) + 1;
         $pageLength = $data['length'] ?? 10;
         $skip = ($pageNumber - 1) * $pageLength;
+        $sort = $data['order'][0]['dir'] ?? 'desc';
 
-        $query = Brand::query();
+        $query = ProductSeri::query();
 
         if (isset($data['search'])) {
             $search = $data['search'];
             $query->where('name', 'like', "%{$search}%");
         }
 
-        $query->orderBy('id', 'desc');
+        $query->orderBy('id', $sort);
         $recordsFiltered = $recordsTotal = $query->count();
-        $brands = $query->skip($skip)
-            // ->withCount(['products'])
+        $categories = $query->skip($skip)
+            ->with(['category'])
             ->take($pageLength)
             ->get();
 
@@ -31,33 +31,29 @@ class BrandService
             "draw" => $data['draw'] ?? 1,
             "recordsTotal" => $recordsTotal,
             "recordsFiltered" => $recordsFiltered,
-            'data' => $brands
+            'data' => $categories
         ];
     }
 
     public function delete($data)
     {
-        $category = Brand::find($data['id']);
-        if ($data['delete_type'] == Brand::DELETE_TYPE['hard']) {
-            // $category->products()->delete();
-            return $category->delete();
-        } else if ($data['delete_type'] == Brand::DELETE_TYPE['soft']) {
-            // $category->products()->update(['category_id' => null]);
-            return $category->delete();
+        $productSeeri = ProductSeri::find($data['id']);
+        if ($data['delete_type'] == ProductSeri::DELETE_TYPE['hard']) {
+            // $productSeeri->products()->delete();
+            return $productSeeri->delete();
+        } else if ($data['delete_type'] == ProductSeri::DELETE_TYPE['soft']) {
+            // $productSeeri->products()->update(['productSeeri_id' => null]);
+            return $productSeeri->delete();
         }
     }
 
     public function store($data)
     {
-        return Brand::create($data);
+        return ProductSeri::create($data);
     }
 
     public function update($data)
     {
-        $category = Brand::find($data['id']);
-        return $category->update($data);
-    }
-    public function getAll() {
-        return Brand::all();
+        return ProductSeri::find($data['id'])->update($data);
     }
 }

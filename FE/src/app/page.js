@@ -11,6 +11,7 @@ import HomeFashion from "./home/fashion/page";
 export const metadata = {
 	title: 'eTrade Multipurpose eCommerce Next JS Template',
 	description: 'eTrade Multipurpose eCommerce Nextjs Template',
+	description: 'eTrade Multipurpose eCommerce Nextjs Template',
 }
 
 const HomeOne = () => {

@@ -11,6 +11,7 @@ class CategoryService
         $pageNumber = ($data['start'] ?? 0) / ($data['length'] ?? 1) + 1;
         $pageLength = $data['length'] ?? 10;
         $skip = ($pageNumber - 1) * $pageLength;
+        $sort = $data['order'][0]['dir'] ?? 'desc';
 
         $query = Category::query();
 
@@ -19,7 +20,7 @@ class CategoryService
             $query->where('name', 'like', "%{$search}%");
         }
 
-        $query->orderBy('id', 'desc');
+        $query->orderBy('id', $sort);
         $recordsFiltered = $recordsTotal = $query->count();
         $categories = $query->skip($skip)
             // ->withCount(['products'])
@@ -53,8 +54,7 @@ class CategoryService
 
     public function update($data)
     {
-        $category = Category::find($data['id']);
-        return $category->update($data);
+        return Category::find($data['id'])->update($data);
     }
 
     public function getCategories()

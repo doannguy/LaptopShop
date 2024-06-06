@@ -1,9 +1,9 @@
-<div class="modal fade" id="category-modal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="product-seri-modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
-            <form class="form" action="#" id="category-form">
+            <form class="form" action="#" id="product-seri-form">
                 <div class="modal-header" id="modal-header">
-                    <h2 class="fw-bold">Thông tin danh mục</h2>
+                    <h2 class="fw-bold">Thêm dòng sản phẩm</h2>
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Close">
                         <i class="ki-duotone ki-cross fs-1">
                             <span class="path1"></span>
@@ -19,9 +19,20 @@
 
                         <input type="hidden" name="id">
                         <div class="fv-row mb-7">
-                            <label class="required fs-6 fw-semibold mb-2" for="category-name">Tên danh mục</label>
-                            <input type="text" id="category-name" class="form-control form-control-solid"
-                                placeholder="Ex: Laptop văn phòng" name="name" autofocus />
+                            <label class="required fs-6 fw-semibold mb-2" for="product-seri-name">Tên dòng sản
+                                phẩm</label>
+                            <input type="text" id="product-seri-name" class="form-control form-control-solid"
+                                placeholder="Ex: Lenovo Thinkpad" name="name" autofocus />
+                        </div>
+
+                        <div class="fv-row mb-7" id="category-select">
+                            <label class="required fs-6 fw-semibold mb-2">Danh mục</label>
+                            <select class="form-select form-select-solid" id="category-id" name="category_id"
+                                aria-label="Danh mục">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -41,36 +52,41 @@
 
 <script>
     $(document).ready(function() {
-        const categoryModal = $('#category-modal');
-        const categoryForm = categoryModal.find('#category-form');
+        const productSeriModal = $('#product-seri-modal');
+        const productSeriForm = productSeriModal.find('#product-seri-form');
 
-        categoryModal.on('hidden.bs.modal', function() {
-            categoryModal.find('#modal-header h2').text('Thêm danh mục');
-            categoryForm.trigger('reset');
+        productSeriForm.find('#category-id').select2({
+            dropdownParent: '#category-select'
+        });
+
+        productSeriModal.on('hidden.bs.modal', function() {
+            productSeriModal.find('#modal-header h2').text('Thêm dòng sản phẩm');
+            productSeriForm.trigger('reset');
         })
 
-        categoryForm.on('submit', function(e) {
+        productSeriForm.on('submit', function(e) {
             e.preventDefault();
             const btnSubmit = $(this).find('button[type="submit"]');
             btnSubmit.attr('data-kt-indicator', "on");
 
             const data = {
-                id: categoryForm.find('input[name="id"]').val(),
-                name: categoryForm.find('input[name="name"]').val(),
+                id: productSeriForm.find('input[name="id"]').val(),
+                name: productSeriForm.find('input[name="name"]').val(),
+                category_id: productSeriForm.find('select[name="category_id"]').val(),
                 _token: $("input[name=_token]").val(),
             }
 
             $.ajax({
-                url: !data.id ? "{{ route('category.store') }}" :
-                    "{{ route('category.update') }}",
+                url: !data.id ? "{{ route('product_seri.store') }}" :
+                    "{{ route('product_seri.update') }}",
                 type: 'POST',
                 data: data,
                 success: function(res) {
                     if (res.code == 0) {
-                        categoryModal.modal('hide');
-                        toastr.success(!data.id ? "Thêm mới danh mục thành công!" :
-                            "Sửa danh mục thành công!");
-                        $('#category-table').DataTable().ajax.reload();
+                        productSeriModal.modal('hide');
+                        toastr.success(!data.id ? "Thêm mới dòng sản phẩm thành công!" :
+                            "Sửa dòng sản phẩm thành công!");
+                        $('#product-seri-table').DataTable().ajax.reload();
                     } else {
                         toastr.error(res.data.join(', ') + ".");
                     }

@@ -4,36 +4,36 @@ import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { Logo } from "@/data/Common";
 
-const AuthLayout = ({children, bgImage}) => {
+const AuthLayout = ({ children, bgImage }) => {
     const pathname = usePathname();
     const slug = pathname.replace("/", "");
 
-    return ( 
+    return (
         <div className="axil-signin-area">
             <div className="signin-header">
                 <div className="row align-items-center">
                     <div className="col-md-6">
                         <Link href="/" className="site-logo">
-                        <Image 
-                            src={Logo.dark}
-                            height={40}
-                            width={157}
-                            alt="Logo"
-                        />
+                            <Image
+                                src={Logo.dark}
+                                height={40}
+                                width={157}
+                                alt="Logo"
+                            />
                         </Link>
                     </div>
                     <div className="col-md-6">
                         <div className="singin-header-btn">
-                            <p>{slug === "sign-in" ? "Not a member?":"Already a member?"}</p>
-                            <Link href={slug === "sign-in" ? "/sign-up":"/sign-in"} className="axil-btn btn-bg-secondary sign-up-btn">{slug === "sign-in" ? "Sign Up Now":"Sign In"}</Link>
+                            <p>{slug === "sign-in" ? "Not a member?" : "Đã có tài khoản?"}</p>
+                            <Link href={slug === "sign-in" ? "/sign-up" : "/sign-in"} className="axil-btn btn-bg-secondary sign-up-btn">{slug === "sign-in" ? "Sign Up Now" : "Đăng nhập"}</Link>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="row">
                 <div className="col-xl-4 col-lg-6">
-                    <div className={`axil-signin-banner bg_image ${bgImage ? bgImage : "bg_image--10"}`}>
-                        <h3 className="title">We Offer the Best Products</h3>
+                    <div className={`axil-signin-banner bg_image ${bgImage ? bgImage : "bg_auth_image"} mx-5`}>
+                        <h3 className="title">Chúng tôi cung cấp những sản phẩm tốt nhất    </h3>
                     </div>
                 </div>
                 <div className="col-lg-6 offset-xl-2">
@@ -45,5 +45,5 @@ const AuthLayout = ({children, bgImage}) => {
         </div>
     );
 }
- 
+
 export default AuthLayout;

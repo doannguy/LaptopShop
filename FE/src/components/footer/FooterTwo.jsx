@@ -74,9 +74,6 @@ const FooterTwo = () => {
                   <a href={ScocialLink.twitter.url}>
                     <i className={ScocialLink.twitter.icon} />
                   </a>
-                  <a href={ScocialLink.linkedin.url}>
-                    <i className={ScocialLink.linkedin.icon} />
-                  </a>
                   <a href={ScocialLink.discord.url}>
                     <i className={ScocialLink.discord.icon} />
                   </a>

@@ -33,7 +33,7 @@ const HomeFashion = () => {
       <main className="main-wrapper">
         <BannerThree />
         <ServiceOne />
-        <Section pClass="axil-new-arrivals-product-area fullwidth-container" sectionPadding="pb--0 pt--50" containerClass="ml--xxl-0" borderBottom="pb--50">
+        {/* <Section pClass="axil-new-arrivals-product-area fullwidth-container" sectionPadding="pb--0 pt--50" containerClass="ml--xxl-0" borderBottom="pb--50">
           <SectionTitle
             title="Sản phẩm mới"
             subtitle="Sản phẩm tuần này"
@@ -72,7 +72,7 @@ const HomeFashion = () => {
               <ProductFour product={data} key={data.id} />
             ))}
           </SlickSlider>
-        </Section>
+        </Section> */}
         <Section pClass="pb--50 pb_sm--30">
           <SectionTitle
             title="Sản phẩm bán chạy"
@@ -120,8 +120,9 @@ const HomeFashion = () => {
           thumbnail="/images/product/poster/poster-05.png"
           thumbWidth={418}
           thumbHeight={502}
+
         />
-        <Section>
+        {/* <Section>
           <SectionTitle
             title="Explore our Products"
             subtitle="Our Products"
@@ -149,7 +150,7 @@ const HomeFashion = () => {
               <Link href="/shop" className="axil-btn btn-bg-lighter btn-load-more">Xem tất cả</Link>
             </div>
           </div>
-        </Section>
+        </Section> */}
         <TestimonialOne />
         <Section pClass="pb--50">
           <SectionTitle

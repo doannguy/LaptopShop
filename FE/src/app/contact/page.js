@@ -40,7 +40,7 @@ const ContactUs = () => {
             <main className="main-wrapper">
                 <Breadcrumb
                     activeItem="Contact"
-                    title="Contact With Us"
+                    title="Liên hệ với chúng tôi"
                 />
                 <div className="axil-contact-page-area axil-section-gap">
                     <div className="container">
@@ -49,8 +49,8 @@ const ContactUs = () => {
                                 <div className="col-lg-8">
                                     <div className="contact-form">
                                         <div>
-                                            <h3 className="title mb--10">We would love to hear from you.</h3>
-                                            <p>If you’ve got great products your making or looking to work with us then drop us a line.</p>
+                                            <h3 className="title mb--10">Chúng tôi rất mong nhận được những phản hồi từ bạn</h3>
+                                            <p>Nếu bạn có những sản phẩm tuyệt vời mà bạn đang tạo ra hoặc muốn hợp tác với chúng tôi thì hãy liên hệ với chúng tôi.</p>
                                             <form onSubmit={handleSubmit(sendEmail)}>
                                                 <div className="row row--10">
                                                     <div className="col-lg-4">
@@ -82,7 +82,7 @@ const ContactUs = () => {
                                                     </div>
                                                     <div className="col-12">
                                                         <div className="form-group mb--0">
-                                                            <button name="submit" type="submit" className="axil-btn btn-bg-primary">Send Message</button>
+                                                            <button name="submit" type="submit" className="axil-btn btn-bg-primary">Gửi phản hồi</button>
                                                             {result && <p className="success">Message has been sent successfully</p>}
                                                         </div>
                                                     </div>
@@ -93,19 +93,16 @@ const ContactUs = () => {
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="contact-location mb--40">
-                                        <h4 className="title mb--20">Our Store</h4>
+                                        <h4 className="title mb--20">Địa chỉ</h4>
                                         <span className="address mb--20">{StoreInfo.address}</span>
                                         <span className="phone">Phone: {StoreInfo.phone}</span>
                                         <span className="email">Email: {StoreInfo.email}</span>
                                     </div>
-                                    <div className="contact-career mb--40">
-                                        <h4 className="title mb--20">Careers</h4>
-                                        <p>Instead of buying six things, one that you really like.</p>
-                                    </div>
+
                                     <div className="opening-hour">
-                                        <h4 className="title mb--20">Opening Hours:</h4>
-                                        <p>Monday to Saturday: {StoreInfo.opening.monToSat}
-                                            <br /> Sundays: {StoreInfo.opening.othersDay}
+                                        <h4 className="title mb--20">Giờ mở cửa:</h4>
+                                        <p>Thứ 2 - Thứ 6: {StoreInfo.opening.monToSat}
+                                            <br /> Chủ nhật: {StoreInfo.opening.othersDay}
                                         </p>
                                     </div>
                                 </div>

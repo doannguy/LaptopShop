@@ -3,8 +3,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import Nav from "@/components/header/elements/Nav";
-import LangDropdown from "@/components/header/elements/LangDropdown";
-import CuurencyDropdown from "@/components/header/elements/CurrencyDropdown";
 import HeaderTopNotify from "@/components/header/elements/HeaderTopNotify";
 import HeaderBrand from "@/components/header/elements/HeaderBrand";
 import HeaderActions from "@/components/header/elements/HeaderActions";
@@ -49,8 +47,6 @@ const HeaderTwo = () => {
                     <i className="far fa-search" />
                   </button>
                 </div>
-                <CuurencyDropdown />
-                <LangDropdown />
               </div>
             </div>
           </div>

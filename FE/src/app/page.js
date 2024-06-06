@@ -6,27 +6,29 @@ import SplashHeader from "@/components/splash/SplashHeader";
 import SplashHomeDemo from "@/components/splash/SplashHomeDemo";
 import SplashInnerDemo from "@/components/splash/SplashInnerDemo";
 import SplashSupport from "@/components/splash/SplashSupport";
+import HomeFashion from "./home/fashion/page";
 
 export const metadata = {
 	title: 'eTrade Multipurpose eCommerce Next JS Template',
-  description: 'eTrade Multipurpose eCommerce Nextjs Template',
+	description: 'eTrade Multipurpose eCommerce Nextjs Template',
 }
 
 const HomeOne = () => {
-  return ( 
-    <>
-	<SplashHeader />
-	<main className="main-wrapper pv-main-wrapper">
-		<SplashBanner />
+	return (
+		<>
+			<main className="main-wrapper pv-main-wrapper">
+				{/* <SplashBanner />
 		<SplashHomeDemo />
 		<SplashInnerDemo />
 		<SplashFeatures />
 		<SplashSupport />
-		<SplashCta />
-	</main>
-	<SplashFooter />
-    </>
-   );
+		<SplashCta /> */}
+
+				<HomeFashion />
+			</main>
+
+		</>
+	);
 }
- 
+
 export default HomeOne;

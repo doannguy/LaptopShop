@@ -29,6 +29,19 @@ class StoreAttributeRequest extends FormRequest
             'attribute_values' => 'required|array|min:1',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Vui lòng nhập tên thuộc tính',
+            'name.string' => 'Tên thuộc tính phải là chuỗi',
+            'name.max' => 'Tên thuộc tính không được quá 255 ký tự',
+            'name.unique' => 'Tên thuộc tính đã tồn tại',
+            'status.required' => 'Vui lòng chọn trạng thái',
+            'attribute_values.required' => 'Vui lòng chọn thuộc tính',
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors();

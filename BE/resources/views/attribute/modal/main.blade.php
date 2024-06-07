@@ -27,11 +27,27 @@
                             <label class="required fs-6 fw-semibold mb-2">Danh sách các giá trị</label>
                             <!--begin::Repeater-->
                             <div id="attribute_values">
-                                <!--begin::Form group-->
-                                <div class="form-group">
-                                    <div data-repeater-list="attribute_values">
-                                        <div data-repeater-item>
-                                            <div class="form-group row">
+
+                                <div data-repeater-list="attribute_values">
+                                    <div data-repeater-item>
+                                        <div class="d-flex mb-2">
+                                            <input type="text" name="value" class="form-control w-100 me-2"
+                                                placeholder="Ex: 32GB" />
+                                            <input type="hidden" name="id" />
+                                            <button type="button" class="btn btn-sm btn-light-danger min-w-75px"
+                                                data-repeater-delete>
+                                                <i class="ki-duotone ki-trash fs-5">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                    <span class="path4"></span>
+                                                    <span class="path5"></span>
+                                                </i>
+                                                Xóa
+                                            </button>
+                                        </div>
+
+                                        {{-- <div class="form-group row">
                                                 <div class="col-md-8">
                                                     <label class="form-label">Giá trị:</label>
                                                     <input type="text" name="value"
@@ -39,6 +55,7 @@
                                                     <input type="hidden" name="id"
                                                         class="form-control mb-md-0 mb-2" placeholder="Ex: 32GB" />
                                                 </div>
+
                                                 <div class="col-md-4">
                                                     <a href="javascript:;" data-repeater-delete
                                                         class="btn btn-sm btn-light-danger mt-md-8 mt-3">
@@ -49,30 +66,27 @@
                                                         Xóa
                                                     </a>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            </div> --}}
                                     </div>
                                 </div>
-                                <!--end::Form group-->
-                                <!--begin::Form group-->
                                 <div class="form-group mt-5">
-                                    <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                    <button type="button" class="btn btn-light-primary" data-repeater-create>
                                         <i class="ki-duotone ki-plus fs-3"></i>
                                         Thêm giá trị
-                                    </a>
+                                    </button>
                                 </div>
-                                <!--end::Form group-->
                             </div>
-                            <!--end::Repeater-->
                         </div>
                         <div class="fv-row mb-7">
                             <label class="required fs-6 fw-semibold mb-2">Trạng thái</label>
-                            <div class="form-check form-check-custom form-check-solid">
-                                <input class="form-check-input" type="radio" value="1" name="status"
-                                    id="status_hien_thi" />
-                                <label class="form-check-label" for="status_hien_thi">
-                                    Hiển thị
-                                </label>
+                            <div class="d-flex">
+                                <div class="form-check form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="radio" value="1" name="status" checked
+                                        id="status_hien_thi" />
+                                    <label class="form-check-label" for="status_hien_thi">
+                                        Hiển thị
+                                    </label>
+                                </div>
                                 <div class="form-check form-check-custom form-check-solid ms-2">
                                     <input class="form-check-input" type="radio" name="status" value="0"
                                         id="status_an" />

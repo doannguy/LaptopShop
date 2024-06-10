@@ -22,6 +22,7 @@
     "gray-matter": "^4.0.3",
     "next": "13.4.3",
     "react": "18.2.0",
+    "react-chatbot-kit": "^2.2.2",
     "react-countdown": "^2.3.5",
     "react-countup": "^6.4.2",
     "react-dom": "18.2.0",

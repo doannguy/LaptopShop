@@ -5,10 +5,24 @@ import ProductSearchModal from "@/components/header/elements/ProductSearchModal"
 import MiniCart from "@/components/header/elements/MiniCart";
 import { miniCartHandler } from "@/store/slices/productSlice";
 import { mobileMenu } from "@/store/slices/menuSlice";
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const HeaderActions = (props) => {
   const [searchToggle, setSearchToggle] = useState(false);
   const [accountDropdown, setaccountDropdown] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (window.localStorage.getItem('token') != null) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
+
+
 
   const dispatch = useDispatch();
   const getProducts = useSelector((state) => state.productData);
@@ -26,6 +40,12 @@ const HeaderActions = (props) => {
   const mobileMneuHandler = (data) => {
     dispatch(mobileMenu(data))
   }
+
+  const logOut = () => {
+    window.localStorage.removeItem('token');
+    router.push('/sign-in');
+  }
+
   return (
     <div className="header-action">
       <ul className="action-list">
@@ -87,11 +107,16 @@ const HeaderActions = (props) => {
                 <Link href="dashboard/account-details">Cài đặt</Link>
               </li>
             </ul>
-            <div className="login-btn">
+
+            {isLogin ? <div className="login-btn">
+              <button onClick={() => logOut()} className="axil-btn btn-bg-primary">
+                Đăng xuất
+              </button>
+            </div> : <div className="login-btn">
               <Link href="/sign-in" className="axil-btn btn-bg-primary">
                 Đăng nhập
               </Link>
-            </div>
+            </div>}
             <div className="reg-footer text-center">
               Bạn không có tài khoản?
               <Link href="/sign-up" className="btn-link">

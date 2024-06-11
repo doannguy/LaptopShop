@@ -20,7 +20,7 @@ class ProductSeri extends Model
 
     public function products()
     {
-        // return $this->hasMany(Product::class, 'product_seri_id', 'id');
+        return $this->hasMany(Product::class, 'product_seri_id', 'id');
     }
 
     public function category()

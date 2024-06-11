@@ -56,4 +56,9 @@ class ProductSeriService
     {
         return ProductSeri::find($data['id'])->update($data);
     }
+
+    public function getByCategoryId($categoryId)
+    {
+        return ProductSeri::where('category_id', $categoryId)->get();
+    }
 }

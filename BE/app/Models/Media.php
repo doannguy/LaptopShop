@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Media extends Model
 {
     use HasFactory;
-
-    protected $table = "brands";
+    protected $table = "media";
 
     protected $guarded = [];
 
@@ -18,8 +17,8 @@ class Brand extends Model
         'hard' => 1,
     ];
 
-    public function products()
-    {
-        return $this->hasMany(Product::class, 'brand_id', 'id');
+    public function thumbnaillProduct () {
+        return $this->belongsTo(Product::class, 'thumbnail', 'id');
     }
+
 }

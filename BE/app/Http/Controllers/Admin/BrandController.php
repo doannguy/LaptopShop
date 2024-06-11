@@ -17,32 +17,32 @@ class BrandController extends Controller
     }
     public function datatable(Request $request)
     {
-        $result = $this->categoryService()->filterDatatable($request->input());
+        $result = $this->brandService()->filterDatatable($request->input());
         return response()->json($result);
     }
 
     public function store(StoreBrandRequest $request)
     {
         $data = $request->validated();
-        $result = $this->categoryService()->store($data);
+        $result = $this->brandService()->store($data);
         return jsonResponse($result ? 0 : 1);
     }
 
     public function update(UpdateBrandRequest $request)
     {
         $data = $request->validated();
-        $result = $this->categoryService()->update($data);
+        $result = $this->brandService()->update($data);
         return jsonResponse($result ? 0 : 1);
     }
 
     public function delete(DeleteBrandRequest $request)
     {
         $data = $request->validated();
-        $result = $this->categoryService()->delete($data);
+        $result = $this->brandService()->delete($data);
         return jsonResponse($result ? 0 : 1);
     }
 
-    public function categoryService()
+    public function brandService()
     {
         return app(BrandService::class);
     }

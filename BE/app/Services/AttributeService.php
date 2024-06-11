@@ -112,6 +112,16 @@ class AttributeService extends Service
         }
     }
 
+    public function getAllWithAttributeValuesArray()
+    {
+        return $this->getAll()->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'name' => $item->name,
+                'values' => $item->attributeValues->toArray(),
+            ];
+        })->values()->toArray();
+    }
     public function delete($id)
     {
         DB::beginTransaction();

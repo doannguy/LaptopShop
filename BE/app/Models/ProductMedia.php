@@ -5,21 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class ProductMedia extends Model
 {
     use HasFactory;
 
-    protected $table = "brands";
-
+    protected $table = "product_media";
+    public $timestamps = false;
     protected $guarded = [];
-
     public const DELETE_TYPE = [
         'soft' => 0,
         'hard' => 1,
     ];
 
-    public function products()
-    {
-        return $this->hasMany(Product::class, 'brand_id', 'id');
-    }
 }

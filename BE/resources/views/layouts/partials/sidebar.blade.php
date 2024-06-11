@@ -42,6 +42,19 @@
                     </div>
 
                     <div class="menu-item">
+                        <a class="menu-link  @if (Route::currentRouteName() == 'product.*') active @endif"
+                            href="{{ route('product.index') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-monitor-mobile   fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Sản phẩm</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
                         <a class="menu-link @if (Route::currentRouteName() == 'category.index') active @endif"
                             href="{{ route('category.index') }}">
                             <span class="menu-icon">

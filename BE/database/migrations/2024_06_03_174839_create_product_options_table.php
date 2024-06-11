@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('product_options', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('price', 8, 2);
-            $table->decimal('current_price', 8, 2)->nullable();
+            $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('current_price')->nullable();
             $table->unsignedBigInteger('product_id');
             $table->integer('amount')->default(0);
+            $table->unsignedBigInteger('image');
             $table->integer('status')->default(1);
         });
     }

@@ -44,6 +44,14 @@ class ProductSeriController extends Controller
         $result = $this->ProductSeriService()->delete($data);
         return jsonResponse($result ? 0 : 1);
     }
+    public function getByCategoryId(Request $request) {
+        $request->validate([
+            'category_id' => 'required|integer|exists:categories,id'
+        ]);
+
+        $result = $this->ProductSeriService()->getByCategoryId($request->input('category_id'));
+        return jsonResponse(0,$result);
+    }
 
     public function ProductSeriService()
     {

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('short_description')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('brand_id')->nullable();
+            $table->unsignedBigInteger('thumbnail');
             $table->unsignedBigInteger('product_seri_id')->nullable();
             $table->timestamps();
         });

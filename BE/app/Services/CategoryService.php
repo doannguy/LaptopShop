@@ -4,8 +4,11 @@ namespace App\Services;
 
 use App\Models\Category;
 
-class CategoryService
+class CategoryService extends Service
 {
+    public function setModel() {
+        $this->model = new Category();
+    }
     public function filterDatatable(array $data)
     {
         $pageNumber = ($data['start'] ?? 0) / ($data['length'] ?? 1) + 1;
@@ -52,10 +55,8 @@ class CategoryService
         return Category::create($data);
     }
 
-    public function update($data)
-    {
-        return Category::find($data['id'])->update($data);
-    }
+
+
 
     public function getCategories()
     {

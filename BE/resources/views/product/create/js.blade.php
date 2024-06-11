@@ -185,7 +185,7 @@ $(document).ready(function () {
             dataSend.append('_token', $("input[name=_token]").val());
             dataSend.append('name', $("input[name=name]").val());
             dataSend.append('thumbnail', $("input[name=thumbnail]")[0].files[0]);
-            dataSend.append('short_description', $("input[name=short_description]").val());
+            dataSend.append('short_description', $("textarea[name=short_description]").val());
             dataSend.append('description', $("textarea[name=description]").val());
             dataSend.append('brand_id', $("select[name=brand]").val());
             dataSend.append('category_id', $("select[name=category]").val());

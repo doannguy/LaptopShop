@@ -34,7 +34,7 @@ const HomeFashion = () => {
       <div style={{ position: 'relative' }}>
         <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: '999' }}>
           <Chatbot
-
+            placeholderText='Vui lòng nhập thắc mắc?'
             config={config}
             messageParser={MessageParser}
             actionProvider={ActionProvider}

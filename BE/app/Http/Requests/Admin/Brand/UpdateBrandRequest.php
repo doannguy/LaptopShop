@@ -24,20 +24,20 @@ class UpdateBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:categories,id',
-            'name' => 'required|string|max:255|unique:categories,name,' . $this->id, // Ignore self
+            'id' => 'required|exists:brands,id',
+            'name' => 'required|string|max:255|unique:brands,name,' . $this->id, // Ignore self
         ];
     }
 
     public function messages()
     {
         return [
-            'id.required' => 'Vui lòng chọn danh mục',
-            'id.exists' => 'Danh mục không tồn tại',
-            'name.required' => 'Vui lòng nhập tên danh mục',
-            'name.unique' => 'Tên danh mục đã tồn tại',
-            'name.max' => 'Tên danh mục tối đa 255 ký tự',
-            'name.string' => 'Tên danh mục phải là chuỗi',
+            'id.required' => 'Vui lòng chọn thương hiệu',
+            'id.exists' => 'Thương hiệu không tồn tại',
+            'name.required' => 'Vui lòng nhập tên thương hiệu',
+            'name.unique' => 'Tên thương hiệu đã tồn tại',
+            'name.max' => 'Tên thương hiệu tối đa 255 ký tự',
+            'name.string' => 'Tên thương hiệu phải là chuỗi',
         ];
     }
 

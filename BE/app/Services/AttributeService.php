@@ -11,7 +11,7 @@ class AttributeService extends Service
 {
     public function setModel()
     {
-        $this->model = new Attribute();
+        return new Attribute();
     }
     public function attributeValueService()
     {

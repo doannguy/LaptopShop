@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('gender')->nullable();
             $table->string('phone')->nullable();
+            $table->unsignedTinyInteger('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

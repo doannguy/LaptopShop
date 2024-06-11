@@ -6,11 +6,12 @@ abstract class Service
 {
     protected $model;
 
+    abstract public function setModel();
+
     public function __construct()
     {
-        $this->setModel();
+        $this->model = $this->setModel();
     }
-    abstract public function setModel();
 
     public function getAll()
     {
@@ -29,7 +30,7 @@ abstract class Service
 
     public function delete($ids)
     {
-        return $this->model->whereIn("id",$ids)->delete();
+        return $this->model->whereIn("id", $ids)->delete();
     }
 
     public function update($id, $data)
@@ -38,4 +39,3 @@ abstract class Service
         return $result->update($data);
     }
 }
-

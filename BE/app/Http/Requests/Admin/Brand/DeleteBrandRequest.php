@@ -24,7 +24,7 @@ class DeleteBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:categories,id',
+            'id' => 'required|exists:brands,id',
             'delete_type' => 'required|in:0,1'
         ];
     }

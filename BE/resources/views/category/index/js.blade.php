@@ -39,7 +39,7 @@
                 const categoryId = data.id
                 const categoryModal = $('#category-modal');
                 const categoryForm = categoryModal.find('#category-form');
-                categoryModal.find('#modal-header h2').text('Sửa danh mục')
+                categoryModal.find('#modal-header h2').text('Sửa thông tin danh mục')
                 categoryForm.find('input[name="id"]').val(categoryId);
                 categoryForm.find('input[name="name"]').val(data.name);
                 categoryModal.modal('show');

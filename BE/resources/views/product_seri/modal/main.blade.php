@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="fv-row mb-7" id="category-select">
-                            <label class="required fs-6 fw-semibold mb-2">Danh mục</label>
+                            <label class="required fs-6 fw-semibold mb-2" for="category-id">Danh mục</label>
                             <select class="form-select form-select-solid" id="category-id" name="category_id"
                                 aria-label="Danh mục">
                                 @foreach ($categories as $category)
@@ -55,9 +55,11 @@
         const productSeriModal = $('#product-seri-modal');
         const productSeriForm = productSeriModal.find('#product-seri-form');
 
-        productSeriForm.find('#category-id').select2({
-            dropdownParent: '#category-select'
-        });
+        productSeriModal.on('show.bs.modal', function() {
+            productSeriForm.find('#category-id').select2({
+                dropdownParent: '#category-select'
+            });
+        })
 
         productSeriModal.on('hidden.bs.modal', function() {
             productSeriModal.find('#modal-header h2').text('Thêm dòng sản phẩm');
@@ -80,12 +82,13 @@
                 url: !data.id ? "{{ route('product_seri.store') }}" :
                     "{{ route('product_seri.update') }}",
                 type: 'POST',
+                dataType: 'json',
                 data: data,
                 success: function(res) {
                     if (res.code == 0) {
                         productSeriModal.modal('hide');
                         toastr.success(!data.id ? "Thêm mới dòng sản phẩm thành công!" :
-                            "Sửa dòng sản phẩm thành công!");
+                            "Cập nhật sản phẩm thành công!");
                         $('#product-seri-table').DataTable().ajax.reload();
                     } else {
                         toastr.error(res.data.join(', ') + ".");

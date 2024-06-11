@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Brand;
-use App\Models\Category;
 
 class BrandService
 {
@@ -37,13 +36,13 @@ class BrandService
 
     public function delete($data)
     {
-        $category = Brand::find($data['id']);
+        $brand = Brand::find($data['id']);
         if ($data['delete_type'] == Brand::DELETE_TYPE['hard']) {
-            // $category->products()->delete();
-            return $category->delete();
+            // $brand->products()->delete();
+            return $brand->delete();
         } else if ($data['delete_type'] == Brand::DELETE_TYPE['soft']) {
-            // $category->products()->update(['category_id' => null]);
-            return $category->delete();
+            // $brand->products()->update(['brand_id' => null]);
+            return $brand->delete();
         }
     }
 
@@ -54,10 +53,11 @@ class BrandService
 
     public function update($data)
     {
-        $category = Brand::find($data['id']);
-        return $category->update($data);
+        $brand = Brand::find($data['id']);
+        return $brand->update($data);
     }
-    public function getAll() {
+    public function getAll()
+    {
         return Brand::all();
     }
 }

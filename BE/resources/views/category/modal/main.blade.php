@@ -64,12 +64,13 @@
                 url: !data.id ? "{{ route('category.store') }}" :
                     "{{ route('category.update') }}",
                 type: 'POST',
+                dataType: 'json',
                 data: data,
                 success: function(res) {
                     if (res.code == 0) {
                         categoryModal.modal('hide');
                         toastr.success(!data.id ? "Thêm mới danh mục thành công!" :
-                            "Sửa danh mục thành công!");
+                            "Cập nhật danh mục thành công!");
                         $('#category-table').DataTable().ajax.reload();
                     } else {
                         toastr.error(res.data.join(', ') + ".");

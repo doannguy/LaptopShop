@@ -119,28 +119,32 @@
         const attributeForm = attributeModal.find('#attribute-form');
         const attributeValue = document.getElementById('attribute_values');
 
-
         attributeForm.on('submit', function(e) {
             e.preventDefault();
             const btnSubmit = $(this).find('button[type="submit"]');
             btnSubmit.attr('data-kt-indicator', "on");
+
             const dataArray = Object.fromEntries(attributeForm.serializeArray().map(({
                 name,
                 value
             }) => [name, value]));
 
+            attributeModal.on('hidden.bs.modal', function() {
+                attributeModal.find('#modal-header h2').text('Thêm cấu hình sản phẩm');
+                attributeForm.trigger('reset');
+            })
 
             $.ajax({
                 url: !dataArray.id ? "{{ route('attribute.store') }}" :
                     "{{ route('attribute.update') }}",
                 type: 'POST',
+                dataType: 'json',
                 data: attributeForm.serialize(),
                 success: function(res) {
                     if (res.code == 0) {
                         attributeModal.modal('hide');
                         toastr.success(!dataArray.id ? "Thêm mới cấu hình thành công!" :
-                            "Sửa cấu hình thành công!");
-                        attributeForm.trigger('reset');
+                            "Cập nhật cấu hình thành công!");
                         $('#attribute-table').DataTable().ajax.reload();
                         $('#attribute_values').repeater().setList([]);
                     } else {

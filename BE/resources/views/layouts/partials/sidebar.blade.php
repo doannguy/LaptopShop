@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="menu-item">
-                        <a class="menu-link  @if (request()->routeIs('brand.*')) active @endif"
+                        <a class="menu-link @if (request()->routeIs('brand.index')) active @endif"
                             href="{{ route('brand.index') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-triangle fs-2">
@@ -94,7 +94,10 @@
                             </span>
                             <span class="menu-title">Thương hiệu</span>
                         </a>
-                        <a class="menu-link  @if (request()->routeIs('attribute.*')) active @endif"
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link @if (request()->routeIs('attribute.*')) active @endif"
                             href="{{ route('attribute.index') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone  ki-abstract-26 fs-2">
@@ -106,6 +109,22 @@
                             <span class="menu-title">Cấu hình sản phẩm</span>
                         </a>
                     </div>
+
+                    @if (Auth::user()->hasRole('admin'))
+                        <div class="menu-item">
+                            <a class="menu-link @if (request()->routeIs('user.*')) active @endif"
+                                href="{{ route('user.index') }}">
+                                <span class="menu-icon">
+                                    <i class="ki-duotone  ki-abstract-26 fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                                <span class="menu-title">Thành viên</span>
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

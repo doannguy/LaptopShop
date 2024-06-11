@@ -10,9 +10,17 @@
                 <h1 class="text-dark mb-3 fs-3x">
                     Đăng nhập
                 </h1>
-                <div class="text-gray-400 fw-semibold fs-6">
+                <div class="text-gray-400 fw-semibold fs-6 mb-3">
                     Đăng nhập vào hệ thống ngay
                 </div>
+
+                @if ($errors->has('block'))
+                    @section('script')
+                        <script>
+                            toastr.error("{{ $errors->first('block') }}");
+                        </script>
+                    @endsection
+                @endif
             </div>
             <div class="fv-row mb-8">
                 <input type="text" placeholder="Email" name="email" autocomplete="off"

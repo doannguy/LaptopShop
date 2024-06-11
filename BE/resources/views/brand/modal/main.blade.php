@@ -3,7 +3,7 @@
         <div class="modal-content">
             <form class="form" action="#" id="brand-form">
                 <div class="modal-header" id="modal-header">
-                    <h2 class="fw-bold">Thông tin thương hiệu</h2>
+                    <h2 class="fw-bold">Thêm thương hiệu</h2>
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Close">
                         <i class="ki-duotone ki-cross fs-1">
                             <span class="path1"></span>
@@ -44,6 +44,11 @@
         const brandModal = $('#brand-modal');
         const brandForm = brandModal.find('#brand-form');
 
+        brandModal.on('hidden.bs.modal', function() {
+            brandModal.find('#modal-header h2').text('Thêm thương hiệu');
+            brandForm.trigger('reset');
+        })
+
         brandForm.on('submit', function(e) {
             e.preventDefault();
             const btnSubmit = $(this).find('button[type="submit"]');
@@ -59,12 +64,12 @@
                 url: !data.id ? "{{ route('brand.store') }}" :
                     "{{ route('brand.update') }}",
                 type: 'POST',
+                dataType: 'json',
                 data: data,
                 success: function(res) {
                     if (res.code == 0) {
                         brandModal.modal('hide');
-                        toastr.success(!data.id ? "Thêm mới thương hiệu thành công!" : "Sửa thương hiệu thành công!");
-                        brandForm.trigger('reset');
+                        toastr.success(!data.id ? "Thêm mới thương hiệu thành công!" : "Cập nhật thương hiệu thành công!");
                         $('#brand-table').DataTable().ajax.reload();
                     } else {
                         toastr.error(res.data.join(', ') + ".");

@@ -7,6 +7,6 @@ class ProductAttributeValueService extends Service
 {
     public function setModel()
     {
-        $this->model = new ProductAttributeValue();
+        return new ProductAttributeValue();
     }
 }

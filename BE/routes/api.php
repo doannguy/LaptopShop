@@ -22,6 +22,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::get('category', 'CategoryController@getCategories');
     Route::get('brand', 'BrandController@getBrands');
+    Route::get('product-list', 'ProductController@getProducts');
+    Route::get('product-detail/{id}', 'ProductController@getProductDetail');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:sanctum']], function () {

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\ProductOption;
 use Illuminate\Support\Facades\DB;
 
 class ProductService extends Service
@@ -58,7 +59,7 @@ class ProductService extends Service
 
             $product = new $this->model();
             $product->name = $data->name;
-            $product->product_seri_id= $data->product_seri_id;
+            $product->product_seri_id = $data->product_seri_id;
             $product->brand_id = $data->brand_id;
             $media_thumbnail = $this->mediaService()->saveFile($data->thumbnail, 'thumbnail', 'product/thumbnail');
             $product->thumbnail = $media_thumbnail->id;
@@ -79,8 +80,7 @@ class ProductService extends Service
             }
             DB::commit();
             return true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             \Log::info($e);
             // xóa thumbnail đã lưu
@@ -89,8 +89,9 @@ class ProductService extends Service
         }
     }
 
-    public function delete($data) {
-      try {
+    public function delete($data)
+    {
+        try {
             $product = Product::find($data['id']);
             $this->mediaService()->deleteFile($product->thumbnail);
             $product->thumbnailMedia()->delete();
@@ -101,10 +102,65 @@ class ProductService extends Service
             }
             $product->delete();
             return true;
-      } catch (\Throwable $th) {
-        \Log::info($th);
-        return false;
-      }
+        } catch (\Throwable $th) {
+            \Log::info($th);
+            return false;
+        }
+
+    }
+    public function filterProductList($filterData)
+    {
+        $page = $filterData['page'] ?? 1;
+        $pageSize = $filterData['pageSize'] ?? 10;
+        $query = ProductOption::query();
+        $brandCount = [];
+        $seriCount = [];
+        $orderBy = $filterData['orderBy'] ?? 'id';
+        $orderDir = $filterData['orderDir'] ?? 'asc';
+        $query->with(['product', 'productMedia']);
+        if (isset($filterData['search'])) {
+            $query->whereHas('product', function ($query) use ($filterData) {
+                $query->where('name', 'like', "%" . $filterData['search'] . "%");
+            });
+        }
+        if (isset($filterData['product_seri'])) {
+            $query->whereHas('product', function ($query) use ($filterData) {
+                $query->where('product_seri_id', $filterData['product_seri']);
+            });
+
+        }
+        if (isset($filterData['brand'])) {
+            $query->whereHas('product', function ($query) use ($filterData) {
+                $query->where('brand_id', $filterData['brand']);
+            });
+        }
+        $query->where('status', ProductOption::STATUS['active']);
+        $totalProduct = $query->count();
+        $productOptionTotal = $query->get();
+        foreach ($productOptionTotal as $productOption) {
+            $brandCount[$productOption->product->brand_id] = isset($brandCount[$productOption->product->brand_id]) ? [...$brandCount[$productOption->product->brand_id], 'count' => $brandCount[$productOption->product->brand_id]['count'] + 1] : ['count' => 1, 'label' => $productOption->product->brand->name];
+            $seriCount[$productOption->product->product_seri_id] = isset($seriCount[$productOption->product->product_seri_id]) ? [...$seriCount[$productOption->product->product_seri_id], 'count' => $seriCount[$productOption->product->product_seri_id]['count'] + 1] : ['count' => 1, 'label' => $productOption->product->productSeri->name];
+        }
+
+        $query->orderBy($orderBy, $orderDir);
+        $query->offset(($page - 1) * $pageSize);
+        $query->limit($pageSize);
+        $totalPages = ceil($totalProduct / $pageSize);
+        $products = $query->get();
+        return [
+            'products' => $products,
+            'totalPages' => $totalPages,
+            'totalProduct' => $totalProduct,
+            'brandCount' => $brandCount,
+            'seriCount' => $seriCount
+        ];
+    }
+    function getProductDetail($id) {
+        $product = Product::where('id', $id)->with(['productOptions' => function ($query) {
+            $query->with(['productMedia', 'attributeValues']);
+        }]);
+
+        return $product->first();
 
     }
 }

@@ -32,7 +32,7 @@ class ProductOptionService extends Service
                     "media_id" => $media->id,
                 ];
             }
-          $product_option->productMedia()->createMany($product_medias);
+          $product_option->productMedia()->attach($product_medias);
 
         } else {
             throw new \Exception("Thiếu ảnh sản phẩm", 400);
@@ -51,7 +51,7 @@ class ProductOptionService extends Service
         foreach ($productMedia as $media) {
             $this->mediaService()->deleteFile($media->id);
         }
-        $product_option->productMedia()->delete();
+        $product_option->productMedia()->detach();
         // xóa product attribute values
         $product_option->attributeValues()->detach();
         return $product_option->delete();

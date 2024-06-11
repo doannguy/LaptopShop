@@ -26,7 +26,7 @@ class ProductOption extends Model
 
     public function productMedia()
     {
-        return $this->hasMany(ProductMedia::class, 'product_option_id', 'id');
+        return $this->belongsToMany(Media::class, 'product_media', 'product_option_id', 'media_id');
     }
     /**
      * The attributeValues that belong to the ProductOption
@@ -36,6 +36,9 @@ class ProductOption extends Model
     public function attributeValues(): BelongsToMany
     {
         return $this->belongsToMany(AttributeValue::class, 'product_attribute_values', 'product_option_id', 'attribute_value_id');
+    }
+    public function product() {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
 }

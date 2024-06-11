@@ -40,11 +40,10 @@
 
                 const productSeriModal = $('#product-seri-modal');
                 const productSeriForm = productSeriModal.find('#product-seri-form');
-                productSeriModal.find('#modal-header h2').text('Sửa dòng sản phẩm')
+                productSeriModal.find('#modal-header h2').text('Sửa thông tin dòng sản phẩm')
                 productSeriForm.find('input[name="id"]').val(productSeriId);
                 productSeriForm.find('input[name="name"]').val(data.name);
-                productSeriForm.find('select[name="category_id"]').val(data.category_id).trigger(
-                    'change');
+                productSeriForm.find('select[name="category_id"]').val(data.category_id);
                 productSeriModal.modal('show');
             })
         }

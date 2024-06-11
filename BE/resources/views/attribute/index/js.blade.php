@@ -36,6 +36,7 @@
             $(document).on('click', '.open-add-modal', function() {
                 const attributeModal = $('#attribute-modal');
                 const attributeForm = $('#attribute-form');
+                productSeriModal.find('#modal-header h2').text('Sửa thông tin cấu hình sản phẩm')
                 attributeForm.find('input[name="id"]').val('');
                 attributeForm.find('input[name="name"]').val('');
                 repeater.setList([]);

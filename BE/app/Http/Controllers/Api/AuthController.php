@@ -23,7 +23,7 @@ class AuthController extends Controller
             'gender' => $data['gender'],
             'password' => Hash::make($request->password),
         ]);
-        $user->assignRole('user');
+        $user->assignRole('member');
         return jsonResponse(0, $user, message: "Đăng ký thành công");
     }
 

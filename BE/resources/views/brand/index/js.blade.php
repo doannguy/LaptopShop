@@ -40,6 +40,7 @@
 
                 const brandModal = $('#brand-modal');
                 const brandForm = $('#brand-form');
+                brandModal.find('#modal-header h2').text('Sửa thông tin thương hiệu')
                 brandForm.find('input[name="id"]').val(brandId);
                 brandForm.find('input[name="name"]').val(data.name);
                 brandModal.modal('show');

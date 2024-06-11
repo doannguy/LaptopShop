@@ -24,7 +24,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::get('brand', 'BrandController@getBrands');
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:sanctum', 'user.status']], function () {
     Route::post('logout', 'AuthController@logout');
     Route::post('change-password', 'AuthController@changePassword');
 

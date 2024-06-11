@@ -1,0 +1,19 @@
+.react-chatbot-kit-user-chat-message {
+    font-size: 16px;
+}
+.react-chatbot-kit-chat-input {
+    font-size: 16px;
+}
+.react-chatbot-kit-chat-container {
+    border-radius: 20px;
+}
+@media (min-width: 768px) {
+    .react-chatbot-kit-chat-container {
+        width: 350px !important;
+    }
+}
+@media (max-width: 767px) {
+    .react-chatbot-kit-chat-container {
+        width: 300px !important;
+    }
+}

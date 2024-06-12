@@ -76,4 +76,9 @@ Route::get('/run-seeder-role-command', function () {
     ]);
     echo "Done";
 });
+// run storage link
+Route::get('/storage-link', function () {
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    echo "Done";
+});
 include "auth.php";

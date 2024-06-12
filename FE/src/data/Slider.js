@@ -29,16 +29,16 @@ const NftSlider = {
 
 const FashionSlider = [
     {
-        title: "Đồng hồ thông minh Bloosom",
-        subTitle: "Đồng hồ thông minh",
+        title: "Macbook Pro M4 Apple Silicon",
+        subTitle: "Macbook Pro M4 Apple Silicon",
         subIcon: "fal fa-watch",
-        thumb: "/images/product/product-40.png"
+        thumb: "/images/product/macbook-pro-m4.jpg"
     },
     {
-        title: "Đồng hồ thông minh Delux Brand",
-        subTitle: "Đồng hồ thông minh",
+        title: "Laptop Lenovo LOQ 15IAX9 83GS001RVN",
+        subTitle: "Laptop Lenovo LOQ 15IAX9 83GS001RVN",
         subIcon: "fal fa-watch",
-        thumb: "/images/product/product-46.png"
+        thumb: "/images/product/laptop-lenovo-loq.jpeg"
     },
     {
         title: "Đồng hồ thông minh Delux Brand",

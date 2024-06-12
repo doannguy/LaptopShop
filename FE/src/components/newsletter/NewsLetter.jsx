@@ -7,7 +7,6 @@ const NewsLetter = (props) => {
         <div className={`etrade-newsletter-wrapper bg_image ${props.bgImage ? props.bgImage : "bg_image--5"}`}>
           <div className="newsletter-content" style={{ margin: "10px" }}>
 
-
           </div>
         </div>
       </div>

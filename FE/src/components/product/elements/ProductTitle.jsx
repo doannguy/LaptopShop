@@ -9,7 +9,7 @@ const ProductTitle = (props) => {
         {props.productTitle.title}
 		{props.verified && 
 		<span className="verified-icon">
-		<i className="fas fa-badge-check" />
+		<i className="fas fa-badge-check" />  
 		</span>
 		}
       </Link>

@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
-use Illuminate\Http\Request;
-use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +32,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:
 
     Route::post('product-detail/review', 'ProductController@storeProductReview');
     // Route::post('product-detail/review/delete', 'ProductController@deleteProductReview');
+
+    Route::get('cart', 'CartController@getMyCart');
+    Route::post('cart/update', 'CartController@updateMyCart');
 });

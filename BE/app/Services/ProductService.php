@@ -4,18 +4,21 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\ProductOption;
+use App\Models\ProductReview;
 use Illuminate\Support\Facades\DB;
 
 class ProductService extends Service
 {
     function setModel()
     {
-       return new Product();
+        return new Product();
     }
+
     function mediaService()
     {
         return app(MediaService::class);
     }
+
     function productOptionService()
     {
         return app(ProductOptionService::class);
@@ -107,7 +110,6 @@ class ProductService extends Service
             \Log::info($th);
             return false;
         }
-
     }
     public function filterProductList($filterData)
     {
@@ -128,7 +130,6 @@ class ProductService extends Service
             $query->whereHas('product', function ($query) use ($filterData) {
                 $query->where('product_seri_id', $filterData['product_seri']);
             });
-
         }
         if (isset($filterData['brand'])) {
             $query->whereHas('product', function ($query) use ($filterData) {
@@ -156,12 +157,20 @@ class ProductService extends Service
             'seriCount' => $seriCount
         ];
     }
-    function getProductDetail($id) {
-        $product = Product::where('id', $id)->with(['productOptions' => function ($query) {
+    public function getProductDetail($productId)
+    {
+        return Product::with(['productOptions' => function ($query) {
             $query->with(['productMedia', 'attributeValues']);
-        }]);
+        }])->find($productId);
+    }
 
-        return $product->first();
+    public function storeReview($data)
+    {
+        return ProductReview::create([...$data, 'user_id' => auth()->user()->id]);
+    }
 
+    public function deleteProductReview($reviewId)
+    {
+        return ProductReview::find($reviewId)->delete();
     }
 }

@@ -6,7 +6,7 @@ use App\Models\ProductMedia;
 class ProductMediaService extends Service
 {
     public function setModel() {
-        $this->model = new ProductMedia();
+        return new ProductMedia();
     }
     public function store($data) {
 

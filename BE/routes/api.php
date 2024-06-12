@@ -32,4 +32,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:
 
     Route::get('user/info', 'UserController@get');
     Route::post('user/info', 'UserController@update');
+
+    Route::post('product-detail/review', 'ProductController@storeProductReview');
+    // Route::post('product-detail/review/delete', 'ProductController@deleteProductReview');
 });

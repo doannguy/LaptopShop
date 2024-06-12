@@ -20,8 +20,8 @@
                         <input type="hidden" name="id">
                         <div class="fv-row mb-7">
                             <label class="required fs-6 fw-semibold mb-2">Tên thương hiệu</label>
-                            <input type="text" class="form-control form-control-solid"
-                                placeholder="Ex: Apple" name="name" />
+                            <input type="text" class="form-control form-control-solid" placeholder="Ex: Apple"
+                                name="name" />
                         </div>
                     </div>
                 </div>
@@ -61,15 +61,15 @@
             }
 
             $.ajax({
-                url: !data.id ? "{{ route('brand.store') }}" :
-                    "{{ route('brand.update') }}",
+                url: !data.id ? "{{ route('brand.store') }}" : "{{ route('brand.update') }}",
                 type: 'POST',
                 dataType: 'json',
                 data: data,
                 success: function(res) {
                     if (res.code == 0) {
                         brandModal.modal('hide');
-                        toastr.success(!data.id ? "Thêm mới thương hiệu thành công!" : "Cập nhật thương hiệu thành công!");
+                        toastr.success(!data.id ? "Thêm mới thương hiệu thành công!" :
+                            "Cập nhật thương hiệu thành công!");
                         $('#brand-table').DataTable().ajax.reload();
                     } else {
                         toastr.error(res.data.join(', ') + ".");

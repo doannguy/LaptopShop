@@ -150,7 +150,7 @@
                                         <div class="fv-row mb-10">
                                             <label class="required form-label">Mô tả ngắn</label>
                                             <textarea type="text" name="short_description" class="form-control mb-2"
-                                                placeholder="Mô tả ngắn về sản phẩm" maxlength="100"></textarea>
+                                                placeholder="Mô tả ngắn về sản phẩm" maxlength="255"></textarea>
                                             <div class="text-muted fs-7">Mô tả ngắn gọn, tổng quát về sản phẩm này</div>
                                         </div>
                                         <div>

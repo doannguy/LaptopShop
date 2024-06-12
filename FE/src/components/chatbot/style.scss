@@ -17,3 +17,9 @@
         width: 300px !important;
     }
 }
+
+@media (min-width: 1px) and (max-width: 766px) {
+    .react-chatbot-kit-chat-container {
+        display: none !important;
+    }
+}

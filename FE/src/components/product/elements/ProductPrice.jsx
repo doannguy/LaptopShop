@@ -1,23 +1,21 @@
 
-const ProductPrice = (props) => {
-    return ( 
-        <div className="product-price-variant">
-              {props.price.salePrice ? (
-                <span className="price old-price">
-                  <span className="currency-symbol">$</span>
-                  {props.price.price}
-                </span>
-              ) : (
-                ""
-              )}
-              <span className="price current-price">
-                <span className="currency-symbol">$</span>
-                {props.price.salePrice
-                  ? props.price.salePrice
-                  : props.price.price}
-              </span>
-            </div>
-     );
+const ProductPrice = ({ currentPrice, price }) => {
+  return (
+    <div className="product-price-variant">
+      {price ? (
+        <span className="price old-price">
+          {price}
+          <span className="currency-symbol">đ</span>
+        </span>
+      ) : (
+        ""
+      )}
+      <span className="price current-price">
+        {currentPrice}
+        <span className="currency-symbol">đ</span>
+      </span>
+    </div>
+  );
 }
- 
+
 export default ProductPrice;

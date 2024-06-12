@@ -1,174 +1,163 @@
 'use client';
-import { useState } from "react";
 import Section from "@/components/elements/Section";
-import ProductsData from "@/data/Products";
 import ProductOne from "@/components/product/ProductOne";
+import Loading from "@/components/widget/Loading";
+import ProductsData from "@/data/Products";
+import ProductService from "@/services/product_service";
 import { slugify } from "@/utils";
-import { Category } from "@/data/ProductCategory";
-import { Gender } from "@/data/ProductAttribute";
-import { ColorAttribute } from "@/data/ProductAttribute";
-import { SizeAttribute } from "@/data/ProductAttribute";
-import useGetProductList from "../hook/use-get-product-list";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 
-const ShopWithSidebar = ({ brand }) => {
-    const [filterProduct, setFilterProduct] = useState(ProductsData);
-    const [productShow, setProductShow] = useState(9);
-    const [filterText, setFilterText] = useState('');
+const ShopWithSidebar = (props) => {
+
     const [cateToggle, setcateToggle] = useState(true);
-    const [genderToggle, setgenderToggle] = useState(true);
-    const [colorToggle, setcolorToggle] = useState(true);
-    const [sizeToggle, setsizeToggle] = useState(true);
-    const [priceRangeToggle, setpriceRangeToggle] = useState(true);
-    const { data, isLoading } = useGetProductList({ brand });
-    console.log(data);
-    const categoryHandler = (cateSelect) => {
-        const cateFilterProduct = ProductsData.filter((data) => (slugify(data.pCate) === cateSelect));
-        setFilterProduct(cateFilterProduct)
-        setFilterText(cateSelect);
+    const [seriToggle, setseriToggle] = useState(true);
+    const [brandToggle, setbrandToggle] = useState(true);
+
+    const params = useSearchParams();
+    const pathname = usePathname();
+    const router = useRouter();
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [productList, setProductList] = useState([]);
+    const { data, error, isLoading, isFetching, refetch, isSuccess } = useQuery({
+        queryKey: ["get-product-list"],
+        queryFn: () => ProductService.getListProduct({ brand: props.brand, product_seri: props.seriFilter, category: props.category, page, pageSize }),
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+
     }
-    const genderHandler = (genderSelect) => {
-        const genderFilterProduct = ProductsData.filter(data => data.gender === genderSelect);
-        setFilterProduct(genderFilterProduct)
-        setFilterText(genderSelect);
-    }
-    const colorHandler = (colorSelect) => {
-        let getColorData = ProductsData.filter((items) => {
-            let colors = items.colorAttribute?.filter(color => slugify(color.color) === colorSelect)
-            return colors?.length > 0;
-        })
-        setFilterProduct(getColorData)
-        setFilterText(colorSelect);
-    }
-    const sizeHandler = (sizeSelect) => {
-        let getSizeData = ProductsData.filter((items) => {
-            let sizes = items.sizeAttribute?.filter(size => slugify(size) === sizeSelect)
-            return sizes?.length > 0;
-        })
-        setFilterProduct(getSizeData);
-        setFilterText(sizeSelect);
+    );
+    const handleFetchData = () => {
+
+        if (data) {
+            const newProductList = data.data.products;
+            const newProducts = newProductList.filter(
+                product => !productList.some(p => p.id === product.id)
+            );
+            setProductList(prevList => [...prevList, ...newProducts]);
+        }
     }
 
-    const priceRangeHandler = (rangeSelect) => {
-        const getPriceData = ProductsData.filter(data => data.price <= rangeSelect);
-        setFilterProduct(getPriceData);
-        setFilterText(rangeSelect);
+
+    useEffect(() => {
+        if (isSuccess && !isFetching) {
+            handleFetchData();
+        }
+    }, [isFetching]);
+
+    useEffect(() => {
+        refetch();
+    }, [page]);
+
+    useEffect(() => {
+        if (props.isFilterChange) {
+            console.log("refetch");
+            setPage(1);
+            setProductList([]);
+            props.setIsFilterChange(false);
+            refetch();
+        }
+    }, [props])
+    const seriHandler = (seriSelect) => {
+        let urlParams = new URLSearchParams(params.toString());
+        urlParams.set("seri", seriSelect);
+        router.push(pathname + "?" + urlParams.toString());
+    }
+    const categoryHandler = (cateSelect) => {
+        let urlParams = new URLSearchParams(params.toString());
+        urlParams.set("category", cateSelect);
+        router.push(pathname + "?" + urlParams.toString());
+    }
+    const brandHandler = (brandSelect) => {
+        let urlParams = new URLSearchParams(params.toString());
+        urlParams.set("brand", brandSelect);
+        router.push(pathname + "?" + urlParams.toString());
     }
 
     const ProductShowHandler = () => {
-        setProductShow(productShow + 3);
+        setPage(page + 1);
     }
 
-    const productFilterReset = () => {
-        setFilterProduct(ProductsData);
-        setFilterText('');
-    }
 
-    const priceRangeData = [
-        50,
-        100,
-        200,
-        300,
-        400,
-        500
-    ]
+
 
     return (
-        isLoading ? <></> : <Section pClass="axil-shop-area">
+        isLoading || !data ? <>
+            <Loading />
+        </> : 
+        <Section pClass="axil-shop-area">
             <div className="row">
                 <div className="col-lg-3">
                     <div className="axil-shop-sidebar">
                         <div className="d-lg-none">
                             <button className="sidebar-close filter-close-btn"><i className="fas fa-times" /></button>
                         </div>
-                        {/* Category Filter */}
-                        <div className={`toggle-list product-categories ${cateToggle ? "active" : ""}`}>
-                            <h6 onClick={() => setcateToggle(!cateToggle)} className="title">CATEGORIES</h6>
-                            {cateToggle &&
+                            {/* category Filter */}
+                            <div className={`toggle-list product-categories ${data.data.cateCount.length > 0 ? "active" : ""}`}>
+                                <h6 onClick={() => setcateToggle(!cateToggle)} className="title">Danh mục</h6>
+                                {cateToggle &&
+                                    <div className="shop-submenu">
+                                        <ul>
+                                            {data.data.cateCount.map((item, index) => (
+                                                <li className={props.seriFilter === item.id ? "current-cat" : ""} key={index}>
+                                                    <button onClick={() => categoryHandler(item.id)}>{item.label + ` (${item.count})`}</button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                }
+                            </div>
+                        {/* seri Filter */}
+                        <div className={`toggle-list product-categories ${data.data.seriCount.length  > 0 ? "active" : ""}`}>
+                            <h6 onClick={() => setseriToggle(!seriToggle)} className="title">Dòng sản phẩm</h6>
+                                {seriToggle &&
                                 <div className="shop-submenu">
                                     <ul>
-                                        {Category.map((data, index) => (
-                                            <li className={filterText === slugify(data.cate) ? "current-cat" : ""} key={index}>
-                                                <button onClick={() => categoryHandler(slugify(data.cate))}>{data.cate}</button>
+                                        {data.data.seriCount.map((item, index) => (
+                                            <li className={props.seriFilter === item.id ? "current-cat" : ""} key={index}>
+                                                <button onClick={() => seriHandler(item.id)}>{item.label + ` (${item.count})`}</button>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                             }
                         </div>
-                        {/* Gender Filter  */}
-                        <div className={`toggle-list product-categories product-gender ${genderToggle ? "active" : ""}`}>
-                            <h6 onClick={() => setgenderToggle(!genderToggle)} className="title">GENDER</h6>
-                            {genderToggle &&
+                        {/* Brand Filter */}
+                        <div className={`toggle-list product-categories ${data.data.brandCount.length > 0 ? "active" : ""}`}>
+                            <h6 onClick={() => setbrandToggle(!brandToggle)} className="title">Thương hiệu</h6>
+                                {brandToggle &&
                                 <div className="shop-submenu">
                                     <ul>
-                                        {Gender?.map((data, index) => (
-                                            <li className={filterText === data ? "chosen" : ""} key={index}>
-                                                <button onClick={() => genderHandler(data)}>{data}</button>
+                                        {data.data.brandCount.map((item, index) => (
+                                            <li className={props.seriFilter === item.id ? "current-cat" : ""} key={index}>
+                                                <button onClick={() => brandHandler(item.id)}>{item.label + ` (${item.count})`}</button>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                             }
                         </div>
-                        {/* Color Filter  */}
-                        <div className={`toggle-list product-color ${colorToggle ? "active" : ""}`}>
-                            <h6 onClick={() => setcolorToggle(!colorToggle)} className="title">COLORS</h6>
-                            {colorToggle &&
-                                <div className="shop-submenu">
-                                    <ul>
-                                        {ColorAttribute?.map((data, index) => (
-                                            <li className={filterText === slugify(data) ? "chosen" : ""} key={index}>
-                                                <button onClick={() => colorHandler(slugify(data))} className={slugify(data)}></button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            }
-                        </div>
-                        {/* Size Filter  */}
-                        <div className={`toggle-list product-size ${sizeToggle ? "active" : ""}`}>
-                            <h6 onClick={() => setsizeToggle(!sizeToggle)} className="title">SIZE</h6>
-                            {sizeToggle &&
-                                <div className="shop-submenu">
-                                    <ul>
-                                        {SizeAttribute?.map((data, index) => (
-                                            <li className={filterText === slugify(data) ? "chosen" : ""} key={index}>
-                                                <button onClick={() => sizeHandler(slugify(data))}>{data}</button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            }
-                        </div>
-                        {/* Price Filter  */}
-                        <div className={`toggle-list product-price-range ${priceRangeToggle ? "active" : ""}`}>
-                            <h6 onClick={() => setpriceRangeToggle(!priceRangeToggle)} className="title">PRICE</h6>
-                            {priceRangeToggle &&
-                                <div className="shop-submenu">
-                                    <ul>
-                                        {priceRangeData?.map((data, index) => (
-                                            <li className={filterText === data ? "chosen" : ""} key={index}>
-                                                <button onClick={() => priceRangeHandler(data)}>{data}</button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            }
-                        </div>
-                        <button className="axil-btn btn-bg-primary" onClick={() => productFilterReset()} >All Reset</button>
+
                     </div>
                 </div>
                 <div className="col-lg-9">
                     <div className="row row--15">
-                        {data.products.length > 0 ? data.products.map((data) => (
-                            <div className="col-xl-4 col-sm-6" key={data.id}>
-                                <ProductOne productOption={data} pClass="mb--30" />
+                        {data && productList.length > 0 ? productList.map((productOption, index) => (
+                            <div className="col-xl-4 col-sm-6" key={index}>
+                                <ProductOne productOption={productOption} pClass="mb--30" />
                             </div>
-                        )) : <h4 className="text-center pt--30">No Product Found</h4>}
+                        )) : <h4 className="text-center pt--30">Không tìm thấy sản phẩm nào phù hợp</h4>}
                     </div>
                     <div className="text-center pt--20">
-                        <button className={`axil-btn btn-bg-lighter btn-load-more ${filterProduct.length < productShow ? "disabled" : ""}`} onClick={ProductShowHandler}>{filterProduct.length < productShow ? "No More Data" : "Load more"}</button>
+                        {
+                            (page < data.data.totalPages) &&
+                            <button className={`axil-btn btn-bg-lighter btn-load-more `} onClick={ProductShowHandler}>Xem thêm</button>
+                        }
+
                     </div>
                 </div>
             </div>

@@ -3,20 +3,21 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import CategoryService from "@/services/category_service";
 import ProductService from "@/services/product_service";
-const useGetProductList = ({ brand }) => {
-    const getData = async ({ brand }) => {
+const useGetProductList = ({ brand, page, pageSize, onSuccess }) => {
+    const getData = async () => {
         try {
-            const response = await ProductService.getListProduct({ brand: brand });
-            console.log(response);
+            const response = await ProductService.getListProduct({ brand,page,pageSize });
             const data = response?.data;
-            console.log(data);
             return data;
         } catch (error) {
             throw error;
         }
     };
 
-    const { data, error, isLoading, isError, refetch } = useQuery({ queryKey: "get-product-list", queryFn: () => getData({ brand }) });
+    const { data, error, isLoading, isError, refetch, isSuccess } = useQuery({ 
+        queryKey: ["get-product-list"], 
+        queryFn: () => getData({ brand }), 
+        onSuccess: (data) => onSuccess(data) });
 
     useEffect(() => {
         if (isError) {
@@ -30,6 +31,7 @@ const useGetProductList = ({ brand }) => {
         isError,
         error,
         refetch,
+        isSuccess
     };
 };
 

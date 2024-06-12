@@ -5,7 +5,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['api-shop.codetify.tech'],
+    domains: ['api-shop.codetify.tech','localhost'],
   }
 
 }

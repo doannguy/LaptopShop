@@ -4,15 +4,15 @@ const ProductPrice = ({ currentPrice, price }) => {
     <div className="product-price-variant">
       {price ? (
         <span className="price old-price">
-          {price}
-          <span className="currency-symbol">đ</span>
+          {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)}
+
         </span>
       ) : (
         ""
       )}
       <span className="price current-price">
-        {currentPrice}
-        <span className="currency-symbol">đ</span>
+        {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(currentPrice)}
+      
       </span>
     </div>
   );

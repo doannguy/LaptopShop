@@ -11,7 +11,6 @@ const ProductOne = ({ productOption, pClass }) => {
   const getAttributeData = (data) => {
     setColorAttribute(data.img);
   }
-  console.log(productOption);
   return (
     <>
       <div className={`axil-product product-style-one ${pClass ?? ""}`}>
@@ -27,7 +26,7 @@ const ProductOne = ({ productOption, pClass }) => {
         />
         <div className="product-content">
           <div className="inner">
-            <h5>{productOption.product.name + `(${productOption.name})`}</h5>
+            <ProductTitle verified={false} productTitle={productOption} />
             <ProductPrice currentPrice={productOption.current_price} price={productOption.price} />
           </div>
         </div>

@@ -76,7 +76,7 @@ const HeaderAsideMenu = () => {
 						{data.map((menuItem, index) => (
 							<li key={index}>
 								<Link
-									href={"#"}
+									href={'/shop?category=' + menuItem.id}
 									className={`nav-link ${menuItem.hasChildren
 										? "has-megamenu"
 										: ""
@@ -96,14 +96,15 @@ const HeaderAsideMenu = () => {
 													{menuItem.product_series
 														.slice(0, 3)
 														.map((submenu, index) => (
-															<div
+															<Link
+																href={`/shop?seri=${submenu.id}`}
 																className="department-submenu"
 																key={index}
 															>
 																<p className="submenu-heading">
 																	{submenu.name}
 																</p>
-															</div>
+															</Link>
 														))}
 												</div>
 											</div>

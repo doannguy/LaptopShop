@@ -9,15 +9,18 @@ import NewsLetter from "@/components/newsletter/NewsLetter";
 import ServiceTwo from "@/components/services/ServiceTwo";
 import { DashboardAsideMenu } from "@/data/Menu";
 import { UserLists } from "@/data/Users";
+import useGetDetailedUser from "../hook/use-get-details-user";
 
 const DahsboardLayout = ({ children }) => {
     const userInfo = UserLists[0];
     const pathname = usePathname();
     const split = pathname.split("/");
     const pageSlug = split[split.length - 1];
-
+    const { data } = useGetDetailedUser();
+    console.log(data);
     return (
         <>
+
             <HeaderFive headerSlider />
             <main className="main-wrapper">
                 <Breadcrumb activeItem="My Account" title="Khám phá tất cả sản phẩm" />
@@ -35,8 +38,8 @@ const DahsboardLayout = ({ children }) => {
                                         />
                                     </div>
                                     <div className="media-body">
-                                        <h5 className="title mb-0">Hello {userInfo.name}</h5>
-                                        <span className="joining-date">eTrade Member Since {userInfo.joinDate}</span>
+                                        <h5 className="title mb-0">Hello {data?.user.name}</h5>
+                                        <span className="joining-date">Tham gia vào ngày {data?.user.created_at}</span>
                                     </div>
                                 </div>
                             </div>

@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
+
+
 const SignUp = () => {
     const router = useRouter();
 
@@ -92,7 +94,7 @@ const SignUp = () => {
                 <div class="form-group">
                     <label>Giới tính</label>
 
-                    <Controller defaultValue='1' name="gender" control={control} render={({ field }) => <select className='form-select' style={{ paddingLeft: "3rem !important" }} {...field}>
+                    <Controller defaultValue='1' name="gender" control={control} render={({ field }) => <select className='form-select' style={{ paddingLeft: "3rem !important", fontSize: "14px" }} {...field}>
                         <option value="1">Nam</option>
                         <option value="0">Nữ</option>
                     </select>} />

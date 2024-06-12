@@ -34,7 +34,12 @@ const SignIn = () => {
     const onSubmit = async (data) => {
         const res = await AuthService.login(data);
         console.log(res);
-        if (res.data.code == 1) {
+
+        if (res.data.code == 0) {
+
+            window.localStorage.setItem('token', res.data.data.token);
+            console.log(window.localStorage.getItem('token'));
+
             router.push('/');
         }
         else {
@@ -43,7 +48,7 @@ const SignIn = () => {
 
     }
 
-    return (    
+    return (
         <AuthLayout bgImage="bg_auth_image">
             <div className="axil-signin-form">
                 <h3 className="title">Sign in to eTrade.</h3>

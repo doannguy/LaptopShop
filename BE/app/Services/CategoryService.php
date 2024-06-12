@@ -60,6 +60,15 @@ class CategoryService extends Service
 
     public function getCategories()
     {
-        return Category::select(['id', 'name'])->get();
+        return Category::select(['id', 'name'])->with(['productSeries'])->get()->map(function ($category) {
+            if(count($category->productSeries) > 0) {
+                $category['hasChildren'] = true;
+            }else {
+                $category['hasChildren'] = false;
+            }
+
+            return $category;
+
+        });
     }
 }

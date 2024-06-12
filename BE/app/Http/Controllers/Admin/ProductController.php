@@ -21,6 +21,7 @@ class ProductController extends Controller
     public function create() {
         $categories = $this->categoryService()->getAll();
         $attributes = $this->attributeService()->getAllWithAttributeValuesArray();
+
         $brands = $this->brandService()->getAll();
         return view('product.create.main', compact('categories', 'attributes', 'brands'));
     }

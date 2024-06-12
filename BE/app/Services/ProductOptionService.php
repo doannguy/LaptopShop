@@ -7,7 +7,7 @@ use App\Models\ProductOption;
 class ProductOptionService extends Service
 {
     public function setModel() {
-        $this->model = new ProductOption();
+        return new ProductOption();
     }
     function mediaService()
     {

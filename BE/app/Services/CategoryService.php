@@ -7,7 +7,7 @@ use App\Models\Category;
 class CategoryService extends Service
 {
     public function setModel() {
-        $this->model = new Category();
+        return new Category();
     }
     public function filterDatatable(array $data)
     {

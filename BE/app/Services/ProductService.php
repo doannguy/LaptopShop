@@ -10,7 +10,7 @@ class ProductService extends Service
 {
     function setModel()
     {
-        $this->model = new Product();
+       return new Product();
     }
     function mediaService()
     {
@@ -59,6 +59,7 @@ class ProductService extends Service
 
             $product = new $this->model();
             $product->name = $data->name;
+
             $product->product_seri_id = $data->product_seri_id;
             $product->brand_id = $data->brand_id;
             $media_thumbnail = $this->mediaService()->saveFile($data->thumbnail, 'thumbnail', 'product/thumbnail');
@@ -85,7 +86,7 @@ class ProductService extends Service
             \Log::info($e);
             // xóa thumbnail đã lưu
             $this->mediaService()->deleteFile($media_thumbnail->id);
-            throw new \Exception($e->getMessage(), 400);
+            throw new \Exception($e, 400);
         }
     }
 

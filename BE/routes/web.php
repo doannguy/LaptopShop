@@ -42,6 +42,7 @@ Route::namespace('App\Http\Controllers\Admin')->middleware(['auth', 'user.status
             Route::post('delete', 'ProductSeriController@delete')->name('product_seri.delete');
             Route::post('store', 'ProductSeriController@store')->name('product_seri.store');
             Route::post('update', 'ProductSeriController@update')->name('product_seri.update');
+                    Route::post('get-by-category-id', 'ProductSeriController@getByCategoryId')->name('product_seri.get_by_category_id');
         });
 
         Route::prefix('attribute')->group(function () {

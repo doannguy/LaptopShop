@@ -183,10 +183,20 @@ class ProductService extends Service
     }
     function getProductDetail($id) {
         $product = Product::where('id', $id)->with(['productOptions' => function ($query) {
-            $query->with(['productMedia', 'attributeValues']);
+            $query->with(['productMedia', 'attributeValues' => function ($query) {
+                $query->with('attribute');
+            }]);
         }]);
+        $product = $product->first();
+        $list_Image = [$product->thumbnailMedia->path];
 
-        return $product->first();
+        foreach ($product->productOptions as $productOption) {
+            $list_Image = array_merge($list_Image, $productOption->productMedia->pluck('path')->toArray());
+        }
+        $product->list_Image = $list_Image;
+
+
+        return $product;
 
     }
 }

@@ -1,44 +1,19 @@
-import ProductsData from "@/data/Products";
-import ProductOne from "@/components/product/ProductOne";
-import { slugify } from "@/utils";
-import SlickSlider from "@/components/elements/SlickSlider";
-import SingleLayouThree from "./SingleLayouThree";
 import Section from "@/components/elements/Section";
 import SectionTitle from "@/components/elements/SectionTitle";
-import SingleLayouSeven from "./SingleLayouSeven";
-import SingleLayoutOne from "./SingleLayoutOne";
-import SingleLayoutTwo from "./SingleLayoutTwo";
-import SingleLayoutFour from "./SingleLayoutFour";
+import SlickSlider from "@/components/elements/SlickSlider";
+import ProductsData from "@/data/Products";
+import { slugify } from "@/utils";
+import SingleLayouThree from "./SingleLayouThree";
 
 const ProductDetails = ({ params }) => {
     const findProduct = ProductsData.filter(product => slugify(product.id) === slugify(params.id));
+    console.log(params.id);
     const singleProduct = findProduct[0];
     const productCategory = singleProduct.pCate;
     const relatedProduct = ProductsData.filter(product => slugify(product.pCate) === slugify(productCategory));
-
-    const ProductSingleLayout = () => {
-        switch (singleProduct.pCate) {
-            case "NFT":
-                return <SingleLayouSeven singleData={singleProduct} />
-                break;
-            case "Electronics":
-                return <SingleLayouThree singleData={singleProduct} />
-                break;
-            case "Fashion":
-                return <SingleLayoutOne singleData={singleProduct} />
-                break;
-            case "Furniture":
-                return <SingleLayoutFour singleData={singleProduct} />
-                break;
-            default:
-                return <SingleLayoutTwo singleData={singleProduct} />
-                break;
-        }
-    }
-
     return (
         <>
-            <ProductSingleLayout />
+            <SingleLayouThree singleData={singleProduct} productId={params.id}/>
             <Section pClass="pb--50 pb_sm--30">
                 <SectionTitle 
                     title="Viewed Items"
@@ -74,9 +49,7 @@ const ProductDetails = ({ params }) => {
                     },
                   ]}
                 >
-                    {relatedProduct?.slice(0, 10).map((data) => (
-                        <ProductOne product={data} key={data.id}/>
-                    ))}
+                  
                 </SlickSlider>
             </Section>
         </>

@@ -190,6 +190,9 @@ class ProductService extends Service
             }]);
         }]);
         $product = $product->first();
+        if (!$product) {
+            return false;
+        }
         $list_Image = [$product->thumbnailMedia->path];
 
         foreach ($product->productOptions as $productOption) {

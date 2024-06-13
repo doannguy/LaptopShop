@@ -5,7 +5,7 @@ const ProductTitle = (props) => {
 
   return (
     <h5 className="title">
-      <Link href={`/products/${props.productTitle.id}`}>
+      <Link href={`/products/${props.productTitle.product.id}`}>
         {props.productTitle.product.name + `(${props.productTitle.name})`}
 		{props.verified && 
 		<span className="verified-icon">

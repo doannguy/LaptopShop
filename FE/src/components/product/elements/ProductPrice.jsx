@@ -1,18 +1,18 @@
+import Currency from "@/components/widget/displayCurrency";
 
 const ProductPrice = ({ currentPrice, price }) => {
   return (
     <div className="product-price-variant">
       {price ? (
         <span className="price old-price">
-          {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)}
+          <Currency currency={price} />
 
         </span>
       ) : (
         ""
       )}
       <span className="price current-price">
-        {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(currentPrice)}
-      
+        <Currency currency={currentPrice} />
       </span>
     </div>
   );

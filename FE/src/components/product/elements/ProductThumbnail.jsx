@@ -7,7 +7,7 @@ const ProductThumbnail = (props) => {
   
   return (
     <div className="thumbnail">
-      <Link href={`/products/${props.product.id}`}>
+      <Link href={`/products/${props.product.product.id}`}>
         <Image
           src={
             "https://api-shop.codetify.tech/storage/"+props.product.product_media[0].path

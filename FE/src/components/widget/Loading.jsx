@@ -9,6 +9,7 @@ const Loading = () => {
         left: 0, 
         zIndex: 99999999,
         display: 'flex',
+        backgroundColor: 'rgba(255, 255, 255)',
         justifyContent: 'center',
         alignItems: 'center',
      }}>

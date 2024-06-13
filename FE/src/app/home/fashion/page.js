@@ -16,7 +16,6 @@ import TestimonialOne from '@/components/testimonial/TestimonialOne';
 import ProductsData from "@/data/Products";
 import { slugify } from '@/utils';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 
 
 const HomeFashion = () => {
@@ -26,8 +25,6 @@ const HomeFashion = () => {
   const fashionProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory);
   const transparentProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory && data.thumbnailTransparent === true);
   // const exploreProduct = mapInSlices(fashionProduct, 8);
-  const [showBot, toggleBot] = useState(true);
-
   return (
     <>
       <div style={{ position: 'relative' }}>

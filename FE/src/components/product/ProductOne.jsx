@@ -9,10 +9,12 @@ const ProductOne = ({ productOption, pClass }) => {
 
   return (
     <>
-      <div className={`axil-product product-style-one ${pClass ?? ""}`}>
+      <div
+        className={`axil-product product-style-one position-relative overflow-hidden justify-content-stretch d-flex flex-column justify-content-between rounded ${pClass ?? ""}`}
+        style={{ boxShadow: "0 0 4px rgb(0 0 0 / 10%)" }}
+      >
         <ProductThumbnail
           product={productOption}
-        
           discountLabel
           hoverItems
           wishlistBtn
@@ -20,8 +22,8 @@ const ProductOne = ({ productOption, pClass }) => {
           quickViewBtn
           isHoverThumbnail
         />
-        <div className="product-content">
-          <div className="inner">
+        <div className="product-content m-0">
+          <div className="inner p-4">
             <ProductTitle verified={false} productTitle={productOption} />
             <ProductPrice currentPrice={productOption.current_price} price={productOption.price} />
           </div>

@@ -20,17 +20,17 @@ const Shop = ({ searchParams }) => {
     useEffect(() => {
         if (router.get("seri")) {
             setSeriFilter(router.get("seri"));
-        }else {
+        } else {
             setSeriFilter("");
         }
-        if(router.get("brand")) {
+        if (router.get("brand")) {
             setBrand(router.get("brand"));
-        }else {
+        } else {
             setBrand("");
         }
-        if(router.get("category")) {
+        if (router.get("category")) {
             setCategoryFilter(router.get("category"));
-        }else {
+        } else {
             setCategoryFilter("");
         }
         setIsFilterChange(true);
@@ -46,7 +46,7 @@ const Shop = ({ searchParams }) => {
                         <HeaderFive headerCampaign />
                         <Breadcrumb activeItem="Shop" title="Danh sách sản phẩm" />
                         <main className="main-wrapper">
-                            <ShopWithSidebar brand={brand} seriFilter={seriFilter} category={categoryFilter} isFilterChange={isFilterChange} setIsFilterChange={setIsFilterChange}/>
+                            <ShopWithSidebar brand={brand} seriFilter={seriFilter} category={categoryFilter} isFilterChange={isFilterChange} setIsFilterChange={setIsFilterChange} />
                             <NewsLetter />
                             <ServiceTwo />
                         </main>

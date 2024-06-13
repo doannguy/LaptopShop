@@ -4,27 +4,28 @@ import ProductDiscountLabel from "./ProductDiscountLabel";
 import ActionButtons from "./ActionButtons";
 
 const ProductThumbnail = (props) => {
-  
-  return (
-    <div className="thumbnail">
-      <Link href={`/products/${props.product.product.id}`}>
-        <Image
-          src={
-            "https://api-shop.codetify.tech/storage/"+props.product.product_media[0].path
-          }
-          width={props.width ?? 300}
-          height={props.height ?? 300}
-          alt={props.product.name}
-        />
-      </Link>
 
-      <div className="product-hover-action">
-        <ActionButtons
+  return (
+    <div className="thumbnail d-flex justify-content-center align-items-center">
+      <div style={{ maxWidth: '300px', maxHeight: '300px', height: '100%' }}>
+        <Link href={`/products/${props.product.product.id}`}>
+          <img
+            src={"https://api-shop.codetify.tech/storage/" + props.product.product_media[0].path}
+            className="img-fluid"
+            // width={'auto'}
+            // height={'auto'}
+            alt={props.product.name}
+          />
+        </Link>
+
+        <div className="product-hover-action">
+          <ActionButtons
           // productAction={props.productThumb}
           // wishlistBtn={props.wishlistBtn}
           // cartBtn={props.cartBtn}
           // quickViewBtn={props.quickViewBtn}
-        />
+          />
+        </div>
       </div>
     </div>
   );

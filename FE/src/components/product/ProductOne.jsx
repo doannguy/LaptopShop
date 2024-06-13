@@ -6,17 +6,13 @@ import ProductThumbnail from "./elements/ProductThumbnail";
 import ProductTitle from "./elements/ProductTitle";
 
 const ProductOne = ({ productOption, pClass }) => {
-  const [colorAttribute, setColorAttribute] = useState('');
 
-  const getAttributeData = (data) => {
-    setColorAttribute(data.img);
-  }
   return (
     <>
       <div className={`axil-product product-style-one ${pClass ?? ""}`}>
         <ProductThumbnail
           product={productOption}
-          attributeImg={colorAttribute}
+        
           discountLabel
           hoverItems
           wishlistBtn

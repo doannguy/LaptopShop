@@ -32,7 +32,8 @@ const SingleLayouThree = ({ singleData, productId }) => {
 
     useEffect(() => {
         if (isFetched) {
-            if (productData.data.name) {
+            
+            if (productData.data != false) {
                 console.log(productData.data);
             } else {
                 setIsProductExist(false);
@@ -129,7 +130,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                     )) :
                                                         <div className="thumbnail">
                                                             <Image
-                                                                src={productData.thumbnail_media.path}
+                                                                src={productData.data?.thumbnail_media?.path && "#"}
                                                                 height={584}
                                                                 width={584}
                                                                 alt="Gallery Image"
@@ -184,7 +185,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                 )) :
                                                     <div className="small-thumb-img">
                                                         <Image
-                                                            src={productData.thumbnail_media.path}
+                                                            src={productData.data.thumbnail_media?.path && "#"}
                                                             height={207}
                                                             width={213}
                                                             alt="Thumb Image"

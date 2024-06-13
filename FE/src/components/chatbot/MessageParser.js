@@ -5,12 +5,14 @@ import { postDataToGemini } from '@/services/gemini_api';
 var text = "";
 const MessageParser = ({ children, actions }) => {
     const parse = async (message) => {
-        const response = await postDataToGemini({
-            messenger: message
-        });
-        text = text + response;
+        if (message !== '') {
+            const response = await postDataToGemini({
+                messenger: message
+            });
+            text = text + response;
 
-        actions.handleChat(response);
+            actions.handleChat(response);
+        }
     };
 
     return (

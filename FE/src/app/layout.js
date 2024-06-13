@@ -1,10 +1,13 @@
 'use client';
 import { useEffect } from 'react';
 import { Providers } from '@/store/provider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ChatBot from '@/components/chatbot';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@/styles/style.scss";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import "@/components/chatbot/style.scss";
+import 'react-chatbot-kit/build/main.css';
 
 const RootLayout = ({ children }) => {
 
@@ -26,6 +29,9 @@ const RootLayout = ({ children }) => {
 				<QueryClientProvider client={queryClient}>
 					<Providers>
 						{children}
+						<div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: '999' }}>
+							<ChatBot />
+						</div>
 					</Providers>
 				</QueryClientProvider>
 			</body>

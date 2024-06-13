@@ -1,6 +1,5 @@
 // in ActionProvider.jsx
 import React from 'react';
-import { postDataToGemini } from '@/services/gemini_api';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const handleChat = async (response) => {

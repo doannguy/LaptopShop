@@ -9,7 +9,7 @@ import FooterTwo from "@/components/footer/FooterTwo";
 import HeaderFive from "@/components/header/HeaderFive";
 import NewsLetter from "@/components/newsletter/NewsLetter";
 import ServiceTwo from "@/components/services/ServiceTwo";
-import { AboutAchievment, AboutFeatures, AboutStore } from "@/data/About";
+import { AboutAchievment, AboutStore } from "@/data/About";
 import { TeamData } from "@/data/Team";
 
 const AboutUs = () => {

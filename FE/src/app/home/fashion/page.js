@@ -1,5 +1,5 @@
 'use client';
-import { usePathname } from 'next/navigation';
+
 import Section from "@/components/elements/Section";
 import SectionTitle from "@/components/elements/SectionTitle";
 import SlickSlider from "@/components/elements/SlickSlider";
@@ -7,20 +7,17 @@ import FooterTwo from "@/components/footer/FooterTwo";
 import HeaderTwo from "@/components/header/HeaderTwo";
 import BannerThree from "@/components/hero-banner/BannerThree";
 import NewsLetter from "@/components/newsletter/NewsLetter";
+import PosterOne from '@/components/poster/PosterOne';
+import ProductSeven from '@/components/product/ProductSeven';
+import ProductTwo from '@/components/product/ProductTwo';
 import ServiceOne from "@/components/services/ServiceOne";
 import ServiceTwo from "@/components/services/ServiceTwo";
-import ProductsData from "@/data/Products";
-import { slugify, mapInSlices } from '@/utils';
-import ProductTwo from '@/components/product/ProductTwo';
 import TestimonialOne from '@/components/testimonial/TestimonialOne';
-import ProductSeven from '@/components/product/ProductSeven';
-import Chatbot from 'react-chatbot-kit';
-import 'react-chatbot-kit/build/main.css';
-import config from '../../../components/chatbot/config';
-import MessageParser from '../../../components/chatbot/MessageParser';
-import ActionProvider from '../../../components/chatbot/ActionProvider';
-import PosterOne from '@/components/poster/PosterOne';
-import "@/components/chatbot/style.scss";
+import ProductsData from "@/data/Products";
+import { slugify } from '@/utils';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+
 
 const HomeFashion = () => {
   const pathname = usePathname();
@@ -28,19 +25,12 @@ const HomeFashion = () => {
   const pageCategory = split[split.length - 1];
   const fashionProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory);
   const transparentProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory && data.thumbnailTransparent === true);
-  const exploreProduct = mapInSlices(fashionProduct, 8);
+  // const exploreProduct = mapInSlices(fashionProduct, 8);
+  const [showBot, toggleBot] = useState(true);
 
   return (
     <>
       <div style={{ position: 'relative' }}>
-        <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: '999' }}>
-          <Chatbot
-            placeholderText='Vui lòng nhập thắc mắc?'
-            config={config}
-            messageParser={MessageParser}
-            actionProvider={ActionProvider}
-          />
-        </div>
         <HeaderTwo />
         <main className="main-wrapper">
           <BannerThree />

@@ -1,6 +1,6 @@
 import Currency from "@/components/widget/displayCurrency";
 
-const ProductPrice = ({ currentPrice, price }) => {
+const   ProductPrice = ({ currentPrice, price }) => {
   return (
     <div className="product-price-variant">
       {price ? (

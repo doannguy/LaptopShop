@@ -38,8 +38,8 @@ class User extends Authenticatable
     public const STATUS_ACTIVE = 0;
     public const STATUS_INACTIVE = 1;
 
-    public function orders()
+    public function carts()
     {
-        // return $this->hasMany(Order::class);
+        return $this->hasMany(Cart::class);
     }
 }

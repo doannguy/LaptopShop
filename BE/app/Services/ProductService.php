@@ -4,18 +4,21 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\ProductOption;
+use App\Models\ProductReview;
 use Illuminate\Support\Facades\DB;
 
 class ProductService extends Service
 {
     function setModel()
     {
-       return new Product();
+        return new Product();
     }
+
     function mediaService()
     {
         return app(MediaService::class);
     }
+
     function productOptionService()
     {
         return app(ProductOptionService::class);
@@ -107,7 +110,6 @@ class ProductService extends Service
             \Log::info($th);
             return false;
         }
-
     }
     public function filterProductList($filterData)
     {
@@ -197,6 +199,14 @@ class ProductService extends Service
 
 
         return $product;
+    }
+    public function storeReview($data)
+    {
+        return ProductReview::create([...$data, 'user_id' => auth()->user()->id]);
+    }
 
+    public function deleteProductReview($reviewId)
+    {
+        return ProductReview::find($reviewId)->delete();
     }
 }

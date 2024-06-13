@@ -118,6 +118,7 @@ class ProductService extends Service
         $query = ProductOption::query();
         $brandCount = [];
         $seriCount = [];
+        $cateCount = [];
         $orderBy = $filterData['orderBy'] ?? 'id';
         $orderDir = $filterData['orderDir'] ?? 'asc';
         $query->with(['product', 'productMedia']);
@@ -130,6 +131,14 @@ class ProductService extends Service
             $query->whereHas('product', function ($query) use ($filterData) {
                 $query->where('product_seri_id', $filterData['product_seri']);
             });
+
+        }
+        if (isset($filterData['category'])) {
+            $query->whereHas('product', function ($query) use ($filterData) {
+                $query->whereHas('productSeri', function ($query) use ($filterData) {
+                    $query->where('category_id', $filterData['category']);
+                });
+            });
         }
         if (isset($filterData['brand'])) {
             $query->whereHas('product', function ($query) use ($filterData) {
@@ -140,9 +149,25 @@ class ProductService extends Service
         $totalProduct = $query->count();
         $productOptionTotal = $query->get();
         foreach ($productOptionTotal as $productOption) {
-            $brandCount[$productOption->product->brand_id] = isset($brandCount[$productOption->product->brand_id]) ? [...$brandCount[$productOption->product->brand_id], 'count' => $brandCount[$productOption->product->brand_id]['count'] + 1] : ['count' => 1, 'label' => $productOption->product->brand->name];
-            $seriCount[$productOption->product->product_seri_id] = isset($seriCount[$productOption->product->product_seri_id]) ? [...$seriCount[$productOption->product->product_seri_id], 'count' => $seriCount[$productOption->product->product_seri_id]['count'] + 1] : ['count' => 1, 'label' => $productOption->product->productSeri->name];
+            $brandId =$productOption->product->brand_id;
+            $brandCount[$brandId] = isset($brandCount[$brandId])
+            ? [...$brandCount[$brandId], 'count' => $brandCount[$brandId]['count'] + 1]
+            :['count' => 1, 'label' => $productOption->product->brand->name, 'id' => $brandId];
+
+            $seriId = $productOption->product->product_seri_id;
+            $seriCount[$seriId] = isset($seriCount[$seriId])
+            ? [...$seriCount[$seriId], 'count' => $seriCount[$seriId]['count'] + 1]
+            : ['count' => 1, 'label' => $productOption->product->productSeri->name, 'id' => $seriId];
+
+            $cate_id = $productOption->product->productSeri->category_id;
+            $cateCount[$cate_id] = isset($cateCount[$cate_id])
+            ? [...$cateCount[$cate_id], 'count' => $cateCount[$cate_id]['count'] + 1]
+            : ['count' => 1, 'label' => $productOption->product->productSeri->category->name, 'id' => $cate_id];
         }
+        // object to array
+        $brandCount = array_values($brandCount);
+        $seriCount = array_values($seriCount);
+        $cateCount = array_values($cateCount);
 
         $query->orderBy($orderBy, $orderDir);
         $query->offset(($page - 1) * $pageSize);
@@ -154,16 +179,27 @@ class ProductService extends Service
             'totalPages' => $totalPages,
             'totalProduct' => $totalProduct,
             'brandCount' => $brandCount,
-            'seriCount' => $seriCount
+            'seriCount' => $seriCount,
+            'cateCount' => $cateCount
         ];
     }
-    public function getProductDetail($productId)
-    {
-        return Product::with(['productOptions' => function ($query) {
-            $query->with(['productMedia', 'attributeValues']);
-        }])->find($productId);
-    }
+    function getProductDetail($id) {
+        $product = Product::where('id', $id)->with(['productOptions' => function ($query) {
+            $query->with(['productMedia', 'attributeValues' => function ($query) {
+                $query->with('attribute');
+            }]);
+        }]);
+        $product = $product->first();
+        $list_Image = [$product->thumbnailMedia->path];
 
+        foreach ($product->productOptions as $productOption) {
+            $list_Image = array_merge($list_Image, $productOption->productMedia->pluck('path')->toArray());
+        }
+        $product->list_Image = $list_Image;
+
+
+        return $product;
+    }
     public function storeReview($data)
     {
         return ProductReview::create([...$data, 'user_id' => auth()->user()->id]);

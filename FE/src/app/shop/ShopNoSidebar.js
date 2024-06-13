@@ -20,7 +20,7 @@ const ShopNoSidebar = () => {
         const getCategoryData = ProductsData.filter(data => slugify(data.pCate) === e.target.value);
         if (e.target.value === "all") {
             setcateProduct(ProductsData);
-        }else {
+        } else {
             setcateProduct(getCategoryData);
         }
     }
@@ -37,24 +37,24 @@ const ShopNoSidebar = () => {
         const getPriceData = ProductsData.filter(data => data.price >= parseInt(splitValue[0]) && data.price <= parseInt(splitValue[1]));
         if (value === "null") {
             setcateProduct(ProductsData);
-        }else {
+        } else {
             setcateProduct(getPriceData);
         }
     }
-    
+
     const sortHandler = (e) => {
         const value = e.target.value;
         if (value === 'price') {
             const getSortingData = ProductsData.sort((product1, product2) => (product1.price > product2.price ? -1 : 1));
             setcateProduct(getSortingData);
-        } else if(value === 'name') {
+        } else if (value === 'name') {
             const getSortingData = ProductsData.sort((product1, product2) => (product1.title > product2.title ? 1 : -1));
             setcateProduct(getSortingData);
-        }else if(value === 'latest'){
+        } else if (value === 'latest') {
             setcateProduct(ProductsData.reverse());
         }
     }
-    
+
     return (
         <Section pClass="axil-shop-area">
             <div className="row">

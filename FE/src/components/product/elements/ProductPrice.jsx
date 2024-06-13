@@ -1,23 +1,21 @@
+import Currency from "@/components/widget/displayCurrency";
 
-const ProductPrice = (props) => {
-    return ( 
-        <div className="product-price-variant">
-              {props.price.salePrice ? (
-                <span className="price old-price">
-                  <span className="currency-symbol">$</span>
-                  {props.price.price}
-                </span>
-              ) : (
-                ""
-              )}
-              <span className="price current-price">
-                <span className="currency-symbol">$</span>
-                {props.price.salePrice
-                  ? props.price.salePrice
-                  : props.price.price}
-              </span>
-            </div>
-     );
+const ProductPrice = ({ currentPrice, price }) => {
+  return (
+    <div className="product-price-variant">
+      {price ? (
+        <span className="price old-price">
+          <Currency currency={price} />
+
+        </span>
+      ) : (
+        ""
+      )}
+      <span className="price current-price">
+        <Currency currency={currentPrice} />
+      </span>
+    </div>
+  );
 }
- 
+
 export default ProductPrice;

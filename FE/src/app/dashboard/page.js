@@ -7,10 +7,6 @@ import useGetDetailedUser from "../hook/use-get-details-user";
 
 const Dashboard = () => {
     const { data, isLoading } = useGetDetailedUser();
-    console.log(data);
-
-
-
     return (
         isLoading == true ? <div>Loading...</div> :
             <div className="axil-dashboard-overview">

@@ -21,6 +21,7 @@ import MessageParser from '../../../components/chatbot/MessageParser';
 import ActionProvider from '../../../components/chatbot/ActionProvider';
 import PosterOne from '@/components/poster/PosterOne';
 import "@/components/chatbot/style.scss";
+
 const HomeFashion = () => {
   const pathname = usePathname();
   const split = pathname.split("/");
@@ -144,5 +145,7 @@ const HomeFashion = () => {
     </>
   );
 }
+
+
 
 export default HomeFashion;

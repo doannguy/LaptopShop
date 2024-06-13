@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Swal from 'sweetalert2';
 import { calculateTotalAmount, calculateTotalQuantity } from "@/utils";
+import CardService from "@/services/card_service";
 
 const productSlice = createSlice({
     name: 'products',
@@ -17,30 +18,45 @@ const productSlice = createSlice({
     },
     reducers: {
         addToCart(state, action) {
-            const ItemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
-            if (ItemIndex >= 0) {
-                state.cartItems[ItemIndex].cartQuantity += action.payload.cartQuantity ?? 1;
-                state.cartQuantityTotal += action.payload.cartQuantity ?? 1
-                state.isMinicartOpen = true;
-
-            } else {
-                const tempProduct = { 
-                    id: action.payload.id,
-                    title: action.payload.title,
-                    thumbnail: action.payload.thumbnail,
-                    salePrice: action.payload.salePrice ?? 0,
-                    price: action.payload.price,
-                    productType: action.payload.productType,
-                    cartQuantity: action.payload.cartQuantity ?? 1,
-                    productSize: action.payload.productSize ?? "",
-                    productColor: action.payload.productColor ?? "",
-                }
-                state.cartItems.push(tempProduct);
-                state.cartQuantityTotal += action.payload.cartQuantity ?? 1;
-                state.isMinicartOpen = true;
+            const { quantity, productOptionId } = action.payload;
+            let status = await CardService.update({ quantity, product_option_id: productOptionId });
+            if (status) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đã thêm vào giỏ hàng',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
+            refetchCard();
+            // const ItemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
 
-            state.cartTotalAmount = calculateTotalAmount(state.cartItems);
+            // if (ItemIndex >= 0) {
+            //     state.cartItems[ItemIndex].cartQuantity += action.payload.cartQuantity ?? 1;
+            //     state.cartQuantityTotal += action.payload.cartQuantity ?? 1
+            //     state.isMinicartOpen = true;
+
+            // } else {
+            //     const tempProduct = { 
+            //         id: action.payload.id,
+            //         title: action.payload.title,
+            //         thumbnail: action.payload.thumbnail,
+            //         salePrice: action.payload.salePrice ?? 0,
+            //         price: action.payload.price,
+            //         productType: action.payload.productType,
+            //         cartQuantity: action.payload.cartQuantity ?? 1,
+            //         productSize: action.payload.productSize ?? "",
+            //         productColor: action.payload.productColor ?? "",
+            //     }
+            //     state.cartItems.push(tempProduct);
+            //     state.cartQuantityTotal += action.payload.cartQuantity ?? 1;
+            //     state.isMinicartOpen = true;
+            // }
+
+            // state.cartTotalAmount = calculateTotalAmount(state.cartItems);
+        },
+        refetchCard(state, action) {
+              
         },
         removeCartItem(state, action) {
             const filteredCartItem = state.cartItems.filter((cartItem) => cartItem.id !== action.payload.id);

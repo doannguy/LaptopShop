@@ -5,7 +5,7 @@ export const getToken = () => window.localStorage.getItem('token');
 
 
 export const base_service = axios.create({
-  baseURL: "https://api-shop.codetify.tech/api",
+  baseURL: "localhost:8000/api",
   headers: {
     "Content-Type": "application/json",
   }

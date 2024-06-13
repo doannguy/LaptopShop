@@ -42,15 +42,14 @@ const SingleLayouThree = ({ singleData, productId }) => {
     }, [isFetched])
     const dispatch = useDispatch();
 
-    const handleAddToCart = (cartAddedData) => {
-        let product = { ...cartAddedData }
+    const handleAddToCart = () => {
+        
+       
         if (quantity > 0) {
-            product.cartQuantity = quantity;
-            product.productColor = colorImage.color;
-            product.productSize = productSize;
-            dispatch(addToCart(product));
+           
+            dispatch(addToCart({quantity,productOptionId}));
         } else {
-            alert("Please select minimum 1 quantity")
+            toast.warning("Số lượng tối thiểu là 1");
         }
     };
 
@@ -212,7 +211,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                 </div>
                                                 <ul className="product-action d-flex-center mb--0">
                                                     <li className="add-to-cart">
-                                                        <button disabled={(!productOptionSelected) ? true : false} onClick={() => handleAddToCart(productOptionSelected)} className="axil-btn btn-bg-primary">Thêm vào giỏ hàng</button>
+                                                        <button disabled={(!productOptionSelected) ? true : false} onClick={() => handleAddToCart()} className="axil-btn btn-bg-primary">Thêm vào giỏ hàng</button>
                                                     </li>
                                                     {/* <li className="wishlist">
                                                     <button className="axil-btn wishlist-btn" onClick={() => handleAddToWishlist(productOptionSelected)}><i className={isWishlistAdded.length === 1 ? "fas fa-heart" : "far fa-heart"} /></button>

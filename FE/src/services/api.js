@@ -7,3 +7,5 @@ export const get_category = "/category";
 export const get_brand = "/brand";
 export const get_product_list = '/product-list';
 export const get_detail_product = '/product-detail'
+export const update_card = '/card/update'
+export const get_card = '/card'

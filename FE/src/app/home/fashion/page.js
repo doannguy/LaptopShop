@@ -1,5 +1,6 @@
 'use client';
 
+import "@/components/chatbot/style.scss";
 import Section from "@/components/elements/Section";
 import SectionTitle from "@/components/elements/SectionTitle";
 import SlickSlider from "@/components/elements/SlickSlider";
@@ -13,23 +14,12 @@ import ProductTwo from '@/components/product/ProductTwo';
 import ServiceOne from "@/components/services/ServiceOne";
 import ServiceTwo from "@/components/services/ServiceTwo";
 import TestimonialOne from '@/components/testimonial/TestimonialOne';
-<<<<<<< HEAD
+import Loading from '@/components/widget/Loading';
 import ProductsData from "@/data/Products";
 import { slugify } from '@/utils';
 import { usePathname } from 'next/navigation';
-
-=======
-import ProductSeven from '@/components/product/ProductSeven';
-import Chatbot from 'react-chatbot-kit';
+import { useEffect, useState } from "react";
 import 'react-chatbot-kit/build/main.css';
-import config from '../../../components/chatbot/config';
-import MessageParser from '../../../components/chatbot/MessageParser';
-import ActionProvider from '../../../components/chatbot/ActionProvider';
-import PosterOne from '@/components/poster/PosterOne';
-import "@/components/chatbot/style.scss";
-import Loading from '@/components/widget/Loading';
-import { useEffect, useState } from 'react';
->>>>>>> LT-25
 
 const HomeFashion = () => {
   const pathname = usePathname();
@@ -37,10 +27,7 @@ const HomeFashion = () => {
   const pageCategory = split[split.length - 1];
   const fashionProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory);
   const transparentProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory && data.thumbnailTransparent === true);
-<<<<<<< HEAD
   // const exploreProduct = mapInSlices(fashionProduct, 8);
-=======
-  const exploreProduct = mapInSlices(fashionProduct, 8);
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -51,7 +38,6 @@ const HomeFashion = () => {
   }, []);
 
   if (loading) return <Loading />;
->>>>>>> LT-25
   return (
     <>
       <div style={{ position: 'relative' }}>

@@ -1,16 +1,38 @@
 import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from "react-redux";
-import { removeCartItem, miniCartHandler } from "@/store/slices/productSlice";
+import { removeCartItem, miniCartHandler, updateCartAmount } from "@/store/slices/productSlice";
+import Currency from "@/components/widget/displayCurrency";
+import Swal from "sweetalert2";
+import CartService from "@/services/cart_service";
 
 const MiniCart = () => {
 const dispatch = useDispatch();
 const getProducts = useSelector((state) => state.productData);
 const router = useRouter();
 
-const removeCartHandler = (data) => {
-    dispatch(removeCartItem(data));
-}
+  const removeCartHandler = (cartItem) => {
+    Swal.fire({
+      title: 'Bạn có muốn xóa sản phẩm này?',
+      showCancelButton: true,
+      confirmButtonText: '<p style="color: white">Xóa</p>',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      cancelButtonText: '<p style="color: white">Hủy</p>',
+      showCloseButton: true,
+      icon: 'warning',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await CartService.update({ quantity: 0, product_option_id: cartItem.product_option_id })
+        if (res.code != 0) {
+          toast.error(res.message);
+        } else {
+          dispatch(removeCartItem(cartItem));
+        }
+        dispatch(updateCartAmount())
+      }
+    })
+  }
 const cartHandler = (data) => {
   dispatch(miniCartHandler(data));
 }
@@ -25,7 +47,7 @@ return (
       <div className={`cart-dropdown ${getProducts.isMinicartOpen ? "open" : ""}`}>
         <div className="cart-content-wrap">
           <div className="cart-header">
-            <h2 className="header-title">Cart review</h2>
+            <h2 className="header-title">Giỏ hàng</h2>
             <button
               className="cart-close sidebar-close"
               onClick={() => cartHandler(false)}
@@ -40,8 +62,8 @@ return (
                   <li className="cart-item" key={data.id}>
                     <div className="item-img">
 						<Image
-							src={data.thumbnail}
-							alt={data.title}
+                        src={"https://api-shop.codetify.tech/storage/" + data.thumbnail}
+							alt={data.product_name}
 							height={100}
 							width={100}
 						/>
@@ -51,14 +73,14 @@ return (
                     </div>
                     <div className="item-content">
                       <h3 className="item-title">
-                        {data.title}
+                        {data.product_name}
                       </h3>
                       <div className="item-price">
                         <span className="currency-symbol">$</span>
-                        {data.salePrice
-                          ? data.salePrice
-                          : data.price}
-                        <strong>x{data.cartQuantity}</strong>
+                        <Currency currency={data.current_price
+                          ? data.current_price
+                          : data.price} />
+                        <strong> x {data.quantity}</strong>
                       </div>
                       <div className="pro-qty item-quantity">
                         <input type="number" className="quantity-input" />
@@ -74,9 +96,9 @@ return (
           {getProducts.cartItems.length > 0 ? (
             <div className="cart-footer">
               <h3 className="cart-subtotal">
-                <span className="subtotal-title">Subtotal:</span>
+                <span className="subtotal-title">Tổng tiền:</span>
                 <span className="subtotal-amount">
-                  ${getProducts.cartTotalAmount}
+                <Currency currency={getProducts.cartTotalAmount} />
                 </span>
               </h3>
               <div className="group-btn">

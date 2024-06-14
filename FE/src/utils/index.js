@@ -83,22 +83,23 @@ const getPriceRange = function (product) {
 const calculateTotalAmount = function (items) {
 	let totalAmount = 0;
 	const allAmount = items.map((item) => {
-		let price = item.salePrice ? item.salePrice : item.price;
-		let productsPrice = item.cartQuantity * price;
+		
+		let price = item.current_price ? item.current_price : item.price;
+		let productsPrice = item.quantity * price;
 		return productsPrice;
 	})
 	for (let i = 0; i < allAmount.length; i++) {
 		const price = allAmount[i];
 		totalAmount += price;
 	}
-	return parseFloat(totalAmount).toFixed(2);
+	return totalAmount;
 }
 
 const calculateTotalQuantity = function (items) {
 	let totalQuantity = 0;
 	for (let i = 0; i < items.length; i++) {
 		const product = items[i];
-		totalQuantity += product.cartQuantity;
+		totalQuantity += product.quantity;
 	}
 	return totalQuantity;
 }

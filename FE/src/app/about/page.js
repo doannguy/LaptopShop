@@ -114,7 +114,7 @@ const AboutUs = () => {
             </section>
             <section className="axil-about-area about-style-2">
                 <div className="container">
-                    {AboutFeatures?.map((data, index) => (
+                    {/* {AboutFeatures?.map((data, index) => (
                         <div className="row align-items-center mb--80 mb_sm--60" key={index}>
                             <div className={`col-lg-5 ${index % 2 === 0 ? "" : "order-lg-2"}`}>
                                 <div className="about-thumbnail">
@@ -135,7 +135,7 @@ const AboutUs = () => {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    ))} */}
                 </div>
             </section>
             <NewsLetter />

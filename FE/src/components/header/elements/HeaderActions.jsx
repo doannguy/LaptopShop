@@ -7,26 +7,44 @@ import { miniCartHandler } from "@/store/slices/productSlice";
 import { mobileMenu } from "@/store/slices/menuSlice";
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import CartService from "@/services/cart_service";
+import { updateCart } from "@/store/slices/productSlice";
 
 const HeaderActions = (props) => {
   const [searchToggle, setSearchToggle] = useState(false);
   const [accountDropdown, setaccountDropdown] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const router = useRouter();
+  const getProducts = useSelector((state) => state.productData);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (window.localStorage.getItem('token') != null) {
       setIsLogin(true);
+      console.log(getProducts.isLoadedCart);
+      if (getProducts.isLoadedCart == false) {
+        loadCart();
+      }
     } else {
       setIsLogin(false);
     }
   }, []);
 
+  const loadCart = async () => {
+    const res = await CartService.get();
+    if(res.code == 0) {
+      dispatch(updateCart({ cartItems: res.data }));
+    }else {
+      toast.error("Lỗi lấy thông tin giỏ hàng");
+      window.localStorage.setItem('token', null);
+      router.push('/sign-in');
+    }
+  }
 
 
-  const dispatch = useDispatch();
-  const getProducts = useSelector((state) => state.productData);
 
+
+ 
   const searchBoxToggleHandler = () => {
     setSearchToggle((toggler) => !toggler);
   };

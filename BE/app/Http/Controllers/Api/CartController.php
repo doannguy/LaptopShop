@@ -19,7 +19,7 @@ class CartController extends Controller
     {
         $data = $request->validated();
         $myCart = $this->cartService()->updateByUserId(Auth::user()->id, $data);
-        return jsonResponse($myCart ? 0 : 1, message: $myCart ? 'Cập nhật thành công!' : 'Có lỗi xảy ra, xin vui lòng tải lại trang và thử lại.');
+        return jsonResponse($myCart ? 0 : 1, $myCart, $myCart ? 'Cập nhật thành công!' : 'Có lỗi xảy ra, xin vui lòng tải lại trang và thử lại.');
     }
 
     public function cartService()

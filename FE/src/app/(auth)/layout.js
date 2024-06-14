@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { Logo } from "@/data/Common";
+import { ToastContainer } from "react-toastify";
 
 const AuthLayout = ({ children, bgImage }) => {
     const pathname = usePathname();
@@ -10,6 +11,7 @@ const AuthLayout = ({ children, bgImage }) => {
 
     return (
         <div className="axil-signin-area">
+            <ToastContainer />
             <div className="signin-header">
                 <div className="row align-items-center">
                     <div className="col-md-6">
@@ -24,8 +26,8 @@ const AuthLayout = ({ children, bgImage }) => {
                     </div>
                     <div className="col-md-6">
                         <div className="singin-header-btn">
-                            <p>{slug === "sign-in" ? "Not a member?" : "Đã có tài khoản?"}</p>
-                            <Link href={slug === "sign-in" ? "/sign-up" : "/sign-in"} className="axil-btn btn-bg-secondary sign-up-btn">{slug === "sign-in" ? "Sign Up Now" : "Đăng nhập"}</Link>
+                            <p>{slug === "sign-in" ? "Bạn chưa có tài khoản?" : "Đã có tài khoản?"}</p>
+                            <Link href={slug === "sign-in" ? "/sign-up" : "/sign-in"} className="axil-btn btn-bg-secondary sign-up-btn">{slug === "sign-in" ? "Đăng ký ngay" : "Đăng nhập"}</Link>
                         </div>
                     </div>
                 </div>

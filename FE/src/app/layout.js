@@ -23,7 +23,7 @@ const RootLayout = ({ children }) => {
 			</head>
 			<body>
 
-				<QueryClientProvider client={queryClient}>
+				<QueryClientProvider client={queryClient} >
 					<Providers>
 						{children}
 					</Providers>

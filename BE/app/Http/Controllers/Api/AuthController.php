@@ -32,7 +32,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return jsonResponse(0, message: "Tài khoản hoặc mật khẩu không chính xác");
+            return jsonResponse(1, message: "Tài khoản hoặc mật khẩu không chính xác");
         }
         $user->tokens()->delete();
         $token = $user->createToken('authToken')->plainTextToken;

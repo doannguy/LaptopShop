@@ -23,6 +23,7 @@
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "next": "13.4.3",
+    "next13-progressbar": "^1.2.1",
     "react": "18.2.0",
     "react-chatbot-kit": "^2.2.2",
     "react-countdown": "^2.3.5",

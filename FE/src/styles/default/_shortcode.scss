@@ -39,7 +39,9 @@ Shortcode
 /*===========================
     Background Image 
 =============================*/
-
+.error {
+    color: red !important;
+}
 .bg_image {
     @extend %bgImagePosition;
 }

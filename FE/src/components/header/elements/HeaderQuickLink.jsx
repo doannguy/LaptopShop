@@ -5,10 +5,7 @@ const HeaderQuickLink = () => {
     <div className="header-top-link">
       <ul className="quick-link">
         <li>
-          <Link href="/sign-up">Join Us</Link>
-        </li>
-        <li>
-          <Link href="/sign-in">Sign In</Link>
+          <Link href="/sign-up">Đăng ký ngay</Link>
         </li>
       </ul>
     </div>

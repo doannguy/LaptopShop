@@ -21,6 +21,8 @@ import MessageParser from '../../../components/chatbot/MessageParser';
 import ActionProvider from '../../../components/chatbot/ActionProvider';
 import PosterOne from '@/components/poster/PosterOne';
 import "@/components/chatbot/style.scss";
+import Loading from '@/components/widget/Loading';
+import { useEffect, useState } from 'react';
 
 const HomeFashion = () => {
   const pathname = usePathname();
@@ -29,7 +31,16 @@ const HomeFashion = () => {
   const fashionProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory);
   const transparentProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory && data.thumbnailTransparent === true);
   const exploreProduct = mapInSlices(fashionProduct, 8);
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
+    }
+  }, []);
 
+  if (loading) return <Loading />;
   return (
     <>
       <div style={{ position: 'relative' }}>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useGetAllCategory from "@/app/hook/use-get-all-category";
+import Loading from "@/components/widget/Loading";
 
 const HeaderAsideMenu = () => {
 	const [asideMenuToggler, setAsideMenuToggler] = useState(false);
@@ -49,7 +50,7 @@ const HeaderAsideMenu = () => {
 	}, [windowWidth]);
 
 	return isLoading == true ? (
-		<div>Loading...</div>
+		<Loading/>
 	) : (
 		<div className="header-nav-department">
 			<aside className="header-department">

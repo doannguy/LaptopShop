@@ -26,7 +26,7 @@ const RootLayout = ({ children }) => {
 			</head>
 			<body>
 
-				<QueryClientProvider client={queryClient}>
+				<QueryClientProvider client={queryClient} >
 					<Providers>
 						{children}
 						<div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: '999' }}>

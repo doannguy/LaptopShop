@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { HeaderMenu } from "@/data/Menu";
 import { mobileMenu } from "@/store/slices/menuSlice";
 import useGetAllBrand from "@/app/hook/use-get-all-brand";
+import Loading from "@/components/widget/Loading";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const Nav = () => {
   return (
 
     isLoading == true ? (
-      <div>Loading...</div>
+      <Loading/>
     ) : (
       <>
         <nav className="mainmenu-nav">

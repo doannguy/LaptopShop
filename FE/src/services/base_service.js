@@ -5,7 +5,7 @@ export const getToken = () => window.localStorage.getItem('token');
 
 
 export const base_service = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: "http://localhost:8000/api",
   headers: {
     "Content-Type": "application/json",
   }
@@ -22,4 +22,16 @@ base_service.interceptors.request.use(
   function (error) {
     return Promise.reject(error);
   }
+);
+base_service.interceptors.response.use(
+  function (response) {
+   
+    return response;
+  },
+  function (error) {
+    if (error.response.status === 401) {
+      console.log("bạn cần đăng nhập");
+    }
+    return Promise.reject(error);
+  },
 );

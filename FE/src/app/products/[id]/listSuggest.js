@@ -8,7 +8,7 @@ import Loading from "@/components/widget/Loading";
 import ProductService from "@/services/product_service";
 import { useQuery } from "@tanstack/react-query";
 
-const ListSuggest = (productId) => {
+const ListSuggest = () => {
     const { data, error, isLoading, isFetching, refetch, isSuccess } = useQuery({
         queryKey: ["get-product-list"],
         queryFn: () => ProductService.getListProduct({ pageSize : 6 }),
@@ -55,7 +55,7 @@ const ListSuggest = (productId) => {
                 },
             ]}
         >
-            {data.data.products?.map((item) => (
+            {data?.data.products?.map((item) => (
                 <ProductOne productOption={item} key={item.id} />
             ))}
         </SlickSlider>

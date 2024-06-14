@@ -13,34 +13,18 @@ const productSlice = createSlice({
         quickView: false,
         quickViewItems: null,
         isMinicartOpen: false,
+        isLoadedCart: false,
         orderItems: []
     },
     reducers: {
-        addToCart(state, action) {
-            const ItemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
-            if (ItemIndex >= 0) {
-                state.cartItems[ItemIndex].cartQuantity += action.payload.cartQuantity ?? 1;
-                state.cartQuantityTotal += action.payload.cartQuantity ?? 1
-                state.isMinicartOpen = true;
-
-            } else {
-                const tempProduct = { 
-                    id: action.payload.id,
-                    title: action.payload.title,
-                    thumbnail: action.payload.thumbnail,
-                    salePrice: action.payload.salePrice ?? 0,
-                    price: action.payload.price,
-                    productType: action.payload.productType,
-                    cartQuantity: action.payload.cartQuantity ?? 1,
-                    productSize: action.payload.productSize ?? "",
-                    productColor: action.payload.productColor ?? "",
-                }
-                state.cartItems.push(tempProduct);
-                state.cartQuantityTotal += action.payload.cartQuantity ?? 1;
-                state.isMinicartOpen = true;
-            }
-
+        updateCart(state, action) { 
+            const { cartItems } = action.payload;
+            state.cartItems = cartItems; 
+            state.cartQuantityTotal = calculateTotalQuantity(state.cartItems);
+            console.log(state.cartItems);
+            // state.isMinicartOpen = true;
             state.cartTotalAmount = calculateTotalAmount(state.cartItems);
+            state.isLoadedCart = true;
         },
         removeCartItem(state, action) {
             const filteredCartItem = state.cartItems.filter((cartItem) => cartItem.id !== action.payload.id);
@@ -52,12 +36,12 @@ const productSlice = createSlice({
         },
         cartQuantityIncrease(state, action) {
             const findItem = state.cartItems.findIndex((item) => item.id === action.payload.id);
-            state.cartItems[findItem].cartQuantity += 1;
+            state.cartItems[findItem].quantity += 1;
         },
         cartQuantityDecrease(state, action) {
             const findItem = state.cartItems.findIndex((item) => item.id === action.payload.id);
-            if (state.cartItems[findItem].cartQuantity > 1) {
-                state.cartItems[findItem].cartQuantity -= 1;
+            if (state.cartItems[findItem].quantity > 1) {
+                state.cartItems[findItem].quantity -= 1;
             }
 
         },
@@ -116,7 +100,7 @@ const productSlice = createSlice({
     }
 });
 
-export const { addToCart, addToWishlist, removeWishlistItem, addToQuickView, removeCartItem, cartQuantityIncrease, cartQuantityDecrease, cartClear, updateCartAmount, miniCartHandler, addToOrder } = productSlice.actions;
+export const { updateCart, addToWishlist, removeWishlistItem, addToQuickView, removeCartItem, cartQuantityIncrease, cartQuantityDecrease, cartClear, updateCartAmount, miniCartHandler, addToOrder } = productSlice.actions;
 
 export default productSlice.reducer;
 

@@ -3,8 +3,9 @@ import SlickSlider from "@/components/elements/SlickSlider";
 import Loading from "@/components/widget/Loading";
 import Currency from "@/components/widget/displayCurrency";
 import { ProductReview } from "@/data/Comments";
+import CardService from "@/services/cart_service";
 import ProductService from "@/services/product_service";
-import { addToCart, addToWishlist } from "@/store/slices/productSlice";
+import { updateCart, addToWishlist } from "@/store/slices/productSlice";
 import { reviewAverage, slugify } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 import FsLightbox from "fslightbox-react";
@@ -23,7 +24,6 @@ const SingleLayouThree = ({ singleData, productId }) => {
     const [nav2, setNav2] = useState();
     const [quantity, setquantity] = useState(0);
     const [colorImage, setColorImage] = useState("");
-    const [productOptionId, setProductOptionId] = useState("");
     const [fsToggler, setFsToggler] = useState(false);
 
     const { data: productData, isLoading, isFetched } = useQuery({ queryKey: ["get-product"], queryFn: () => ProductService.getDetailProduct(productId) });
@@ -32,8 +32,8 @@ const SingleLayouThree = ({ singleData, productId }) => {
 
     useEffect(() => {
         if (isFetched) {
-            
-            if (productData.data != false) {
+
+            if (productData && productData.data != false) {
                 console.log(productData.data);
             } else {
                 setIsProductExist(false);
@@ -42,14 +42,25 @@ const SingleLayouThree = ({ singleData, productId }) => {
     }, [isFetched])
     const dispatch = useDispatch();
 
-    const handleAddToCart = () => {
-        
-       
-        if (quantity > 0) {
-           
-            dispatch(addToCart({quantity,productOptionId}));
-        } else {
-            toast.warning("Số lượng tối thiểu là 1");
+    const handleUpdateCart = async () => {
+        try {
+            if (quantity > 0) {
+                const res = await CardService.update({ quantity, product_option_id: productOptionSelected.id });
+                console.log(res);
+                if (res.code == 0) {
+                    dispatch(updateCart({ cartItems: res.data }));
+                    toast.success("Đã thêm vào giỏ hàng");
+                    setquantity(0);
+                    
+                } else {
+                    toast.error(res.message);
+                }
+            } else {
+                toast.warning("Số lượng tối thiểu là 1");
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng");
         }
     };
 
@@ -69,19 +80,19 @@ const SingleLayouThree = ({ singleData, productId }) => {
         }
         else {
             console.log("out of stock");
-            toast.warning(quantity == 0 ?"Bạn chưa chọn phiên bản":"Đã đạt đến số lượng tối đa")
+            toast.warning(quantity == 0 ? "Bạn chưa chọn phiên bản" : "Đã đạt đến số lượng tối đa")
         }
     }
 
 
     const productProductOptionHandler = (product_options) => {
         setProductOptionSelected(product_options);
-        setProductOptionId(product_options.id);
+        
     };
     const getFullscreenPreview = () => {
         let galleryPreview = [];
-        if (productData.data.list_Image) {
-            productData.data.list_Image.map((img) => {
+        if (productData?.data.list_Image) {
+            productData?.data.list_Image.map((img) => {
                 galleryPreview.push("https://api-shop.codetify.tech/storage/" + img);
             })
         } else {
@@ -98,7 +109,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                 </div> :
 
                 <section className="axil-single-product-area axil-section-gap pb--0">
-                
+
                     <div className="single-product-thumb mb--40">
                         <div className="container">
                             <div className="row">
@@ -117,7 +128,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                     asNavFor={nav2}
                                                     ref={(slider1 => setNav1(slider1))}
                                                 >
-                                                    {productData.data.list_Image ? productData.data.list_Image.map((galleryImg, index) => (
+                                                    {productData?.data.list_Image ? productData?.data.list_Image.map((galleryImg, index) => (
                                                         <div className="thumbnail" key={index}>
                                                             <Image
                                                                 src={"https://api-shop.codetify.tech/storage/" + galleryImg}
@@ -129,7 +140,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                     )) :
                                                         <div className="thumbnail">
                                                             <Image
-                                                                src={productData.data?.thumbnail_media?.path && "#"}
+                                                                src={productData?.data?.thumbnail_media?.path && "#"}
                                                                 height={584}
                                                                 width={584}
                                                                 alt="Gallery Image"
@@ -137,20 +148,19 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                         </div>
                                                     }
                                                 </SlickSlider>
-
-                                                {productData.data.list_Image && 
-                                        <>
-                                            <div className="product-quick-view position-view">
-                                                <button onClick={() => setFsToggler(!fsToggler)} className="popup-zoom">
-                                                    <i className="far fa-search-plus" />
-                                                </button>
-                                            </div>
-                                            <FsLightbox
-                                            toggler={fsToggler}
-                                            sources={getFullscreenPreview()}
-                                            />
-                                        </>
-                                        }
+                                                {productData?.data.list_Image &&
+                                                    <>
+                                                        <div className="product-quick-view position-view">
+                                                            <button onClick={() => setFsToggler(!fsToggler)} className="popup-zoom">
+                                                                <i className="far fa-search-plus" />
+                                                            </button>
+                                                        </div>
+                                                        <FsLightbox
+                                                            toggler={fsToggler}
+                                                            sources={getFullscreenPreview()}
+                                                        />
+                                                    </>
+                                                }
                                             </div>
                                         </div>
                                         <div className="col-lg-2 order-lg-1">
@@ -172,7 +182,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                     },
                                                 ]}
                                             >
-                                                {productData.data.list_Image ? productData.data.list_Image.map((galleryImg, index) => (
+                                                {productData?.data.list_Image ? productData?.data.list_Image.map((galleryImg, index) => (
                                                     <div className="small-thumb-img" key={index}>
                                                         <Image
                                                             src={"https://api-shop.codetify.tech/storage/" + galleryImg}
@@ -184,7 +194,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                 )) :
                                                     <div className="small-thumb-img">
                                                         <Image
-                                                            src={productData.data.thumbnail_media?.path && "#"}
+                                                            src={productData?.data.thumbnail_media?.path && "#"}
                                                             height={207}
                                                             width={213}
                                                             alt="Thumb Image"
@@ -197,10 +207,10 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                 <div className="col-lg-5 mb--40">
                                     <div className="single-product-content">
                                         <div className="inner">
-                                            <h2 className="product-title">{productData.data.name}</h2>
-                                            {productData.data.short_description &&
+                                            <h2 className="product-title">{productData?.data.name}</h2>
+                                            {productData?.data.short_description &&
                                                 <>
-                                                    <p>{productData.data.short_description}</p>
+                                                    <p>{productData?.data.short_description}</p>
                                                 </>
                                             }
                                             <div className="product-action-wrapper d-flex-center">
@@ -211,7 +221,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                 </div>
                                                 <ul className="product-action d-flex-center mb--0">
                                                     <li className="add-to-cart">
-                                                        <button disabled={(!productOptionSelected) ? true : false} onClick={() => handleAddToCart()} className="axil-btn btn-bg-primary">Thêm vào giỏ hàng</button>
+                                                        <button disabled={(!productOptionSelected) ? true : false} onClick={() => handleUpdateCart()} className="axil-btn btn-bg-primary">Thêm vào giỏ hàng</button>
                                                     </li>
                                                     {/* <li className="wishlist">
                                                     <button className="axil-btn wishlist-btn" onClick={() => handleAddToWishlist(productOptionSelected)}><i className={isWishlistAdded.length === 1 ? "fas fa-heart" : "far fa-heart"} /></button>
@@ -219,12 +229,12 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                 </ul>
                                             </div>
                                             <div className="product-variations-wrapper">
-                                                {(productData.data.product_options && productData.data.product_options.length > 0) &&
+                                                {(productData?.data.product_options && productData?.data.product_options.length > 0) &&
                                                     <div className="product-variation product-size-variation">
                                                         <h6 className="title">Phiên bản:</h6>
                                                         <ul className="range-variant">
-                                                            {productData.data.product_options?.map((data, index) => (
-                                                                <li key={index} className={productOptionId === data.id ? "active" : ""}
+                                                            {productData?.data.product_options?.map((data, index) => (
+                                                                <li key={index} className={productOptionSelected?.id === data.id ? "active" : ""}
                                                                     onClick={() => productProductOptionHandler(data)}>
                                                                     <div>{data.name}</div>
                                                                 </li>
@@ -290,7 +300,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                             <div className="tab-content">
                                 <div className="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
                                     <div className="product-desc-wrapper">
-                                        <div dangerouslySetInnerHTML={{ __html: productData.data.description }} />
+                                        <div dangerouslySetInnerHTML={{ __html: productData?.data.description }} />
 
                                     </div>
                                 </div>

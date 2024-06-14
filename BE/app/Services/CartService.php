@@ -14,21 +14,38 @@ class CartService extends Service
 
     public function findByUserId($userId)
     {
-        return Cart::where('user_id', $userId)
-            ->with('productOption.product')
-            ->firstOrCreate();
+        $carts = Cart::where('user_id', $userId)
+            ->with(['productOption.product', 'productOption.productMedia'])
+            ->get();
+        return $carts->map(function ($cart) {
+            return [
+                'id' => $cart->id,
+                'product_option_id' => $cart->product_option_id,
+                'product_name' => $cart->productOption->product->name." (".$cart->productOption->name.")",
+                'price' => $cart->productOption->price,
+                'current_price' => $cart->productOption->current_price,
+                'quantity' => $cart->quantity,
+                'thumbnail' => $cart->productOption->productMedia->first()->path,
+                'product_id' => $cart->productOption->product_id,
+                'totalAmount' => $cart->productOption->current_price * $cart->quantity
+            ];
+        });
     }
 
     public function updateByUserId($userId, $data)
-    {
+    {   $result = false;
         if ($data['quantity'] == 0) {
-            return $this->deleteByUserId($userId, $data['product_option_id']);
+            $result = $this->deleteByUserId($userId, $data['product_option_id']);
+        }else {
+            $result = Cart::updateOrCreate([
+                'user_id' => $userId,
+                'product_option_id' => $data['product_option_id'],
+            ], $data);
         }
+        if($result == false) return false;
+        return $this->findByUserId($userId);
 
-        return Cart::updateOrCreate([
-            'user_id' => $userId,
-            'product_option_id' => $data['product_option_id'],
-        ], $data);
+
     }
 
     public function deleteByUserId($userId, $productOptionId)

@@ -32,7 +32,7 @@ class UpdateCartRequest extends FormRequest
                 'max:100',
                 function ($attribute, $value, $fail) {
                     $productOption = \App\Models\ProductOption::find($this->product_option_id);
-                    if ($value > $productOption->amount) {
+                    if ($productOption && $value > $productOption->amount) {
                         $fail('Số lượng vượt quá số lượng sản phẩm trong kho');
                     }
                 },

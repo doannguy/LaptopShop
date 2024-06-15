@@ -31,7 +31,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:
     Route::post('user/info', 'UserController@update');
 
     Route::post('product-detail/review', 'ProductController@storeProductReview');
-    // Route::post('product-detail/review/delete', 'ProductController@deleteProductReview');
+    // Route::post('product-detail/review/delete', 'ProductController@deleteReview');
 
     Route::get('cart', 'CartController@getMyCart');
     Route::post('cart/update', 'CartController@updateMyCart');

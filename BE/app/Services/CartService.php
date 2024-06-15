@@ -17,11 +17,12 @@ class CartService extends Service
         $carts = Cart::where('user_id', $userId)
             ->with(['productOption.product', 'productOption.productMedia'])
             ->get();
+            
         return $carts->map(function ($cart) {
             return [
                 'id' => $cart->id,
                 'product_option_id' => $cart->product_option_id,
-                'product_name' => $cart->productOption->product->name." (".$cart->productOption->name.")",
+                'product_name' => $cart->productOption->product->name . " (" . $cart->productOption->name . ")",
                 'price' => $cart->productOption->price,
                 'current_price' => $cart->productOption->current_price,
                 'quantity' => $cart->quantity,
@@ -33,19 +34,18 @@ class CartService extends Service
     }
 
     public function updateByUserId($userId, $data)
-    {   $result = false;
+    {
+        $result = false;
         if ($data['quantity'] == 0) {
             $result = $this->deleteByUserId($userId, $data['product_option_id']);
-        }else {
+        } else {
             $result = Cart::updateOrCreate([
                 'user_id' => $userId,
                 'product_option_id' => $data['product_option_id'],
             ], $data);
         }
-        if($result == false) return false;
+        if ($result == false) return false;
         return $this->findByUserId($userId);
-
-
     }
 
     public function deleteByUserId($userId, $productOptionId)

@@ -26,7 +26,7 @@ class CategoryService extends Service
         $query->orderBy('id', $sort);
         $recordsFiltered = $recordsTotal = $query->count();
         $categories = $query->skip($skip)
-            // ->withCount(['products'])
+            ->withCount(['products'])
             ->take($pageLength)
             ->get();
 
@@ -42,10 +42,10 @@ class CategoryService extends Service
     {
         $category = Category::find($data['id']);
         if ($data['delete_type'] == Category::DELETE_TYPE['hard']) {
-            // $category->products()->delete();
+            $category->products()->delete();
             return $category->delete();
         } else if ($data['delete_type'] == Category::DELETE_TYPE['soft']) {
-            // $category->products()->update(['category_id' => null]);
+            $category->products()->update(['category_id' => null]);
             return $category->delete();
         }
     }

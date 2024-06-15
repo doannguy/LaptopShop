@@ -22,7 +22,7 @@ class BrandService
         $query->orderBy('id', 'desc');
         $recordsFiltered = $recordsTotal = $query->count();
         $brands = $query->skip($skip)
-            // ->withCount(['products'])
+            ->withCount(['products'])
             ->take($pageLength)
             ->get();
 
@@ -38,10 +38,10 @@ class BrandService
     {
         $brand = Brand::find($data['id']);
         if ($data['delete_type'] == Brand::DELETE_TYPE['hard']) {
-            // $brand->products()->delete();
+            $brand->products()->delete();
             return $brand->delete();
         } else if ($data['delete_type'] == Brand::DELETE_TYPE['soft']) {
-            // $brand->products()->update(['brand_id' => null]);
+            $brand->products()->update(['brand_id' => null]);
             return $brand->delete();
         }
     }

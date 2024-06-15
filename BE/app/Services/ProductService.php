@@ -188,18 +188,18 @@ class ProductService extends Service
             $query->with(['productMedia', 'attributeValues' => function ($query) {
                 $query->with('attribute');
             }]);
-        }]);
-        $product = $product->first();
+        }])->first();
+
         if (!$product) {
             return false;
         }
+
         $list_Image = [$product->thumbnailMedia->path];
 
         foreach ($product->productOptions as $productOption) {
             $list_Image = array_merge($list_Image, $productOption->productMedia->pluck('path')->toArray());
         }
         $product->list_Image = $list_Image;
-
 
         return $product;
     }
@@ -208,7 +208,7 @@ class ProductService extends Service
         return ProductReview::create([...$data, 'user_id' => auth()->user()->id]);
     }
 
-    public function deleteProductReview($reviewId)
+    public function deleteReview($reviewId)
     {
         return ProductReview::find($reviewId)->delete();
     }

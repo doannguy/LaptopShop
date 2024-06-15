@@ -111,6 +111,7 @@
             datatable = $("#brand-table").DataTable({
                 processing: true,
                 serverSide: true,
+                ordering: false,
                 ajax: {
                     url: "{{ route('brand.datatable') }}",
                     type: "POST",

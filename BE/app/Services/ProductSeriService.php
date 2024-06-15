@@ -37,13 +37,13 @@ class ProductSeriService
 
     public function delete($data)
     {
-        $productSeeri = ProductSeri::find($data['id']);
+        $productSeri = ProductSeri::find($data['id']);
         if ($data['delete_type'] == ProductSeri::DELETE_TYPE['hard']) {
-            // $productSeeri->products()->delete();
-            return $productSeeri->delete();
+            $productSeri->products()->delete();
+            return $productSeri->delete();
         } else if ($data['delete_type'] == ProductSeri::DELETE_TYPE['soft']) {
-            // $productSeeri->products()->update(['productSeeri_id' => null]);
-            return $productSeeri->delete();
+            $productSeri->products()->update(['productSeri_id' => null]);
+            return $productSeri->delete();
         }
     }
 

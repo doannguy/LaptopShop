@@ -97,6 +97,20 @@
                     </div>
 
                     <div class="menu-item">
+                        <a class="menu-link @if (request()->routeIs('order.*')) active @endif"
+                            href="{{ route('order.index') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-triangle fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Đơn hàng</span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
                         <a class="menu-link @if (request()->routeIs('attribute.*')) active @endif"
                             href="{{ route('attribute.index') }}">
                             <span class="menu-icon">

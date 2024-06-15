@@ -8,7 +8,7 @@
                 class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5 mb-lg-0">
 
                 <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                    Danh sách thương hiệu
+                    Danh sách đơn hàng
                 </h1>
 
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -18,7 +18,7 @@
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
-                    <li class="breadcrumb-item text-muted">Thương hiệu</li>
+                    <li class="breadcrumb-item text-muted">Đơn hàng</li>
                 </ul>
             </div>
         </div>
@@ -34,25 +34,27 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i>
-                            <input type="text" id="brand-search" class="form-control form-control-solid w-250px ps-12"
+                            <input type="text" id="order-search" class="form-control form-control-solid w-250px ps-12"
                                 placeholder="Tìm kiếm" />
                         </div>
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end base">
                             <button type="button" class="btn btn-primary btn-add-customer me-2" data-bs-toggle="modal"
-                                data-bs-target="#brand-modal">Tạo mới</button>
+                                data-bs-target="#order-modal">Tạo mới</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
                     <table class="table table-reponsive align-middle table-row-dashed table-bordered fs-6 gy-5"
-                        id="brand-table">
+                        id="order-table">
                         <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="text-center w-10px">STT</th>
-                                <th class="text-center min-w-125px">Tên</th>
-                                <th class="text-center min-w-125px">Số lượng sản phẩm</th>
+                                <th class="text-center min-w-125px">Thời gian đặt hàng</th>
+                                <th class="text-center min-w-125px">Khách hàng</th>
+                                <th class="text-center min-w-125px">Đơn giá</th>
+                                <th class="text-center min-w-125px">Trạng thái</th>
                                 <th class="text-center min-w-100px">Hành động</th>
                             </tr>
                         </thead>
@@ -65,9 +67,9 @@
 @endsection
 
 @section('modal')
-    @include('brand.modal.main')
+    @include('order.modal.main')
 @endsection
 
 @section('script')
-    @include('brand.index.js')
+    @include('order.index.js')
 @endsection

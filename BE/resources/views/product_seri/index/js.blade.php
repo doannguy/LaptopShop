@@ -112,6 +112,7 @@
             datatable = $("#product-seri-table").DataTable({
                 processing: true,
                 serverSide: true,
+                ordering: false,
                 ajax: {
                     url: "{{ route('product_seri.datatable') }}",
                     type: "POST",

@@ -35,4 +35,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:
 
     Route::get('cart', 'CartController@getMyCart');
     Route::post('cart/update', 'CartController@updateMyCart');
+
+    Route::post('order/store', 'OrderController@store');
+
 });

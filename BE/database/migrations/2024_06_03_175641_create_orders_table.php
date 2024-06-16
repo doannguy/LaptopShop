@@ -14,12 +14,16 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->decimal('total_amount', 8, 2);
+            $table->unsignedBigInteger('total_price');
             $table->text('note')->nullable();
             $table->string('name');
             $table->string('phone');
             $table->string('address');
+            $table->unsignedSmallInteger('shipping_type');
+            $table->unsignedBigInteger('shipping_fee');
+            $table->unsignedSmallInteger('payment_method');
             $table->tinyInteger('status')->default(Order::STATUS_WAITING);
             $table->text('message')->nullable();
             $table->timestamps();

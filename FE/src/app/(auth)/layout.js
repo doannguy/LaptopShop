@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { Logo } from "@/data/Common";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthLayout = ({ children, bgImage }) => {
     const pathname = usePathname();

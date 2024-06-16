@@ -17,7 +17,6 @@ const DahsboardLayout = ({ children }) => {
     const split = pathname.split("/");
     const pageSlug = split[split.length - 1];
     const { data } = useGetDetailedUser();
-    console.log(data);
     return (
         <>
 

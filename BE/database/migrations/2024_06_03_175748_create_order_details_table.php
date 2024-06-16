@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_option_id');
-            $table->integer('amount');
-            $table->decimal('price', 8, 2);
+            $table->integer('quantity');
+            $table->unsignedBigInteger('price');
         });
     }
 

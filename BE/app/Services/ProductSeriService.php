@@ -11,19 +11,24 @@ class ProductSeriService
         $pageNumber = ($data['start'] ?? 0) / ($data['length'] ?? 1) + 1;
         $pageLength = $data['length'] ?? 10;
         $skip = ($pageNumber - 1) * $pageLength;
-        $sort = $data['order'][0]['dir'] ?? 'desc';
+        $orderBy = $data['columns'][$data['order'][0]['column']]['data'] ?? 'id';
+        $orderDir = $data['order'][0]['dir'] ?? 'desc';
 
         $query = ProductSeri::query();
 
         if (isset($data['search'])) {
             $search = $data['search'];
-            $query->where('name', 'like', "%{$search}%");
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhereHas('category', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                });
         }
 
-        $query->orderBy('id', $sort);
+        $query->orderBy($orderBy, $orderDir);
         $recordsFiltered = $recordsTotal = $query->count();
         $categories = $query->skip($skip)
             ->with(['category'])
+            ->withCount(['products'])
             ->take($pageLength)
             ->get();
 

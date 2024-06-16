@@ -22,20 +22,23 @@ class AttributeController extends Controller
         $result = $this->attributeService()->filterDatatable($request->input());
         return response()->json($result);
     }
-    public function store(StoreAttributeRequest $request) {
+    public function store(StoreAttributeRequest $request)
+    {
 
         $data = $request->validated();
         $result = $this->AttributeService()->store($data);
         return jsonResponse($result ? 0 : 1);
     }
 
-    public function update(UpdateAttributeRequest $request) {
+    public function update(UpdateAttributeRequest $request)
+    {
         $data = $request->validated();
-        $result = $this->AttributeService()->update($data['id'],$data);
+        $result = $this->AttributeService()->update($data['id'], $data);
         return jsonResponse($result ? 0 : 1);
     }
 
-    public function delete(DeleteAttributeRequest $request) {
+    public function delete(DeleteAttributeRequest $request)
+    {
         $data = $request->validated();
         $result = $this->AttributeService()->delete($data['id']);
         return jsonResponse($result ? 0 : 1);

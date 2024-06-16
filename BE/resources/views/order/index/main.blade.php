@@ -39,21 +39,23 @@
                         </div>
                     </div>
                     <div class="card-toolbar">
-                        <div class="d-flex justify-content-end base">
+                        {{-- <div class="d-flex justify-content-end base">
                             <button type="button" class="btn btn-primary btn-add-customer me-2" data-bs-toggle="modal"
                                 data-bs-target="#order-modal">Tạo mới</button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table table-reponsive align-middle table-row-dashed table-bordered fs-6 gy-5"
+                    <table class="table table-reponsive align-middle table-row-dashed fs-6 gy-5"
                         id="order-table">
                         <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="text-center w-10px">STT</th>
-                                <th class="text-center min-w-125px">Thời gian đặt hàng</th>
+                                <th class="text-center min-w-125px">Mã đơn hàng</th>
                                 <th class="text-center min-w-125px">Khách hàng</th>
+                                <th class="text-center min-w-125px">SĐT</th>
                                 <th class="text-center min-w-125px">Đơn giá</th>
+                                <th class="text-center min-w-125px">Thời gian đặt hàng</th>
                                 <th class="text-center min-w-125px">Trạng thái</th>
                                 <th class="text-center min-w-100px">Hành động</th>
                             </tr>
@@ -64,10 +66,6 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('modal')
-    @include('order.modal.main')
 @endsection
 
 @section('script')

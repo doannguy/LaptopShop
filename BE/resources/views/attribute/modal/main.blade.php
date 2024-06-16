@@ -3,7 +3,7 @@
         <div class="modal-content">
             <form class="form" action="#" id="attribute-form">
                 <div class="modal-header" id="modal-header">
-                    <h2 class="fw-bold">Thông tin cấu hình</h2>
+                    <h2 class="fw-bold">Thêm mới</h2>
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Close">
                         <i class="ki-duotone ki-cross fs-1">
                             <span class="path1"></span>
@@ -119,6 +119,11 @@
         const attributeForm = attributeModal.find('#attribute-form');
         const attributeValue = document.getElementById('attribute_values');
 
+        attributeModal.on('hidden.bs.modal', function() {
+            attributeModal.find('#modal-header h2').text('Thêm mới');
+            attributeForm.trigger('reset');
+        })
+
         attributeForm.on('submit', function(e) {
             e.preventDefault();
             const btnSubmit = $(this).find('button[type="submit"]');
@@ -128,11 +133,6 @@
                 name,
                 value
             }) => [name, value]));
-
-            attributeModal.on('hidden.bs.modal', function() {
-                attributeModal.find('#modal-header h2').text('Thêm cấu hình sản phẩm');
-                attributeForm.trigger('reset');
-            })
 
             $.ajax({
                 url: !dataArray.id ? "{{ route('attribute.store') }}" :
@@ -146,7 +146,7 @@
                         toastr.success(!dataArray.id ? "Thêm mới cấu hình thành công!" :
                             "Cập nhật cấu hình thành công!");
                         $('#attribute-table').DataTable().ajax.reload();
-                        $('#attribute_values').repeater().setList([]);
+                        repeater.setList([]);
                     } else {
                         toastr.error(res.data.join(', ') + ".");
                     }

@@ -46,14 +46,14 @@ class UpdateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên.',
-            'name.string' => 'Định dạng tên phải là chuỗi.',
-            'name.max' => 'Độ dài tên không được vượt quá 255 kí tự.',
-            'gender.required' => 'Vui lòng chọn giới tính.',
-            'gender.in' => 'Giới tính không hợp lệ.',
-            'phone.required' => 'Vui lòng nhập số điện thoại.',
-            'phone.numeric' => 'Sai định dạng số điện thoại.',
-            'phone.unique' => 'Số điện thoại đã được đăng ký.',
+            'name.required' => 'Vui lòng nhập tên',
+            'name.string' => 'Định dạng tên phải là chuỗi',
+            'name.max' => 'Độ dài tên không được vượt quá 255 kí tự',
+            'gender.required' => 'Vui lòng chọn giới tính',
+            'gender.in' => 'Giới tính không hợp lệ',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
+            'phone.numeric' => 'Sai định dạng số điện thoại',
+            'phone.unique' => 'Số điện thoại đã được đăng ký',
         ];
     }
 

@@ -27,18 +27,23 @@ class StoreAttributeRequest extends FormRequest
             'name' => 'required|string|max:255|unique:attributes,name',
             'status' => 'required|in:0,1',
             'attribute_values' => 'required|array|min:1',
+            'attribute_values.*.id' => 'nullable',
+            'attribute_values.*.value' => 'required|string|max:255',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên thuộc tính',
-            'name.string' => 'Tên thuộc tính phải là chuỗi',
-            'name.max' => 'Tên thuộc tính không được quá 255 ký tự',
-            'name.unique' => 'Tên thuộc tính đã tồn tại',
+            'name.required' => 'Vui lòng nhập tên cấu hình',
+            'name.string' => 'Tên cấu hình phải là chuỗi',
+            'name.max' => 'Tên cấu hình không được quá 255 ký tự',
+            'name.unique' => 'Tên cấu hình đã tồn tại',
             'status.required' => 'Vui lòng chọn trạng thái',
-            'attribute_values.required' => 'Vui lòng chọn thuộc tính',
+            'attribute_values.required' => 'Vui lòng điền giá trị của cấu hình',
+            'attribute_values.min' => 'Vui lòng tạo ít nhất 1 cấu hình',
+            'attribute_values.*.value.required' => 'Vui lòng nhập giá trị cấu hình',
+            'attribute_values.*.value.max' => 'Giá trị cấu hình có độ dài tối đa 255 kí tự',
         ];
     }
 

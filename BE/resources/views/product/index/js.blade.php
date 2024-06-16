@@ -40,7 +40,7 @@
                 const productId = data.id
 
                 const url = "{{ route('product.delete') }}";
-            alert('Bạn có muốn xóa sản phẩm này không ?', 'question', {
+                alert('Bạn có muốn xóa sản phẩm này không ?', 'question', {
                         showCancelButton: true
                     })
                     .then((result) => {
@@ -93,17 +93,13 @@
                         render: function(data, type, row, meta) {
                             console.log(row);
                             return `<div class="d-flex align-items-center">
-																<!--begin::Thumbnail-->
-																<a href="apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-																	<span class="symbol-label" style="background-image:url('{{ url('/storage') }}/${row?.thumbnail_media?.path ?? ''}');"></span>
-																</a>
-																<!--end::Thumbnail-->
-																<div class="ms-5">
-																	<!--begin::Title-->
-																	<a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name">${data ?? ''}</a>
-																	<!--end::Title-->
-																</div>
-															</div>`
+                                        <a href="apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
+                                            <span class="symbol-label" style="background-image:url('{{ url('/storage') }}/${row?.thumbnail_media?.path ?? ''}');"></span>
+                                        </a>
+                                        <div class="ms-5">
+                                            <a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name">${data ?? ''}</a>
+                                        </div>
+                                    </div>`
                         }
                     },
                     {
@@ -112,7 +108,7 @@
                         orderable: false,
                         className: 'text-center',
                         render: function(data, type, row) {
-                            return `<span>${data ?? ''} phiên bản</span>`
+                            return `<span class="fw-bold">${data ?? ''} phiên bản</span>`
                         }
                     },
                     {
@@ -121,7 +117,7 @@
                         orderable: false,
                         className: 'text-center',
                         render: function(data, type, row) {
-                            return `<span>${data.name || " "}</span>`
+                            return `<span class="fw-bold">${data.name || " "}</span>`
                         }
                     },
                     {
@@ -130,7 +126,7 @@
                         orderable: false,
                         className: 'text-center',
                         render: function(data, type, row) {
-                            return `<span>${data.name || " "}</span>`
+                            return `<span class="fw-bold">${data.name || " "}</span>`
                         }
                     },
                     {

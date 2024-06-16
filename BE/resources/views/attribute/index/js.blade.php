@@ -36,7 +36,6 @@
             $(document).on('click', '.open-add-modal', function() {
                 const attributeModal = $('#attribute-modal');
                 const attributeForm = $('#attribute-form');
-                attributeModal.find('#modal-header h2').text('Sửa thông tin cấu hình sản phẩm')
                 attributeForm.find('input[name="id"]').val('');
                 attributeForm.find('input[name="name"]').val('');
                 repeater.setList([]);
@@ -50,6 +49,7 @@
 
                 const attributeModal = $('#attribute-modal');
                 const attributeForm = $('#attribute-form');
+                attributeModal.find('#modal-header h2').text('Sửa thông tin cấu hình sản phẩm')
                 attributeForm.find('input[name="id"]').val(attributeId);
                 attributeForm.find('input[name="name"]').val(data.name);
                 list_attribute_value = [];
@@ -133,20 +133,18 @@
                 },
                 columnDefs: [{
                         targets: 0,
-                        data: null,
-                        orderable: false,
+                        data: 'id',
                         className: 'text-center',
                         render: function(data, type, row, meta) {
-                            return `<span>${meta.row + meta.settings._iDisplayStart + 1}</span>`
+                            return `<span class="fw-bold">${meta.row + meta.settings._iDisplayStart + 1}</span>`
                         }
                     },
                     {
                         targets: 1,
                         data: 'name',
-                        orderable: false,
                         className: 'text-center',
                         render: function(data, type, row) {
-                            return `<span>${data ?? ''}</span>`
+                            return `<span class="fw-bold">${data ?? ''}</span>`
                         }
                     },
                     {
@@ -156,7 +154,7 @@
                         className: 'text-center',
                         render: function(data, type, row) {
                             let attribute_values = data.map((item) => {
-                                return `<span class="badge badge-light-primary me-2">${item.value}</span>`
+                                return `<span class="fw-bold badge badge-light-primary me-2">${item.value}</span>`
                             })
 
                             return attribute_values
@@ -165,10 +163,9 @@
                     {
                         targets: 3,
                         data: 'status',
-                        orderable: false,
                         className: 'text-center',
                         render: function(data, type, row) {
-                            return `<span class="badge ${data == 1 ? 'badge-light-success' : 'badge-light-danger'} me-2">${data == 1 ? 'Hiển thị' : 'Ẩn'}</span>`
+                            return `<span class="fw-bold badge ${data == 1 ? 'badge-light-success' : 'badge-light-danger'} me-2">${data == 1 ? 'Hiển thị' : 'Ẩn'}</span>`
                         }
                     },
                     {

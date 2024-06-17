@@ -24,6 +24,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::post('send-reset-link', 'AuthController@sendResetLinkEmail');
     Route::post('reset-password', 'AuthController@resetPassword');
+
+    Route::get('reviews', 'ProductController@getReviews');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:sanctum', 'user.status']], function () {

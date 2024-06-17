@@ -31,4 +31,9 @@ class ProductController extends Controller
         $result = $this->ProductService()->storeReview($data);
         return jsonResponse($result ? 0 : 1);
     }
+
+    public function getReviews(Request $request) {
+        $result = $this->ProductService()->getReviews($request);
+        return jsonResponse($result ? 0 : 1);
+    }
 }

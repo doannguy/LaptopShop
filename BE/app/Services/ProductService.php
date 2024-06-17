@@ -203,6 +203,10 @@ class ProductService extends Service
 
         return $product;
     }
+    function getReviews($data) {
+        $limit = $data['length'] ?? 10;
+        return ProductReview::with('product')->orderBy('id', 'desc')->limit($limit);
+    }
     public function storeReview($data)
     {
         return ProductReview::create([...$data, 'user_id' => auth()->user()->id]);

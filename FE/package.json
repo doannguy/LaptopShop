@@ -36,6 +36,7 @@
     "react-markdown": "^9.0.1",
     "react-on-screen": "^2.1.1",
     "react-range": "^1.8.14",
+    "react-rating": "^2.0.5",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.23.1",
     "react-slick": "^0.29.0",

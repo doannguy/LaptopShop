@@ -50,8 +50,8 @@ const FashionSlider = [
 
 const FashionSliderProduct = {
     thumbnail: "/images/product/product-41.png",
-    title: "Túi xách da Yantiti",
-    price: "29.990đ"
+    title: "Macbook Pro M4",
+    price: "50.000.000vnđ"
 
 }
 

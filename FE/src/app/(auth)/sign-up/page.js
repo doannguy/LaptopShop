@@ -49,7 +49,8 @@ const SignUp = () => {
                 router.push("/sign-in");
             }, 2000);
         } else {
-            toast.error(res.data.data.email[0]);
+            toast.error(res.data.data[0]);
+            console.log(res.data.data);
         }
         console.log(res);
     }

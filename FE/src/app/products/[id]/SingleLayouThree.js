@@ -18,8 +18,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const SingleLayouThree = ({ singleData, productId }) => {
     const findReview = ProductReview.filter((data) => slugify(data.productId) === slugify(singleData.id));
 
-
-
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
     const [quantity, setquantity] = useState(0);
@@ -51,7 +49,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                     dispatch(updateCart({ cartItems: res.data }));
                     toast.success("Đã thêm vào giỏ hàng");
                     setquantity(0);
-                    
+
                 } else {
                     toast.error(res.message);
                 }
@@ -87,7 +85,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
 
     const productProductOptionHandler = (product_options) => {
         setProductOptionSelected(product_options);
-        
+
     };
     const getFullscreenPreview = () => {
         let galleryPreview = [];
@@ -223,9 +221,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                     <li className="add-to-cart">
                                                         <button disabled={(!productOptionSelected) ? true : false} onClick={() => handleUpdateCart()} className="axil-btn btn-bg-primary">Thêm vào giỏ hàng</button>
                                                     </li>
-                                                    {/* <li className="wishlist">
-                                                    <button className="axil-btn wishlist-btn" onClick={() => handleAddToWishlist(productOptionSelected)}><i className={isWishlistAdded.length === 1 ? "fas fa-heart" : "far fa-heart"} /></button>
-                                                </li> */}
+
                                                 </ul>
                                             </div>
                                             <div className="product-variations-wrapper">
@@ -290,9 +286,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                 <li className="nav-item" role="presentation">
                                     <a className="active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Thông tin sản phẩm</a>
                                 </li>
-                                {/* <li className="nav-item " role="presentation">
-                                <a id="additional-info-tab" data-bs-toggle="tab" href="#additional-info" role="tab" aria-controls="additional-info" aria-selected="false">Cấu hình</a>
-                            </li> */}
+
                                 <li className="nav-item" role="presentation">
                                     <a id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Đánh giá</a>
                                 </li>
@@ -304,22 +298,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
 
                                     </div>
                                 </div>
-                                {/* <div className="tab-pane fade" id="additional-info" role="tabpanel" aria-labelledby="additional-info-tab">
-                                    <div className="product-additional-info">
-                                        <div className="table-responsive">
-                                            <table>
-                                                <tbody>
-                                                    {singleData.addInfo?.map((data, index) => (
-                                                        <tr key={index}>
-                                                            <th>{data.title}</th>
-                                                            <td>{data.text}</td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div> */}
+
                                 <div className="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                                     <div className="reviews-wrapper">
                                         <div className="row">
@@ -367,9 +346,9 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                             <div className="col-lg-6 mb--40">
                                                 <div className="comment-respond pro-des-commend-respond mt--0">
                                                     <h5 className="title mb--30">Add a Review</h5>
-                                                    <p>Your email address will not be published. Required fields are marked *</p>
+                                                    <p>Địa chỉ email của bạn sẽ không được công khai. Trường bắt buộc được đánh dấu *</p>
                                                     <div className="rating-wrapper d-flex-center mb--40">
-                                                        Your Rating <span className="require">*</span>
+                                                        Đánh giá của bạn <span className="require">*</span>
                                                         <div className="reating-inner ml--20">
                                                             <a href="#"><i className="fal fa-star" /></a>
                                                             <a href="#"><i className="fal fa-star" /></a>
@@ -382,25 +361,25 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                         <div className="row">
                                                             <div className="col-12">
                                                                 <div className="form-group">
-                                                                    <label>Other Notes (optional)</label>
+                                                                    <label>Nội dung đánh giá</label>
                                                                     <textarea name="message" placeholder="Your Comment" defaultValue={""} />
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-6 col-md-6 col-12">
                                                                 <div className="form-group">
-                                                                    <label>Name <span className="require">*</span></label>
+                                                                    <label>Họ và tên <span className="require">*</span></label>
                                                                     <input id="name" type="text" />
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-6 col-md-6 col-12">
                                                                 <div className="form-group">
-                                                                    <label>Email <span className="require">*</span> </label>
+                                                                    <label>Địa chỉ Email <span className="require">*</span> </label>
                                                                     <input id="email" type="email" />
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12">
                                                                 <div className="form-submit">
-                                                                    <button type="submit" id="submit" className="axil-btn btn-bg-primary w-auto">Submit Comment</button>
+                                                                    <button type="submit" id="submit" className="axil-btn btn-bg-primary w-auto">Xác nhận</button>
                                                                 </div>
                                                             </div>
                                                         </div>

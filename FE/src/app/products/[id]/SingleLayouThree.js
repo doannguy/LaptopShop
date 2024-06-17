@@ -91,7 +91,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
         let galleryPreview = [];
         if (productData?.data.list_Image) {
             productData?.data.list_Image.map((img) => {
-                galleryPreview.push("https://api-shop.codetify.tech/storage/" + img);
+                galleryPreview.push(process.env.NEXT_PUBLIC_APP_URL + "/storage/" + img);
             })
         } else {
             galleryPreview.push(productData?.thumbnail_media.path);
@@ -129,7 +129,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                     {productData?.data.list_Image ? productData?.data.list_Image.map((galleryImg, index) => (
                                                         <div className="thumbnail" key={index}>
                                                             <Image
-                                                                src={"https://api-shop.codetify.tech/storage/" + galleryImg}
+                                                                src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + galleryImg}
                                                                 height={584}
                                                                 width={584}
                                                                 alt="Gallery Image"
@@ -183,7 +183,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                 {productData?.data.list_Image ? productData?.data.list_Image.map((galleryImg, index) => (
                                                     <div className="small-thumb-img" key={index}>
                                                         <Image
-                                                            src={"https://api-shop.codetify.tech/storage/" + galleryImg}
+                                                            src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + galleryImg}
                                                             height={207}
                                                             width={213}
                                                             alt="Thumb Image"

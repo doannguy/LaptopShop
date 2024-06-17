@@ -63,7 +63,7 @@ const HeaderActions = (props) => {
 
   const handleLogout = () => {
     removeToken();
-    dispatch(clearCart());
+    dispatch(cartClear());
     router.push('/signin');
   }
 

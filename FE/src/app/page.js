@@ -8,6 +8,7 @@ export const metadata = {
 }
 
 const HomeOne = () => {
+	console.log(process.env.NEXT_PUBLIC_APP_URL);
 	return (
 		<>
 			<main className="main-wrapper pv-main-wrapper">

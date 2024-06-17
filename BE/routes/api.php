@@ -21,6 +21,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::get('brand', 'BrandController@getBrands');
     Route::get('product-list', 'ProductController@getProducts');
     Route::get('product-detail/{id}', 'ProductController@getProductDetail');
+
+    Route::post('send-reset-link', 'AuthController@sendResetLinkEmail');
+    Route::post('reset-password', 'AuthController@resetPassword');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:sanctum', 'user.status']], function () {

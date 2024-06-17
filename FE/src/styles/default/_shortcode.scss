@@ -42,6 +42,9 @@ Shortcode
 .error {
     color: red !important;
 }
+.success {
+    color: green !important;
+}
 .bg_image {
     @extend %bgImagePosition;
 }

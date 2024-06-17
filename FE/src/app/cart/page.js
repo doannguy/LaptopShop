@@ -102,7 +102,7 @@ const Cart = () => {
                                                                 <td className="product-thumbnail">
                                                                     <Link href={`/products/${slugify(product.product_id)}`}>
                                                                         <Image
-                                                                            src={"https://api-shop.codetify.tech/storage/" + product.thumbnail}
+                                                                            src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + product.thumbnail}
                                                                             width={80}
                                                                             height={80}
                                                                             alt={product.name}

@@ -5,7 +5,7 @@ export const getToken = () => window.localStorage.getItem('token');
 
 
 export const base_service = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: process.env.NEXT_PUBLIC_APP_URL+ "/api",
   headers: {
     "Content-Type": "application/json",
   }

@@ -71,7 +71,7 @@ Route::namespace('App\Http\Controllers\Admin')->middleware(['auth', 'user.status
     Route::prefix('order')->group(function () {
         Route::get('/', 'OrderController@index')->name('order.index');
         Route::post('datatable', 'OrderController@datatable')->name('order.datatable');
-        Route::post('edit/{id}', 'OrderController@edit')->name('order.edit');
+        Route::get('edit/{id}', 'OrderController@edit')->name('order.edit');
         Route::post('update', 'OrderController@update')->name('order.update');
     });
 });

@@ -11,6 +11,8 @@ class BrandService
         $pageNumber = ($data['start'] ?? 0) / ($data['length'] ?? 1) + 1;
         $pageLength = $data['length'] ?? 10;
         $skip = ($pageNumber - 1) * $pageLength;
+        $orderBy = $data['columns'][$data['order'][0]['column']]['data'] ?? 'id';
+        $orderDir = $data['order'][0]['dir'] ?? 'desc';
 
         $query = Brand::query();
 
@@ -19,7 +21,7 @@ class BrandService
             $query->where('name', 'like', "%{$search}%");
         }
 
-        $query->orderBy('id', 'desc');
+        $query->orderBy($orderBy, $orderDir);
         $recordsFiltered = $recordsTotal = $query->count();
         $brands = $query->skip($skip)
             ->withCount(['products'])

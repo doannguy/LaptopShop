@@ -38,12 +38,12 @@ class UpdateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'id.required' => 'Vui lòng chọn người dùng.',
-            'id.exists' => 'Người dùng không tồn tại trong hệ thống.',
-            'role.required' => 'Vui lòng chọn vai trò.',
-            'role.exists' => 'Vai trò không tồn tại.',
-            'status.required' => 'Vui lòng chọn trạng thái.',
-            'status.in' => 'Trạng thái không hợp lệ.',
+            'id.required' => 'Vui lòng chọn người dùng',
+            'id.exists' => 'Người dùng không tồn tại trong hệ thống',
+            'role.required' => 'Vui lòng chọn vai trò',
+            'role.exists' => 'Vai trò không tồn tại',
+            'status.required' => 'Vui lòng chọn trạng thái',
+            'status.in' => 'Trạng thái không hợp lệ',
         ];
     }
 

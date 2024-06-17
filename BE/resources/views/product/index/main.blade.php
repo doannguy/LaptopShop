@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table-reponsive table-row-dashed table-bordered fs-6 gy-5 table align-middle"
+                    <table class="table-reponsive table-row-dashed fs-6 gy-5 table align-middle"
                         id="product-table">
                         <thead>
                             <tr class="fw-bold fs-7 text-uppercase gs-0 text-start text-gray-500">

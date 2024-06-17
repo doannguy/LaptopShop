@@ -27,6 +27,8 @@ class AttributeService extends Service
         $pageNumber = ($data['start'] ?? 0) / ($data['length'] ?? 1) + 1;
         $pageLength = $data['length'] ?? 10;
         $skip = ($pageNumber - 1) * $pageLength;
+        $orderBy = $data['columns'][$data['order'][0]['column']]['data'] ?? 'id';
+        $orderDir = $data['order'][0]['dir'] ?? 'desc';
 
         $query = $this->model::query();
 
@@ -35,7 +37,7 @@ class AttributeService extends Service
             $query->where('name', 'like', "%{$search}%");
         }
 
-        $query->orderBy('id', 'desc');
+        $query->orderBy($orderBy, $orderDir);
         $recordsFiltered = $recordsTotal = $query->count();
         $attributes = $query->skip($skip)
             ->with('attributeValues')
@@ -83,11 +85,9 @@ class AttributeService extends Service
                 "name" => $data['name'],
                 "status" => $data['status']
             ]);
-            \Log::info($attribute);
 
             $attribute_values_remove = $this->attributeValueService()->getByAttributeId($id)->pluck('id')->toArray();
             $attribute_values = $data['attribute_values'];
-            \Log::info($attribute_values);
             foreach ($attribute_values as $attribute_value) {
                 if (in_array($attribute_value['id'], $attribute_values_remove)) {
                     unset($attribute_values_remove[array_search($attribute_value['id'], $attribute_values_remove)]);

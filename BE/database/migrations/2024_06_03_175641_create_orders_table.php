@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('total_price');
             $table->text('note')->nullable();
-            $table->string('name');
+            $table->string('user_name');
             $table->string('phone');
             $table->string('address');
             $table->unsignedSmallInteger('shipping_type');
@@ -26,6 +26,9 @@ return new class extends Migration
             $table->unsignedSmallInteger('payment_method');
             $table->tinyInteger('status')->default(Order::STATUS_WAITING);
             $table->text('message')->nullable();
+            $table->unsignedSmallInteger('shipping_type');
+            $table->unsignedBigInteger('shipping_fee');
+            $table->unsignedSmallInteger('payment_method');
             $table->timestamps();
         });
     }

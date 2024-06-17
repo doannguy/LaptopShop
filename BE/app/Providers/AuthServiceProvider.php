@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        // Map your models to policies here
     ];
 
     /**
@@ -24,9 +23,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        ResetPassword::createUrlUsing(function (Request $request) {
-            $isApi = $request->is('api/*');
-            return $isApi ? config('app.frontend_url') . '/reset-password?token=' . $request->route('token') : config('app.url') . '/reset-password?token=' . $request->route('token');
+        ResetPassword::createUrlUsing(function ($notifiable, $token) {
+            $isApi = request()->is('api/*');
+            return $isApi
+                ? config('app.frontend_url') . '/reset-password?token=' . $token
+                : config('app.url') . '/reset-password?token=' . $token;
         });
     }
 }

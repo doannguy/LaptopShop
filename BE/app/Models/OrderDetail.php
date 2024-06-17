@@ -4,29 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderDetail extends Model
 {
     use HasFactory;
-   protected $table = 'order_details';
+
+    protected $table = "order_details";
+
+    protected $guarded = ['id'];
+
     public $timestamps = false;
-    protected $guarded = [];
-    /**
-     * Get the order that owns the OrderDetail
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function order(): BelongsTo
+
+    public function order()
     {
         return $this->belongsTo(Order::class, 'order_id', 'id');
     }
-    /**
-     * Get the productOption that owns the OrderDetail
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function productOption(): BelongsTo
+
+    public function productOption()
     {
         return $this->belongsTo(ProductOption::class, 'product_option_id', 'id');
     }

@@ -24,7 +24,7 @@ class Order extends Model
         self::STATUS_CANCEL => 'Đã hủy',
     ];
 
-    public const SHIPING_LABEL = [
+    public const SHIPPING_LABEL = [
         0 => 'Giao hàng tiết kiệm (Miễn Phí)',
         1 => 'Giao hàng nhanh',
     ];
@@ -33,6 +33,21 @@ class Order extends Model
         0 => 'Thanh toán qua thẻ ngân hàng',
         1 => 'Thanh toán khi nhận hàng',
     ];
+
+    public static function getPaymentMethod($id)
+    {
+        return self::PAYMENT_LABEL[$id];
+    }
+
+    public static function getShippingType($id)
+    {
+        return self::SHIPPING_LABEL[$id];
+    }
+
+    public static function getStatus($id)
+    {
+        return self::STATUS_LABEL[$id];
+    }
 
     public function user()
     {

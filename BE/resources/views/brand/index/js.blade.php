@@ -111,7 +111,6 @@
             datatable = $("#brand-table").DataTable({
                 processing: true,
                 serverSide: true,
-                ordering: false,
                 ajax: {
                     url: "{{ route('brand.datatable') }}",
                     type: "POST",
@@ -122,29 +121,26 @@
                 },
                 columnDefs: [{
                         targets: 0,
-                        data: null,
-                        orderable: false,
+                        data: 'id',
                         className: 'text-center',
                         render: function(data, type, row, meta) {
-                            return `<span>${meta.row + meta.settings._iDisplayStart + 1}</span>`
+                            return `<span class="fw-bold">${meta.row + meta.settings._iDisplayStart + 1}</span>`
                         }
                     },
                     {
                         targets: 1,
                         data: 'name',
-                        orderable: false,
                         className: 'text-center',
                         render: function(data, type, row) {
-                            return `<span>${data ?? ''}</span>`
+                            return `<span class="fw-bold">${data ?? ''}</span>`
                         }
                     },
                     {
                         targets: 2,
-                        data: null,
-                        orderable: false,
+                        data: 'products_count',
                         className: 'text-center',
                         render: function(data, type, row) {
-                            return `<span>${row.productCount || 0}</span>`
+                            return `<span class="fw-bold">${data}</span>`
                         }
                     },
                     {

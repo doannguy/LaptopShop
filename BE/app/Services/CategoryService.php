@@ -14,7 +14,8 @@ class CategoryService extends Service
         $pageNumber = ($data['start'] ?? 0) / ($data['length'] ?? 1) + 1;
         $pageLength = $data['length'] ?? 10;
         $skip = ($pageNumber - 1) * $pageLength;
-        $sort = $data['order'][0]['dir'] ?? 'desc';
+        $orderBy = $data['columns'][$data['order'][0]['column']]['data'] ?? 'id';
+        $orderDir = $data['order'][0]['dir'] ?? 'desc';
 
         $query = Category::query();
 
@@ -23,10 +24,10 @@ class CategoryService extends Service
             $query->where('name', 'like', "%{$search}%");
         }
 
-        $query->orderBy('id', $sort);
+        $query->orderBy($orderBy, $orderDir);
         $recordsFiltered = $recordsTotal = $query->count();
         $categories = $query->skip($skip)
-            ->withCount(['products'])
+            ->withCount(['productSeries'])
             ->take($pageLength)
             ->get();
 

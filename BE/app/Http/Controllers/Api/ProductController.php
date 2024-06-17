@@ -34,6 +34,6 @@ class ProductController extends Controller
 
     public function getReviews(Request $request) {
         $result = $this->ProductService()->getReviews($request);
-        return jsonResponse($result ? 0 : 1);
+        return jsonResponse($result ? 0 : 1, $result);
     }
 }

@@ -113,8 +113,11 @@ const SingleLayouThree = ({ singleData, productId }) => {
 
 	const onSubmit = async (data, e) => {
 		console.log(data);
+		data.rating = rating;
+		data.product_id = productId;
 		const res = await RatingService.userRating(data);
 		if (res.data.code == 1) {
+			toast.success(res.data.message);
 		} else {
 		}
 		console.log(res);

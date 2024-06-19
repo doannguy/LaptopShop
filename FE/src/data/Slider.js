@@ -51,7 +51,7 @@ const FashionSlider = [
 const FashionSliderProduct = {
     thumbnail: "/images/product/product-41.png",
     title: "Macbook Pro M4",
-    price: "50.000.000vnđ"
+    price: "50.000.000 vnđ"
 
 }
 

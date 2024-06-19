@@ -48,7 +48,7 @@ const HeaderFive = (props) => {
           </div>
         </div>
       </div>
-      {props.headerSlider && <CampaignSlider />}
+      {props.headerSlider}
     </header>
   );
 };

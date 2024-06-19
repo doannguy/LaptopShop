@@ -13,7 +13,7 @@ const WhoWeAre = () => {
           <div className="col-lg-7">
             <SectionTitle
               title="Who we are"
-              subtitle="About Us"
+              subtitle=""
               subtitleIcon="fal fa-star"
               subColor="highlighter-primary2"
             />

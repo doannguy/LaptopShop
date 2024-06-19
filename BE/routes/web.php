@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::namespace('App\Http\Controllers\Admin')->middleware(['auth', 'user.status'])->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('dashboard');
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+    // Route::post('/product-datatable', 'DashboardController@productDatatable')->name('dashboard.product.datatable');
 
     Route::middleware('role:staff|admin')->group(function () {
         Route::prefix('category')->group(function () {

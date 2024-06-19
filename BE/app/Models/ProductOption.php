@@ -12,17 +12,29 @@ class ProductOption extends Model
     public const STATUS = [
         'active' => 0,
         'outOfStock' => 1,
-        'inactive' => 0,
+        'inactive' => 2,
+    ];
+    public const STATUS_LABEL = [
+        self::STATUS['active'] => 'Còn hàng',
+        self::STATUS['outOfStock'] => 'Hết hàng',
+        self::STATUS['inactive'] => 'Ngưng bán',
     ];
     use HasFactory;
     protected $table = "product_options";
 
     protected $guarded = [];
+    protected $appends = ['status_label'];
+
     public $timestamps = false;
     public const DELETE_TYPE = [
         'soft' => 0,
         'hard' => 1,
     ];
+
+     public function getStatusLabelAttribute()
+    {
+        return self::STATUS_LABEL[$this->status];
+    }
 
     public function productMedia()
     {

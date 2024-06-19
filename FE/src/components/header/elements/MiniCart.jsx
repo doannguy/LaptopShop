@@ -62,7 +62,8 @@ return (
                   <li className="cart-item" key={data.id}>
                     <div className="item-img">
 						<Image
-                        src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + data.thumbnail}
+              src={`${process.env.NEXT_PUBLIC_APP_URL}/storage/${data.thumbnail}`}
+              unoptimized
 							alt={data.product_name}
 							height={100}
 							width={100}

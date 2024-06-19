@@ -37,8 +37,10 @@ const DahsboardLayout = ({ children }) => {
                                         />
                                     </div>
                                     <div className="media-body">
-                                        <h5 className="title mb-0">Hello {data?.user.name}</h5>
-                                        <span className="joining-date">Tham gia vào ngày {data?.user.created_at}</span>
+                                        <h5 className="title mb-0">Xin chào {data?.user.name}</h5>
+                                        <span className="joining-date">
+                                          Tham gia ngày   {new Date(data?.user.created_at).toLocaleDateString('vi-VN', {day: '2-digit', month: '2-digit', year: 'numeric'})}
+                                        </span>
                                     </div>
                                 </div>
                             </div>

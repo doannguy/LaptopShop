@@ -5,16 +5,48 @@ import {
   addToCart,
   addToWishlist,
   addToQuickView,
+  updateCart,
 } from "@/store/slices/productSlice";
+import CardService from "@/services/cart_service";
+import Swal from "sweetalert2";
 
 const ActionButtons = (props) => {
   const dispatch = useDispatch();
   const getWishlist = useSelector((state) => state.productData.wishlistItems);
   const isWishlistAdded = getWishlist.filter((data) => data.id === props.productAction.id);
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+  const cartDatas = useSelector((state) => state.productData.cartItems);
+
+  const handleAddToCart = async (product) => {
+    try {
+      const existQuantity = cartDatas.find((data) => data.product_option_id === product.id)?.quantity || 0;
+      const res = await CardService.update({ quantity: 1 + existQuantity, product_option_id: product.id });
+      if (res.code == 0) {
+        dispatch(updateCart({ cartItems: res.data }));
+        Swal.fire({
+         
+          icon: 'success',
+          title: 'Đã thêm vào giỏ hàng',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: res.message
+        })
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng'
+      })
+    }
   };
+
 
   const handleAddToWishlist = (product) => {
     dispatch(addToWishlist(product));
@@ -44,7 +76,7 @@ const ActionButtons = (props) => {
             </Link>
           ) : (
             <button onClick={() => handleAddToCart(props.productAction)}>
-              Add to Cart
+              Thêm vào giỏ hàng
             </button>
           )}
         </li>

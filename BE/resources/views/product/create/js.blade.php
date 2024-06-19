@@ -39,7 +39,6 @@ $(document).ready(function () {
 
         nameInput.on('change', (e) => {
             let name = e.target.value;
-
             collapseButton.text(name);
         })
         let productAttributeForm = collapseForm.find('.product-attribute-form');

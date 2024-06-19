@@ -4,7 +4,6 @@ import ProductDiscountLabel from "./ProductDiscountLabel";
 import ActionButtons from "./ActionButtons";
 
 const ProductThumbnail = (props) => {
-
   return (
     <div className="thumbnail d-flex justify-content-center align-items-center">
       <div style={{ maxWidth: '300px', maxHeight: '300px', height: '100%' }}>

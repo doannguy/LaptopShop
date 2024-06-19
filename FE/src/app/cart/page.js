@@ -103,6 +103,7 @@ const Cart = () => {
                                                                     <Link href={`/products/${slugify(product.product_id)}`}>
                                                                         <Image
                                                                             src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + product.thumbnail}
+                                                                            unoptimized
                                                                             width={80}
                                                                             height={80}
                                                                             alt={product.name}
@@ -146,34 +147,16 @@ const Cart = () => {
                                             <div className="row">
                                                 <div className="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5">
                                                     <div className="axil-order-summery mt--80">
-                                                        <h5 className="title mb--20">Thông tin thanh toán</h5>
                                                         <div className="summery-table-wrap">
                                                             <table className="table summery-table mb--30">
                                                                 <tbody>
-                                                                    <tr className="order-subtotal">
-                                                                        <td>Tổng giá trị</td>
-                                                                        <td><Currency currency={cartProducts.cartTotalAmount} /></td>
-                                                                    </tr>
-                                                                    <tr className="order-shipping">
-                                                                        <td>Vận chuyển</td>
-                                                                        <td>
-                                                                            <div className="input-group">
-                                                                                <input type="radio" id="radio1" name="shipping" defaultChecked />
-                                                                                <label htmlFor="radio1">Miễn phí vận chuyển</label>
-                                                                            </div>
-                                                                            <div className="input-group">
-                                                                                <input type="radio" id="radio2" name="shipping" />
-                                                                                <label htmlFor="radio2">Local: $35.00</label>
-                                                                            </div>
-                                                                            <div className="input-group">
-                                                                                <input type="radio" id="radio3" name="shipping" />
-                                                                                <label htmlFor="radio3">Flat rate: $12.00</label>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
+                                                                   
+                                                                    
                                                                     <tr className="order-total">
                                                                         <td>Tổng cộng</td>
-                                                                        <td className="order-total-amount">${cartProducts.cartTotalAmount}</td>
+                                                                        <td className="order-total-amount">
+                                                                            <Currency currency={cartProducts.cartTotalAmount} />
+                                                                        </td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>

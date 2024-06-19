@@ -26,7 +26,7 @@ class MediaService
         ]);
         return $media;
     }
-    public function deleteFile($media_id,)
+    public function deleteFile($media_id)
     {
         $media = Media::find($media_id);
 

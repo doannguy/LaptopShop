@@ -21,7 +21,7 @@ const productSlice = createSlice({
             const { cartItems } = action.payload;
             state.cartItems = cartItems; 
             state.cartQuantityTotal = calculateTotalQuantity(state.cartItems);
-            console.log(state.cartItems);
+            
             // state.isMinicartOpen = true;
             state.cartTotalAmount = calculateTotalAmount(state.cartItems);
             state.isLoadedCart = true;

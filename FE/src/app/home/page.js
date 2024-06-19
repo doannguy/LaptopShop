@@ -15,13 +15,16 @@ import ServiceOne from "@/components/services/ServiceOne";
 import ServiceTwo from "@/components/services/ServiceTwo";
 import TestimonialOne from '@/components/testimonial/TestimonialOne';
 import Loading from '@/components/widget/Loading';
+import SkeletonCustom from "@/components/widget/Skeleton";
 import ProductsData from "@/data/Products";
+import ProductService from "@/services/product_service";
 import { slugify } from '@/utils';
+import { useQuery } from "@tanstack/react-query";
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from "react";
 import 'react-chatbot-kit/build/main.css';
 
-const HomeFashion = () => {
+const Home = () => {
   const pathname = usePathname();
   const split = pathname.split("/");
   const pageCategory = split[split.length - 1];
@@ -29,6 +32,10 @@ const HomeFashion = () => {
   const transparentProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory && data.thumbnailTransparent === true);
   // const exploreProduct = mapInSlices(fashionProduct, 8);
   const [loading, setLoading] = useState(true)
+  const { data: lastestProduct, isFetched: isLastestFetched } = useQuery({
+    queryKey: ["get-lastest-product-list"],
+    queryFn: () => ProductService.getListProduct({ limit: 8, orderBy: 'id', orderDir: 'desc', search: '' })
+  })
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setTimeout(() => {
@@ -46,7 +53,54 @@ const HomeFashion = () => {
           <BannerThree />
           <ServiceOne />
 
-          <Section pClass="pb--50 pb_sm--30">
+          <Section pClass="pb--50">
+            <SectionTitle
+              title="Sản phẩm mới"
+              subtitle="Sản phẩm tuần này"
+              subtitleIcon="far fa-shopping-basket"
+            />
+            {isLastestFetched ?
+              (
+                <SlickSlider
+                  class="slick-layout-wrapper--30 axil-slick-arrow arrow-top-slide"
+                  slidesToShow={4}
+                  responsive={[
+                    {
+                      breakpoint: 1400,
+                      settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                      }
+                    },
+                    {
+                      breakpoint: 992,
+                      settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                      }
+                    },
+                    {
+                      breakpoint: 575,
+                      settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                      }
+                    },
+                  ]}
+                >
+                  {lastestProduct.data.products.map((data) => (
+                    <ProductTwo productOption={data} key={data.id} />
+                  ))}
+
+                </SlickSlider>
+              )
+              :
+              <SkeletonCustom lines={8} />
+            }
+          </Section>
+
+
+          {/* <Section pClass="pb--50 pb_sm--30">
             <SectionTitle
               title="Sản phẩm bán chạy"
               subtitle="Sản phẩm tháng này"
@@ -86,7 +140,7 @@ const HomeFashion = () => {
               ))}
 
             </SlickSlider>
-          </Section>
+          </Section> */}
           <PosterOne
             subtitleIcon="far fa-shopping-basket"
             title="Khám phá cửa hàng hôm nay"
@@ -97,45 +151,7 @@ const HomeFashion = () => {
           />
 
           <TestimonialOne />
-          <Section pClass="pb--50">
-            <SectionTitle
-              title="Sản phẩm mới"
-              subtitle="Sản phẩm tuần này"
-              subtitleIcon="far fa-shopping-basket"
-            />
-            <SlickSlider
-              class="slick-layout-wrapper--30 axil-slick-arrow arrow-top-slide"
-              slidesToShow={4}
-              responsive={[
-                {
-                  breakpoint: 1400,
-                  settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                  }
-                },
-                {
-                  breakpoint: 992,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                  }
-                },
-                {
-                  breakpoint: 575,
-                  settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                  }
-                },
-              ]}
-            >
-              {fashionProduct.slice(0, 8).map((data) => (
-                <ProductTwo product={data} key={data.id} />
-              ))}
 
-            </SlickSlider>
-          </Section>
 
           <NewsLetter bgImage="bg_image--12" />
           <ServiceTwo />
@@ -148,4 +164,4 @@ const HomeFashion = () => {
 
 
 
-export default HomeFashion;
+export default Home;

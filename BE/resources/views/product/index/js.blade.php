@@ -136,7 +136,7 @@
                         className: 'text-center min-w-150px',
                         render: function(data, type, row) {
                             return `
-                                    <button class="btn btn-warning btn-active-light-warning me-2 btn-sm btn-edit">Sửa</button>
+                                    <a class="btn btn-warning btn-active-light-warning me-2 btn-sm" href="{{ route('product.edit','') }}/${row.id}">Sửa</a>
                                     <button class="btn btn-danger btn-active-light-danger btn-sm btn-delete">Xóa</button>
                                 `;
                         },

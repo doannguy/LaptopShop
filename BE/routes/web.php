@@ -42,7 +42,7 @@ Route::namespace('App\Http\Controllers\Admin')->middleware(['auth', 'user.status
             Route::post('delete', 'ProductSeriController@delete')->name('product_seri.delete');
             Route::post('store', 'ProductSeriController@store')->name('product_seri.store');
             Route::post('update', 'ProductSeriController@update')->name('product_seri.update');
-                    Route::post('get-by-category-id', 'ProductSeriController@getByCategoryId')->name('product_seri.get_by_category_id');
+            Route::post('get-by-category-id', 'ProductSeriController@getByCategoryId')->name('product_seri.get_by_category_id');
         });
 
         Route::prefix('attribute')->group(function () {
@@ -59,6 +59,14 @@ Route::namespace('App\Http\Controllers\Admin')->middleware(['auth', 'user.status
             Route::post('/store', 'ProductController@store')->name('product.store');
             Route::post('datatable', 'ProductController@datatable')->name('product.datatable');
             Route::post('delete', 'ProductController@delete')->name('product.delete');
+            Route::get('edit/{id}', 'ProductController@edit')->name('product.edit');
+            Route::post('product-options-datatable/{id}', 'ProductController@productOptionsDatatable')->name('product.product_options_datatable');
+            Route::post('update', 'ProductController@update')->name('product.update');
+        });
+        Route::prefix('product-option')->group(function () {
+            Route::post('store', 'ProductOptionController@store')->name('product_option.store');
+            Route::post('update', 'ProductOptionController@update')->name('product_option.update');
+            Route::post('delete', 'ProductOptionController@delete')->name('product_option.delete');
         });
     });
 

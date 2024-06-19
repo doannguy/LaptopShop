@@ -258,6 +258,10 @@
     }
     &.product-style-two {
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 390px;
         .product-content {
             .color-variant,
             .product-price-variant {

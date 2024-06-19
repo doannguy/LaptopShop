@@ -111,6 +111,32 @@ class ProductService extends Service
             return false;
         }
     }
+    function update($id, $data) {
+        DB::beginTransaction();
+        try {
+            $product = $this->model->find($id);
+            $product->update([
+                'name' => $data['name'],
+                'product_seri_id' => $data['product_seri'],
+                'brand_id' => $data['brand'],
+                'short_description' => $data['short_description'],
+                'description' => $data['description'],
+            ]);
+            if (isset($data['thumbnail'])) {
+                $this->mediaService()->deleteFile($product->thumbnail);
+                $media_thumbnail = $this->mediaService()->saveFile($data['thumbnail'], 'thumbnail', 'product/thumbnail');
+                $product->thumbnail = $media_thumbnail->id;
+                $product->save();
+            }
+
+            DB::commit();
+            return true;
+        } catch (\Throwable $th) {
+            \Log::info($th);
+            DB::rollBack();
+            return false;
+        }
+    }
     public function filterProductList($filterData)
     {
         $page = $filterData['page'] ?? 1;

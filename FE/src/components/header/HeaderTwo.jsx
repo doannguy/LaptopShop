@@ -19,14 +19,7 @@ const HeaderTwo = () => {
 
   return (
     <header className="header axil-header header-style-2">
-      <HeaderTopNotify bgImage="/images/others/campaign-bg2.png">
-        <div className="campaign-countdown">
-          <CountDown unit unitShort date="2024-10-01T23:59:59" />
-        </div>
-        <p>
-          Rất nhiều ưu đãi hấp dẫn <Link href="/">Get Your Offer</Link>
-        </p>
-      </HeaderTopNotify>
+      
       <div className="axil-header-top">
         <div className="container">
           <div className="row align-items-center">

@@ -58,7 +58,7 @@ const Checkout = () => {
                     address: data.address,
                     shipping_type: shipping.type,
                     shipping_fee: shipping.fee,
-                    total_amount: cartProducts.cartTotalAmount,
+                    total_amount: cartProducts.cartTotalAmount + shipping.fee,
                     order_details: cartProducts.cartItems,
                     payment_method: paymentMethod
                 }
@@ -263,7 +263,7 @@ const Checkout = () => {
                                                     <tr className="order-total">
                                                         <td>Tổng tiền cần thanh toán</td>
                                                         <td className="order-total-amount">
-                                                            <Currency currency={cartProducts.cartTotalAmount} />
+                                                            <Currency currency={cartProducts.cartTotalAmount + shipping.fee} />
                                                         </td>
                                                     </tr>
                                                 </tbody>

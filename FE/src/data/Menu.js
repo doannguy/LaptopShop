@@ -12,7 +12,7 @@ const HeaderMenu = [
     {
         id: 'brand',
         name: "Thương hiệu",
-        url: "#",
+        url: "/shop",
         hasChildren: true,
 
     },
@@ -181,18 +181,13 @@ const DashboardAsideMenu = [
     },
     {
         icon: "fas fa-shopping-basket",
-        name: "Chi tiết hàng hoá",
+        name: "Đơn hàng của tôi",
         slug: "orders"
     },
 
     {
-        icon: "fas fa-home",
-        name: "Địa chỉ",
-        slug: "addresses-edit"
-    },
-    {
         icon: "fas fa-user",
-        name: "Chi tiết tài khoản",
+        name: "Thông tin tài khoản",
         slug: "account-details"
     }
 ]

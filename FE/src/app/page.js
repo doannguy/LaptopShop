@@ -1,9 +1,10 @@
-import HomeFashion from "./home/fashion/page";
+import Home from "./home/page";
+
 
 export const metadata = {
-	title: 'eTrade Multipurpose eCommerce Next JS Template',
-	description: 'eTrade Multipurpose eCommerce Nextjs Template',
-	description: 'eTrade Multipurpose eCommerce Nextjs Template',
+	title: 'Laptop Nguyễn Đoàn',
+	description: 'Laptop Nguyễn Đoàn',
+	description: 'Laptop Nguyễn Đoàn',
 
 }
 
@@ -12,7 +13,7 @@ const HomeOne = () => {
 	return (
 		<>
 			<main className="main-wrapper pv-main-wrapper">
-				<HomeFashion />
+				<Home />
 			
 			</main>
 

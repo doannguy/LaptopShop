@@ -47,7 +47,7 @@ const Shop = ({ searchParams }) => {
                         <Breadcrumb activeItem="Shop" title="Danh sách sản phẩm" />
                         <main className="main-wrapper">
                             <ShopWithSidebar brand={brand} seriFilter={seriFilter} category={categoryFilter} isFilterChange={isFilterChange} setIsFilterChange={setIsFilterChange} />
-                            <NewsLetter />
+                            {/* <NewsLetter /> */}
                             <ServiceTwo />
                         </main>
                         <FooterTwo />

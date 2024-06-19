@@ -5,8 +5,8 @@ import Currency from "@/components/widget/displayCurrency";
 import { ProductReview } from "@/data/Comments";
 import CardService from "@/services/cart_service";
 import ProductService from "@/services/product_service";
-import { updateCart, addToWishlist } from "@/store/slices/productSlice";
-import { reviewAverage, slugify } from "@/utils";
+import { addToWishlist, updateCart } from "@/store/slices/productSlice";
+import { slugify } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 import FsLightbox from "fslightbox-react";
 import Image from "next/image";
@@ -21,8 +21,8 @@ const SingleLayouThree = ({ singleData, productId }) => {
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
     const [quantity, setquantity] = useState(0);
-    const [colorImage, setColorImage] = useState("");
     const [fsToggler, setFsToggler] = useState(false);
+    const cartDatas = useSelector((state) => state.productData.cartItems);
 
     const { data: productData, isLoading, isFetched } = useQuery({ queryKey: ["get-product"], queryFn: () => ProductService.getDetailProduct(productId) });
     const [productOptionSelected, setProductOptionSelected] = useState(null);
@@ -43,7 +43,8 @@ const SingleLayouThree = ({ singleData, productId }) => {
     const handleUpdateCart = async () => {
         try {
             if (quantity > 0) {
-                const res = await CardService.update({ quantity, product_option_id: productOptionSelected.id });
+                const existQuantity = cartDatas.find((data) => data.product_option_id === productOptionSelected.id)?.quantity || 0;
+                const res = await CardService.update({ quantity: quantity + existQuantity, product_option_id: productOptionSelected.id });
                 console.log(res);
                 if (res.code == 0) {
                     dispatch(updateCart({ cartItems: res.data }));
@@ -94,8 +95,9 @@ const SingleLayouThree = ({ singleData, productId }) => {
                 galleryPreview.push(process.env.NEXT_PUBLIC_APP_URL + "/storage/" + img);
             })
         } else {
-            galleryPreview.push(productData?.thumbnail_media.path);
+            galleryPreview.push(process.env.NEXT_PUBLIC_APP_URL + "/storage/" +productData?.thumbnail_media.path);
         }
+        console.log(galleryPreview);
         return galleryPreview;
     }
 
@@ -129,6 +131,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                     {productData?.data.list_Image ? productData?.data.list_Image.map((galleryImg, index) => (
                                                         <div className="thumbnail" key={index}>
                                                             <Image
+                                                                unoptimized={true} 
                                                                 src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + galleryImg}
                                                                 height={584}
                                                                 width={584}
@@ -138,7 +141,8 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                     )) :
                                                         <div className="thumbnail">
                                                             <Image
-                                                                src={productData?.data?.thumbnail_media?.path && "#"}
+                                                                unoptimized={true} 
+                                                                src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + (productData?.data?.thumbnail_media?.path && "#")}
                                                                 height={584}
                                                                 width={584}
                                                                 alt="Gallery Image"
@@ -146,7 +150,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                         </div>
                                                     }
                                                 </SlickSlider>
-                                                {productData?.data.list_Image &&
+                                                {/* {productData?.data.list_Image &&
                                                     <>
                                                         <div className="product-quick-view position-view">
                                                             <button onClick={() => setFsToggler(!fsToggler)} className="popup-zoom">
@@ -158,7 +162,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                             sources={getFullscreenPreview()}
                                                         />
                                                     </>
-                                                }
+                                                } */}
                                             </div>
                                         </div>
                                         <div className="col-lg-2 order-lg-1">
@@ -183,6 +187,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                 {productData?.data.list_Image ? productData?.data.list_Image.map((galleryImg, index) => (
                                                     <div className="small-thumb-img" key={index}>
                                                         <Image
+                                                            unoptimized={true} 
                                                             src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + galleryImg}
                                                             height={207}
                                                             width={213}
@@ -192,7 +197,8 @@ const SingleLayouThree = ({ singleData, productId }) => {
                                                 )) :
                                                     <div className="small-thumb-img">
                                                         <Image
-                                                            src={productData?.data.thumbnail_media?.path && "#"}
+                                                            unoptimized={true} 
+                                                            src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + (productData?.data.thumbnail_media?.path && "#")}
                                                             height={207}
                                                             width={213}
                                                             alt="Thumb Image"

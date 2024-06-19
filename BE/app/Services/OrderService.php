@@ -37,7 +37,7 @@ class OrderService extends Service
             'status_label' => Order::STATUS_LABEL[$order->status] ?? 'Đang chờ',
             'status' => $order->status,
             'shipping_fee' => $order->shipping_fee,
-            'shipping_type' => Order::SHIPING_LABEL[$order->shipping_type] ?? 'Lỗi',
+            'shipping_type' => Order::SHIPPING_LABEL[$order->shipping_type] ?? 'Lỗi',
             'payment_method' => Order::PAYMENT_LABEL[$order->payment_method] ?? 'Lỗi',
             'note'  => $order->note,
             'message' => $order->message,

@@ -40,7 +40,7 @@ class ProductService extends Service
 
         $query->orderBy('id', $sort);
         $recordsFiltered = $recordsTotal = $query->count();
-        $categories = $query->skip($skip)
+        $products = $query->skip($skip)
             ->withCount(['productOptions'])
             ->take($pageLength)
             ->with(['brand', 'productSeri', 'thumbnailMedia'])
@@ -50,7 +50,7 @@ class ProductService extends Service
             "draw" => $data['draw'] ?? 1,
             "recordsTotal" => $recordsTotal,
             "recordsFiltered" => $recordsFiltered,
-            'data' => $categories
+            'data' => $products
         ];
     }
 

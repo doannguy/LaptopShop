@@ -51,11 +51,11 @@
                         id="product-table">
                         <thead>
                             <tr class="fw-bold fs-7 text-uppercase gs-0 text-start text-gray-500">
-                                <th class="min-w-200px">Product</th>
+                                <th class="text-center min-w-200px">Sản phẩm</th>
                                 <th class="min-w-100px text-end">Số lượng phiên bản</th>
                                 <th class="min-w-100px text-end">Dòng sản phẩm</th>
                                 <th class="min-w-100px text-end">Thương hiệu</th>
-                                <th class="min-w-70px text-end">Actions</th>
+                                <th class="min-w-70px text-end">Hành động</th>
                             </tr>
                         </thead>
                         <tbody class="fw-semibold text-gray-600"></tbody>

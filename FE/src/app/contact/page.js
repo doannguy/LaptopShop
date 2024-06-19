@@ -45,7 +45,7 @@ const ContactUs = () => {
                 <div className="axil-contact-page-area axil-section-gap">
                     <div className="container">
                         <div className="axil-contact-page">
-                            <div className="row row--30">
+                            {/* <div className="row row--30">
                                 <div className="col-lg-8">
                                     <div className="contact-form">
                                         <div>
@@ -91,22 +91,8 @@ const ContactUs = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-4">
-                                    <div className="contact-location mb--40">
-                                        <h4 className="title mb--20">Địa chỉ</h4>
-                                        <span className="address mb--20">{StoreInfo.address}</span>
-                                        <span className="phone">Phone: {StoreInfo.phone}</span>
-                                        <span className="email">Email: {StoreInfo.email}</span>
-                                    </div>
 
-                                    <div className="opening-hour">
-                                        <h4 className="title mb--20">Giờ mở cửa:</h4>
-                                        <p>Thứ 2 - Thứ 6: {StoreInfo.opening.monToSat}
-                                            <br /> Chủ nhật: {StoreInfo.opening.othersDay}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="axil-google-map-wrap axil-section-gap pb--0">
                             <div className="mapouter">

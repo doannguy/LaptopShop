@@ -39,15 +39,24 @@ const productEdit = () => {
             },
             {
                 targets: 1,
-                data: 'amount',
+                data: 'selled',
                 orderable: false,
                 className: 'text-center',
                 render: function (data, type, row) {
-                    return `<span class="fw-bold">${data ?? '0'} chiếc</span>`
+                    return `<span class="fw-bold">${data ?? '0'}</span>`
                 }
             },
             {
                 targets: 2,
+                data: 'amount',
+                orderable: false,
+                className: 'text-center',
+                render: function (data, type, row) {
+                    return `<span class="fw-bold">${data ?? '0'}</span>`
+                }
+            },
+            {
+                targets: 3,
                 data: 'price',
                 orderable: false,
                 className: 'text-center',
@@ -56,7 +65,7 @@ const productEdit = () => {
                 }
             },
             {
-                targets: 3,
+                targets: 4,
                 data: 'current_price',
                 orderable: false,
                 className: 'text-center',
@@ -65,7 +74,7 @@ const productEdit = () => {
                 }
             },
             {
-                targets: 4,
+                targets: 5,
                 data: 'status_label',
                 orderable: false,
                 className: 'text-center',
@@ -106,6 +115,7 @@ const productEdit = () => {
                 formProductOption.find('input[name="price"]').val(productOption.price);
                 formProductOption.find('select[name="status"]').val(productOption.status);
                 myDropzone.removeAllFiles(true);
+                // render ảnh cũ
                 for (let index = 0; index < productOption.product_media.length; index++) {
                     const media = productOption.product_media[index];
                     const url = "{{ url('/storage') }}/" + media.path
@@ -119,6 +129,7 @@ const productEdit = () => {
                     mockFile.previewElement.querySelector(".dz-details ").style.display = "none";
                     mockFile.url = url;
                 }
+
                 listAttributeStatus = listAttribute.map(attribute => ({
                     id: attribute.id,
                     name: attribute.name,
@@ -132,6 +143,7 @@ const productEdit = () => {
                 }));
                 // render list attribute
                 repeaterList.empty();
+                initReapeater();
                 for (let index = 0; index < productOption.attribute_values.length; index++) {
                     const attributeValue = productOption.attribute_values[index];
                     let repeaterItem = repeaterItemTemplate.clone();
@@ -141,7 +153,7 @@ const productEdit = () => {
                     repeaterItem.find('select[name="product_variable"]').val(attributeValue.attribute_id).trigger('change');
                     repeaterItem.find('select.product-variable-value').val(attributeValue.pivot.attribute_value_id).trigger('change');
                 }
-                initReapeater();
+
                 modal.modal('show');
             })
         }

@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Loading from '@/components/widget/Loading';
 
 
 const SignUp = () => {
@@ -32,6 +34,7 @@ const SignUp = () => {
             .required('Vui lòng chọn giới tính')
             .oneOf(["0", "1"], 'Giới tính không hợp lệ')
     });
+    const [isLoading, setLoading] = useState(false);    
 
     const {
         register,
@@ -41,21 +44,22 @@ const SignUp = () => {
     } = useForm({ resolver: yupResolver(schema) });
 
     const onSubmit = async (data, e) => {
-        console.log(data);
+        setLoading(true);
         const res = await AuthService.register(data);
-        if (res.data.code == 1) {
+        if (res.data.code == 0) {
             toast.success(res.data.message);
+            setLoading(false);
             setTimeout(() => {
                 router.push("/sign-in");
             }, 2000);
         } else {
             toast.error(res.data.data[0]);
-            console.log(res.data.data);
+            setLoading(false);
         }
-        console.log(res);
+      
     }
 
-    return (
+    return isLoading ? <Loading /> : (
         <div className="axil-signin-form">
             <h3 className="title">Đăng ký tài khoản</h3>
             <p className="b2 mb--55">Nhập thông tin chi tiết bên dưới</p>

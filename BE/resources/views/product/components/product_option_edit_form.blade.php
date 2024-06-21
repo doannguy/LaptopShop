@@ -8,7 +8,8 @@
                 <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
                         <th class="table-sort-desc">Tên phiên bản</th>
-                        <th class="table-sort-asc">Số lượng</th>
+                        <th class="table-sort-asc">Đã bán</th>
+                        <th class="table-sort-asc">Tồn kho</th>
                         <th>Giá gốc</th>
                         <th>Giá khuyến mại</th>
                         <th>Trạng thái</th>

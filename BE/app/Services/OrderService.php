@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\ProductOption;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -123,6 +124,13 @@ class OrderService extends Service
             $order = parent::store($orderData);
             $order_details = [];
             foreach ($data['order_details'] as $item) {
+                $productOption = ProductOption::find($item['product_option_id']);
+                if($productOption->amount < $item['quantity']) {  // Kiem tra so luong
+                    return false;
+                }
+                $productOption->amount -= $item['quantity'];
+                $productOption->selled += $item['quantity'];
+                $productOption->save();
                 $order_details[] = [
                     'product_option_id' => $item['product_option_id'],
                     'price' => $item['current_price'] ? $item['current_price'] : $item['price'],

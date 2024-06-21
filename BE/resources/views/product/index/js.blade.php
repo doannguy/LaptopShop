@@ -97,7 +97,7 @@
                                             <span class="symbol-label" style="background-image:url('{{ url('/storage') }}/${row?.thumbnail_media?.path ?? ''}');"></span>
                                         </a>
                                         <div class="ms-5">
-                                            <a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name">${data ?? ''}</a>
+                                            ${data ?? ''}
                                         </div>
                                     </div>`
                         }

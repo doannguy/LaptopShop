@@ -290,6 +290,9 @@ const SingleLayouThree = ({ singleData, productId }) => {
 															</div>
 														</div>
 														<div style={{ marginBottom: '10px' }}>
+															Đã bán : {productOptionSelected.selled} sản phẩm
+														</div>
+														<div style={{ marginBottom: '10px' }}>
 															Còn lại : {productOptionSelected.amount} sản phẩm
 														</div>
 														<div className="product-attribute">

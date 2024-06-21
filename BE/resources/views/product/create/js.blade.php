@@ -192,12 +192,13 @@ $(document).ready(function () {
             let product_option = [];
             productOptionElements = document.querySelectorAll('#product-options .product-option')
             productOptionElements.forEach((element, index) => {
-                let productAttributeElements = element.querySelectorAll('.product-attribute-form')
+                let productAttributeElements = element.querySelector('.product-attribute-form')
                 let product_attribute_values = [];
-
-                productAttributeElements.forEach((attribute) => {
-                    product_attribute_values.push(attribute.querySelector('select.product-variable-value')?.value)
+                const variableValues = productAttributeElements.querySelectorAll('select.product-variable-value')
+                variableValues.forEach((value) => {
+                    product_attribute_values.push(value.value);
                 })
+
                 product_option.push({
                     name: element.querySelector('input.option-name').value,
 
@@ -227,19 +228,19 @@ $(document).ready(function () {
                 contentType: false,
                 success: function (res) {
                     console.log(res);
-                    if(res.code == 0) {
+                    if (res.code == 0) {
                         toastr.success("Thêm thành công");
                         setTimeout(() => {
                             window.location.href = "{{ route('product.index') }}";
                         }, 2000)
-                    }else {
+                    } else {
                         toastr.error(res.message);
                     }
 
 
                 },
                 error: function (res) {
-                    console.log(res);
+
                     toastr.error(res.responseJSON.message);
                 }
             })

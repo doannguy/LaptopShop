@@ -4,11 +4,11 @@
 
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <a href="{{ route('dashboard') }}">
-            <img alt="Logo" src="assets/media/logos/default.svg" style="width: 100%;"
+            <img alt="Logo" src="{{ asset('assets/media/logos/default.svg') }}" style="width: 100%;"
                 class="app-sidebar-logo-default theme-light-show" />
-            <img alt="Logo" src="assets/media/logos/default-dark.svg" style="width: 100%;"
+            <img alt="Logo" src="{{ asset('assets/media/logos/default-dark.svg') }}" style="width: 100%;"
                 class="app-sidebar-logo-default theme-dark-show" />
-            <img alt="Logo" src="assets/media/logos/default-small.svg" class="h-20px app-sidebar-logo-minimize" />
+            <img alt="Logo" src="{{ asset('assets/media/logos/default-small.svg') }}" class="h-20px app-sidebar-logo-minimize" />
         </a>
         <div id="kt_app_sidebar_toggle"
             class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"

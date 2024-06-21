@@ -9,6 +9,9 @@ const ProductThumbnail = (props) => {
       <div style={{ maxWidth: '300px', maxHeight: '300px', height: '100%' }}>
         <Link href={`/products/${props.product.product.id}`}>
           <img
+          style={{ 
+            height: '200px',
+           }}
             src={process.env.NEXT_PUBLIC_APP_URL + "/storage/" + props.product.product_media[0].path}
             className="img-fluid"
             // width={'auto'}

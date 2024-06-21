@@ -32,6 +32,39 @@ class RegisterRequest extends FormRequest
             'gender' => 'required|in:0,1',
         ];
     }
+
+    /**
+     * Get the validation error messages.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Tên không được để trống',
+            'name.string' => 'Tên phải là một chuỗi',
+            'name.max' => 'Tên không được vượt quá 255 ký tự',
+            'email.required' => 'Email không được để trống',
+            'email.string' => 'Email phải là một chuỗi',
+            'email.email' => 'Email phải là một định dạng email',
+            'email.max' => 'Email không được vượt quá 255 ký tự',
+            'email.unique' => 'Email đã tồn tại',
+            'password.required' => 'Mật khẩu không được để trống',
+            'password.string' => 'Mật khẩu phải là một chuỗi',
+            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự',
+            'password.confirmed' => 'Mật khẩu xác nhận không chính xác',
+            'password_confirmation.required' => 'Mật khẩu xác nhận không được để trống',
+            'password_confirmation.string' => 'Mật khẩu xác nhận phải là một chuỗi',
+            'password_confirmation.min' => 'Mật khẩu xác nhận phải có ít nhất 8 ký tự',
+            'phone.required' => 'Số điện thoại không được để trống',
+            'phone.string' => 'Số điện thoại phải là một chuỗi',
+            'phone.max' => 'Số điện thoại không được vượt quá 11 ký tự',
+            'phone.unique' => 'Số điện thoại đã tồn tại',
+            'phone.regex' => 'Số điện thoại không đúng định dạng',
+            'gender.required' => 'Giới tính không được để trống',
+            'gender.in' => 'Giới tính không hợp lệ',
+        ];
+    }
     /**
      * Handle a failed validation attempt.
      *
@@ -45,7 +78,7 @@ class RegisterRequest extends FormRequest
         $errors = $validator->errors();
 
         throw new HttpResponseException(
-            jsonResponse(0, $errors->all(), "Thông tin đăng ký không hợp lệ")
+            jsonResponse(1, $errors->all(), "Thông tin đăng ký không hợp lệ")
         );
     }
 }

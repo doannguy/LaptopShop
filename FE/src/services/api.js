@@ -17,3 +17,5 @@ export const delete_order = '/order/delete'
 export const send_reset_link = '/send-reset-link'
 export const reset_password = '/reset-password' ;
 export const rating = '/product-detail/review';
+export const get_review_by_product_id = '/review/'
+export const get_reviews = '/reviews';

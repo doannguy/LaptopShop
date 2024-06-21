@@ -58,17 +58,6 @@
                 </button>
             </div>
 
-            <div class="d-flex flex-stack py-5">
-                <div class="me-2"></div>
-                <div class="m-0">
-                    <span class="text-gray-400 fw-bold fs-5 me-2">
-                        Not a Member yet?
-                    </span>
-                    <a href="{{ route('register') }}" class="link-primary fw-bold fs-5">
-                        Đăng ký
-                    </a>
-                </div>
-            </div>
         </div>
     </form>
 @endsection

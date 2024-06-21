@@ -3,15 +3,15 @@
 
 <head>
     <base href="../" />
-    <title>@yield('title') - LAPTOPSHOP</title>
+    <title>@yield('title')  Đoàn Laptop</title>
     <meta charset="utf-8" />
-    <meta name="description" content="LAPTOPSHOP." />
-    <meta name="keywords" content="LAPTOPSHOP" />
+    <meta name="description" content="Đoàn Laptop." />
+    <meta name="keywords" content="Đoàn Laptop" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="LAPTOPSHOP" />
-    <meta property="og:site_name" content="LAPTOPSHOP" />
+    <meta property="og:title" content="Đoàn Laptop" />
+    <meta property="og:site_name" content="Đoàn Laptop" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />

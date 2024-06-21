@@ -39,6 +39,7 @@
     "react-rating": "^2.0.5",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.23.1",
+    "react-simple-star-rating": "^5.1.7",
     "react-slick": "^0.29.0",
     "react-toastify": "^10.0.5",
     "remark": "^14.0.3",

@@ -10,6 +10,8 @@ import { useRouter } from 'next/navigation';
 import CartService from "@/services/cart_service";
 import { updateCart } from "@/store/slices/productSlice";
 import useLocalStorage from "@/app/hook/use-local-storage";
+import UserService from "@/services/user_service";
+import { logOut, logIn } from "@/store/slices/authSlice";
 
 const HeaderActions = (props) => {
   const [searchToggle, setSearchToggle] = useState(false);
@@ -18,14 +20,22 @@ const HeaderActions = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const getProducts = useSelector((state) => state.productData);
+  const getAuth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [token,setToken,removeToken] = useLocalStorage("token",null);
   useEffect(() => {
     if (token != null) {
       setIsLogin(true);
-      console.log(getProducts.isLoadedCart);
       if (getProducts.isLoadedCart == false) {
         loadCart();
+      }
+      if (getAuth.login == false) {
+        (async () => {
+          const res= await UserService.getUserInfomation();
+          if (res.data.code == 0) {
+            dispatch(logIn({userData: res.data.data.user}));
+          }
+        })(); 
       }
     } else {
       setIsLogin(false);
@@ -64,6 +74,7 @@ const HeaderActions = (props) => {
   const handleLogout = () => {
     removeToken();
     dispatch(cartClear());
+    dispatch(logOut());
     router.push('/signin');
   }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('current_price')->nullable();
             $table->unsignedBigInteger('product_id');
             $table->integer('amount')->default(0);
+            $table->integer('selled')->default(0);
             $table->integer('status')->default(1);
         });
     }

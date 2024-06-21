@@ -4,10 +4,10 @@
 
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <a href="{{ route('dashboard') }}">
-            <img alt="Logo" src="assets/media/logos/default.svg"
-                class="h-25px app-sidebar-logo-default theme-light-show" />
-            <img alt="Logo" src="assets/media/logos/default-dark.svg"
-                class="h-25px app-sidebar-logo-default theme-dark-show" />
+            <img alt="Logo" src="assets/media/logos/default.svg" style="width: 100%;"
+                class="app-sidebar-logo-default theme-light-show" />
+            <img alt="Logo" src="assets/media/logos/default-dark.svg" style="width: 100%;"
+                class="app-sidebar-logo-default theme-dark-show" />
             <img alt="Logo" src="assets/media/logos/default-small.svg" class="h-20px app-sidebar-logo-minimize" />
         </a>
         <div id="kt_app_sidebar_toggle"
@@ -18,9 +18,9 @@
         </div>
     </div>
 
-    <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+    <div class="app-sidebar-menu flex-column-fluid overflow-hidden">
         <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper">
-            <div id="kt_app_sidebar_menu_scroll" class="scroll-y my-5 mx-3" data-kt-scroll="true"
+            <div id="kt_app_sidebar_menu_scroll" class="scroll-y mx-3 my-5" data-kt-scroll="true"
                 data-kt-scroll-activate="true" data-kt-scroll-height="auto"
                 data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
                 data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px"
@@ -31,21 +31,34 @@
                         <a class="menu-link @if (Route::currentRouteName() == 'dashboard') active @endif"
                             href="{{ route('dashboard') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-graph-2 fs-2">
+                                <i class="ki-duotone ki-home fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Trang chủ</span>
+                            <span class="menu-title">Thống kê</span>
                         </a>
                     </div>
-
+                     <div class="menu-content"><span class="menu-heading fw-bold text-uppercase fs-7">Quản lý đơn hàng</span></div>
+                     <div class="menu-item">
+                        <a class="menu-link @if (request()->routeIs('order.*')) active @endif"
+                            href="{{ route('order.index') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-purchase">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Đơn hàng</span>
+                        </a>
+                    </div>
+                    <div class="menu-content"><span class="menu-heading fw-bold text-uppercase fs-7">Quản lý sản phẩm</span></div>
                     <div class="menu-item">
-                        <a class="menu-link  @if (Route::currentRouteName() == 'product.index') active @endif"
+                        <a class="menu-link @if (Route::currentRouteName() == 'product.index') active @endif"
                             href="{{ route('product.index') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-monitor-mobile   fs-2">
+                                <i class="ki-duotone ki-monitor-mobile fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -72,7 +85,7 @@
                         <a class="menu-link @if (Route::currentRouteName() == 'product_seri.index') active @endif"
                             href="{{ route('product_seri.index') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-graph-2 fs-2">
+                                <i class="ki-duotone ki-package fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -86,7 +99,7 @@
                         <a class="menu-link @if (request()->routeIs('brand.index')) active @endif"
                             href="{{ route('brand.index') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-triangle fs-2">
+                                <i class="ki-duotone ki-abstract-26 fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -95,29 +108,20 @@
                             <span class="menu-title">Thương hiệu</span>
                         </a>
                     </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link @if (request()->routeIs('order.*')) active @endif"
-                            href="{{ route('order.index') }}">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-triangle fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Đơn hàng</span>
-                        </a>
-                    </div>
-
                     <div class="menu-item">
                         <a class="menu-link @if (request()->routeIs('attribute.*')) active @endif"
                             href="{{ route('attribute.index') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone  ki-abstract-26 fs-2">
+                                <i class="ki-duotone ki-technology">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                    <span class="path7"></span>
+                                    <span class="path8"></span>
+                                    <span class="path9"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Cấu hình sản phẩm</span>
@@ -125,14 +129,16 @@
                     </div>
 
                     @if (Auth::user()->hasRole('admin'))
+                     <div class="menu-content"><span class="menu-heading fw-bold text-uppercase fs-7">Quản lý thành viên</span></div>
                         <div class="menu-item">
                             <a class="menu-link @if (request()->routeIs('user.*')) active @endif"
                                 href="{{ route('user.index') }}">
                                 <span class="menu-icon">
-                                    <i class="ki-duotone  ki-abstract-26 fs-2">
+                                    <i class="ki-duotone ki-profile-user">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
                                         <span class="path3"></span>
+                                        <span class="path4"></span>
                                     </i>
                                 </span>
                                 <span class="menu-title">Thành viên</span>

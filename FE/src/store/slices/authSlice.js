@@ -9,16 +9,17 @@ const authSlice = createSlice({
     },
     reducers: {
         logIn(state, action) {
-            const findUser = UserLists.filter(user => user.email === action.payload);
-            if (findUser.length) {
-                state.userData = findUser[0];
-                state.login = true;
-            } 
+            state.login = true;
+            state.userData = action.payload.userData;
+        },
+        logOut(state) {
+            state.login = false;
+            state.userData = {};
         }
     }
 });
 
-export const { logIn } = authSlice.actions;
+export const { logIn, logOut } = authSlice.actions;
 
 export default authSlice.reducer;
 

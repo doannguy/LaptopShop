@@ -5,12 +5,14 @@ import Loading from "@/components/widget/Loading";
 import ProductService from "@/services/product_service";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import useLocalStorage from "../hook/use-local-storage";
 
 
 const ShopWithSidebar = (props) => {
     const [cateToggle, setcateToggle] = useState(true);
     const [seriToggle, setseriToggle] = useState(true);
     const [brandToggle, setbrandToggle] = useState(true);
+    const [token] = useLocalStorage("token", null);
 
     const [productList, setProductList] = useState([]);
     const [filterData, setFilterData] = useState({
@@ -51,9 +53,12 @@ const ShopWithSidebar = (props) => {
 
     useEffect(() => {
         if (props.isFilterChange) {
-            console.log("refetch");
             setProductList([]);
             props.setIsFilterChange(false);
+            setFilterData(prev => ({
+                ...prev, brand: props.brand,
+                product_seri: props.seriFilter,
+                category: props.category, }));
             refetch();
         }
     }, [props])

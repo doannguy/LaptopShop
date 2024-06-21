@@ -231,7 +231,11 @@ class ProductService extends Service
     }
     function getReviews($data) {
         $limit = $data['length'] ?? 10;
-        return ProductReview::with('product')->orderBy('id', 'desc')->limit($limit)->get();
+        return ProductReview::with('product:id,name','user:id,name')->orderBy('rating', 'desc')->limit($limit)->get();
+    }
+    function getReviewByProductId($product_id) {
+        return ProductReview::where('product_id', $product_id)->with('user:id,name')->get();
+
     }
     public function storeReview($data)
     {

@@ -26,6 +26,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::post('reset-password', 'AuthController@resetPassword');
 
     Route::get('reviews', 'ProductController@getReviews');
+    Route::get('review/{id}', 'ProductController@getReviewByProduct');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:sanctum', 'user.status']], function () {

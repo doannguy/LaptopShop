@@ -26,9 +26,6 @@ return new class extends Migration
             $table->unsignedSmallInteger('payment_method');
             $table->tinyInteger('status')->default(Order::STATUS_WAITING);
             $table->text('message')->nullable();
-            $table->unsignedSmallInteger('shipping_type');
-            $table->unsignedBigInteger('shipping_fee');
-            $table->unsignedSmallInteger('payment_method');
             $table->timestamps();
         });
     }

@@ -142,8 +142,8 @@ const productEdit = () => {
                     })
                 }));
                 // render list attribute
-                repeaterList.empty();
-                initReapeater();
+                // repeaterList.empty();
+
                 for (let index = 0; index < productOption.attribute_values.length; index++) {
                     const attributeValue = productOption.attribute_values[index];
                     let repeaterItem = repeaterItemTemplate.clone();
@@ -153,7 +153,7 @@ const productEdit = () => {
                     repeaterItem.find('select[name="product_variable"]').val(attributeValue.attribute_id).trigger('change');
                     repeaterItem.find('select.product-variable-value').val(attributeValue.pivot.attribute_value_id).trigger('change');
                 }
-
+                // initReapeater();
                 modal.modal('show');
             })
         }
@@ -218,6 +218,7 @@ const productEdit = () => {
         });
     }
     const initReapeater = (listInit = null) => {
+
         if (productAttributeReapeater == undefined) {
             productAttributeReapeater = productAttributeForm.repeater({
                 initEmpty: true,
@@ -232,9 +233,7 @@ const productEdit = () => {
                 }
             })
         }
-        if (listInit != null) {
-            productAttributeReapeater.setList(listInit);
-        }
+        repeaterList.empty();
     }
     const handleAddButton = () => {
         addButton = $('#btn-add-product-option');
@@ -340,10 +339,11 @@ const productEdit = () => {
             });
     }
     const resetForm = () => {
-        repeaterList.empty();
+        // repeaterList.empty();
         $('#product-option-form').trigger('reset');
         myDropzone.removeAllFiles(true);
         listAttributeStatus = createNewListAttribute();
+        initReapeater();
         removeImages = [];
     }
 

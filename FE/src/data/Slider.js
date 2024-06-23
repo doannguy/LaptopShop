@@ -40,12 +40,7 @@ const FashionSlider = [
         subIcon: "fal fa-watch",
         thumb: "/images/product/laptop-lenovo-loq.jpeg"
     },
-    {
-        title: "Đồng hồ thông minh Delux Brand",
-        subTitle: "Đồng hồ thông minh",
-        subIcon: "fal fa-watch",
-        thumb: "/images/product/product-40.png"
-    }
+    
 ]
 
 const FashionSliderProduct = {

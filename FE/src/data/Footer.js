@@ -16,10 +16,6 @@ const FooterData = {
                     url: "/cart"
                 },
                 {
-                    name: "Danh sách mong ước",
-                    url: "/wishlist"
-                },
-                {
                     name: "Khám phá cửa hàng",
                     url: "/shop"
                 }
@@ -56,10 +52,6 @@ const FooterData = {
                 {
                     name: "Chính sách",
                     url: "/privacy-policy"
-                },
-                {
-                    name: "Chính sách của người dùng",
-                    url: "/terms-of-use"
                 },
                 {
                     name: "Liên hệ",

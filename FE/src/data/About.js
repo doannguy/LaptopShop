@@ -23,10 +23,10 @@ const AboutStore = {
     subtitle: "About Store",
     subtitleIcon: "far fa-shopping-basket",
     title: "Thương mại điện tử bao gồm cả mua sắm trực tuyến.",
-    higlightLine: "E-Trade giúp bạn tạo ra các trải nghiệm thương mại điện tử hợp nhất, trí tuệ nhân tạo trong việc tạo ra các giao dịch thương mại điện tử — trực tuyến và tại cửa hàng.",
+    higlightLine: "ĐOÀN LAPTOP tạo ra các trải nghiệm thương mại điện tử hợp nhất, trí tuệ nhân tạo trong việc tạo ra các giao dịch thương mại điện tử — trực tuyến và tại cửa hàng.",
     description: [
         "Tạo ra các giải pháp được thiết kế riêng biệt cho ngành hàng để giúp các nhà sản xuất đi vào thế giới điện tử, và phù hợp với thị trường và khách hàng thay đổi nhanh chóng bằng cách tạo ra các doanh nghiệp mới.",
-        "E-Trade cung cấp cho người mua trải nghiệm thương mại điện tử ổn định, tự động, đa dạng."
+        "ĐOÀN LAPTOP cung cấp cho người mua trải nghiệm thương mại điện tử ổn định, tự động, đa dạng."
     ]
 }
 

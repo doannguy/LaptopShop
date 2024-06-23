@@ -115,7 +115,7 @@ class OrderService extends Service
                 'total_price' => $data['total_amount'],
                 'address' => $data['address'],
                 'status' => $this->model::STATUS_WAITING,
-                'name' => $data['first_name'] . ' ' . $data['last_name'],
+                'user_name' => $data['first_name'] . ' ' . $data['last_name'],
                 'phone' => $data['phone'],
                 'shipping_fee' => $data['shipping_fee'],
                 'shipping_type' => $data['shipping_type'],
@@ -130,6 +130,11 @@ class OrderService extends Service
                 }
                 $productOption->amount -= $item['quantity'];
                 $productOption->selled += $item['quantity'];
+                \Log::info($item);
+                \Log::info($productOption->amount);
+                \Log::info($productOption->selled);
+
+
                 $productOption->save();
                 $order_details[] = [
                     'product_option_id' => $item['product_option_id'],

@@ -10,7 +10,7 @@ import Currency from "@/components/widget/displayCurrency";
 import Loading from "@/components/widget/Loading";
 import CartService from "@/services/cart_service";
 import Swal from "sweetalert2";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -54,7 +54,14 @@ const Cart = () => {
             const res = await CartService.update({ quantity: cartItem.quantity - 1, product_option_id: cartItem.product_option_id })
             if (res.code != 0) {
                 dispatch(cartQuantityIncrease(cartItem))
-                toast.error(res.message);
+                if(res.data && res.data.length > 0){
+                    for (let index = 0; index < res.data.length; index++) {
+                        const error = res.data[index];
+                        toast.error(error);
+                    }
+                }else {
+                    toast.error(res.message);
+                }
             }
             dispatch(updateCartAmount())
         } else {
@@ -67,6 +74,7 @@ const Cart = () => {
 
         <>
             <HeaderOne />
+            <ToastContainer />
             <main className="main-wrapper">
                 <div className="axil-product-cart-area axil-section-gap">
                     <div className="container">

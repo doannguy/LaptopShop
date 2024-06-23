@@ -25,7 +25,7 @@ const Checkout = () => {
         "fee": 0,
     });
     const [paymentMethod, setPaymentMethod] = useState(1);
-
+    const AuthData = useSelector((state) => state.auth);
     const handleChangeShipping = (value) => {
         if (value == 0) {
             setShipping({
@@ -190,7 +190,7 @@ const Checkout = () => {
                                             <div className="col-lg-12">
                                                 <div className="form-group">
                                                     <label>Số điện thoại <span>*</span></label>
-                                                    <input type="number" {...register('phone', { required: true, maxLength: 11 })} />
+                                                    <input type="number" defaultValue={AuthData ? AuthData.userData.phone : ''} {...register('phone', { required: true, maxLength: 11 })} />
                                                     {errors.phone && <p className="error">Số điện thoại tối đa 11 số và không được bỏ trống.</p>}
                                                 </div>
                                             </div>

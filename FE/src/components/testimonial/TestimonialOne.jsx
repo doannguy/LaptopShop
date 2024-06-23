@@ -46,7 +46,7 @@ const TestimonialOne = () => {
                   /> */}
                 </div>
                 <div className="media-body">
-                  <span className="designation">{data.product.name}</span>
+                  <span className="designation">{data.product?.name}</span>
                   <h6 className="title">{data.user.name}</h6>
                 </div>
               </div>

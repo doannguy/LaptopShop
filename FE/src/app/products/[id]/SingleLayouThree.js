@@ -37,9 +37,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
 	const { data: ratingData, isFetched: isFetchedRating, refetch: refetchRating } = useQuery({ queryKey: ["get-rating"], queryFn: () => RatingService.getReviewByProductId(productId) });
 	useEffect(() => {
 		if (isFetched) {
-
 			if (productData && productData.data != false) {
-				console.log(productData.data);
 			} else {
 				setIsProductExist(false);
 			}
@@ -93,17 +91,18 @@ const SingleLayouThree = ({ singleData, productId }) => {
 	}
 
 	const incrementQuantity = () => {
+
 		if (quantity < 5 && quantity < productOptionSelected?.amount) {
 			setquantity(quantity + 1);
 		}
 		else {
-			console.log("out of stock");
-			toast.warning(quantity == 0 ? "Bạn chưa chọn phiên bản" : "Đã đạt đến số lượng tối đa")
+			toast.warning(productOptionSelected == null ? "Bạn chưa chọn phiên bản" : "Đã đạt đến số lượng tối đa")
 		}
 	}
 
 
 	const productProductOptionHandler = (product_options) => {
+		setquantity(0);
 		setProductOptionSelected(product_options);
 
 	};
@@ -126,6 +125,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
 		const res = await RatingService.userRating(data);
 		if (res.data.code == 0) {
 			toast.success("Đánh giá đã được gửi thành công");
+			setIsReviewed(true);
 			reset();
 			refetchRating();
 		} else {
@@ -256,7 +256,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
 												</div>
 												<ul className="product-action d-flex-center mb--0">
 													<li className="add-to-cart">
-														<button disabled={(!productOptionSelected) ? true : false} onClick={() => handleUpdateCart()} className="axil-btn btn-bg-primary">Thêm vào giỏ hàng</button>
+														<button disabled={(!productOptionSelected || quantity === 0) ? true : false} onClick={() => handleUpdateCart()} className="axil-btn btn-bg-primary">Thêm vào giỏ hàng</button>
 													</li>
 
 												</ul>

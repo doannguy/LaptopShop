@@ -17,7 +17,7 @@ class CartService extends Service
         $carts = Cart::where('user_id', $userId)
             ->with(['productOption.product', 'productOption.productMedia'])
             ->get();
-            
+
         return $carts->map(function ($cart) {
             return [
                 'id' => $cart->id,

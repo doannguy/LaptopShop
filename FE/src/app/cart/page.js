@@ -43,8 +43,14 @@ const Cart = () => {
         dispatch(cartQuantityIncrease(cartItem))
         const res = await CartService.update({ quantity: cartItem.quantity + 1, product_option_id: cartItem.product_option_id })
         if (res.code != 0) {
-            dispatch(cartQuantityDecrease(cartItem))
-            toast.error(res.message);
+            if(res.data && res.data.length > 0){
+                for (let index = 0; index < res.data.length; index++) {
+                    const error = res.data[index];
+                    toast.error(error);
+                }
+            }else {
+                toast.error(res.message);
+            }
         }
         dispatch(updateCartAmount())
     }

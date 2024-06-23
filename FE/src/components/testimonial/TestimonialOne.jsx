@@ -7,6 +7,7 @@ import SlickSlider from "../elements/SlickSlider";
 import RatingService from "@/services/rating_service";
 import SkeletonCustom from "../widget/Skeleton";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const TestimonialOne = () => {
   const { data: TestimonialData, isFetched } = useQuery({ queryKey: ["get-testimonial"], queryFn: () => RatingService.getReviews({ length: 6 }) });

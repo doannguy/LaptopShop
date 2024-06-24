@@ -238,7 +238,7 @@ const Checkout = () => {
                                                     ))}
                                                     <tr className="order-subtotal">
                                                         <td>Tổng cộng</td>
-                                                        <td>${cartProducts.cartTotalAmount}</td>
+                                                        <td>  <Currency currency={cartProducts.cartTotalAmount} /></td>
                                                     </tr>
                                                     <tr className="order-shipping">
                                                         <td colSpan={2}>
@@ -271,15 +271,23 @@ const Checkout = () => {
                                         </div>
                                         <div className="order-payment-method">
                                             <div className="single-payment" onClick={() => setPaymentMethod(0)}>
-                                                <div className="input-group" >
+                                                <div className="input-group justify-content-between align-items-center" >
                                                     <input type="radio" {...register("paymentMethod")} checked={paymentMethod == 0} id="bank" value="bank" />
                                                     <label htmlFor="bank">Thanh toán qua thẻ ngân hàng</label>
+                                                    <Image
+                                                        src="/images/others/payment.png"
+                                                        height={28}
+                                                        width={156}
+                                                        alt="Paypal payment"
+                                                    />
                                                 </div>
+                                                <p>Sử dụng thẻ ghi nợ nội địa để thanh toán đơn hàng của bạn.</p>
                                             </div>
                                             <div className="single-payment" onClick={() => setPaymentMethod(1)}>
                                                 <div className="input-group">
                                                     <input type="radio" {...register("paymentMethod")} checked={paymentMethod == 1} id="cash" value="cash" />
                                                     <label htmlFor="cash">Thanh toán khi nhận hàng</label>
+                                                    
                                                 </div>
                                             </div>
                                             {/* <div className="single-payment">

@@ -44,7 +44,7 @@ class OrderService extends Service
             'message' => $order->message,
             'total_price' => $order->total_price,
             'phone' => $order->phone,
-            'name' => $order->name,
+            'name' => $order->user_name,
             'user' => $order->user,
             'order_details' => $order->orderDetails->map(function ($orderDetail) {
                 return [
@@ -130,9 +130,6 @@ class OrderService extends Service
                 }
                 $productOption->amount -= $item['quantity'];
                 $productOption->selled += $item['quantity'];
-                \Log::info($item);
-                \Log::info($productOption->amount);
-                \Log::info($productOption->selled);
 
 
                 $productOption->save();
@@ -160,12 +157,16 @@ class OrderService extends Service
 
     }
 
-    public function update($data, $id) {
+    public function update( $id, $data) {
         $order = $this->model->find($id);
-        if($order->status != $this->model::STATUS_WAITING) {
+        return $order->update($data);
+    }
+    public function userUpdate($data, $id) {
+        $order = $this->model->find($id);
+        if ($order->status != $this->model::STATUS_WAITING) {
             return false;
         }
-        return parent::update( $id, $data);
+        return parent::update($id, $data);
     }
     function delete($id) {
         $order = $this->model->find($id);

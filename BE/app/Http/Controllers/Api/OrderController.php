@@ -27,7 +27,7 @@ class OrderController extends Controller
         return jsonResponse($result ? 0 : 1, $result, $result ?'Đặt hàng thành công' : 'Đặt hàng thất bại');
     }
     function update(UpdateOrderRequest $request, $id)  {
-        $result = $this->orderService()->update($request->input(), $id);
+        $result = $this->orderService()->userUpdate($request->input(), $id);
         return jsonResponse($result ? 0 : 1, $result, $result ?'Cập nhật đơn hàng thành công' : 'Cập nhật đơn hàng thất bại');
     }
     function delete($id) {

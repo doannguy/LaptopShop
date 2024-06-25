@@ -7,7 +7,6 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -30,7 +29,7 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['required', Rule::unique('users')->ignore(auth()->user()->id)],
+            'id' => 'required|exists:users,id',
             'role' => 'required|exists:roles,name',
             'status' => 'required|in:' . implode(',', [User::STATUS_ACTIVE, User::STATUS_INACTIVE]),
         ];
@@ -56,7 +55,7 @@ class UpdateUserRequest extends FormRequest
 
     public function failedAuthorization()
     {
-        $errors = ['Bạn không thể chỉnh sửa thông tin của chính bạn'];
+        $errors = ['Bạn không thể chỉnh sửa thông tin của chính bạn.'];
         throw new HttpResponseException(jsonResponse(1, $errors));
     }
 }

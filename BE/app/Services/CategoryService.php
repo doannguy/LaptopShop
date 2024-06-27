@@ -6,7 +6,8 @@ use App\Models\Category;
 
 class CategoryService extends Service
 {
-    public function setModel() {
+    public function setModel()
+    {
         return new Category();
     }
     public function filterDatatable(array $data)
@@ -43,10 +44,11 @@ class CategoryService extends Service
     {
         $category = Category::find($data['id']);
         if ($data['delete_type'] == Category::DELETE_TYPE['hard']) {
-            $category->products()->delete();
+            $category->productSeries()->product()->delete();
+            $category->productSeries()->delete();
             return $category->delete();
         } else if ($data['delete_type'] == Category::DELETE_TYPE['soft']) {
-            $category->products()->update(['category_id' => null]);
+            $category->productSeries()->update(['category_id' => null]);
             return $category->delete();
         }
     }
@@ -62,14 +64,13 @@ class CategoryService extends Service
     public function getCategories()
     {
         return Category::select(['id', 'name'])->with(['productSeries'])->get()->map(function ($category) {
-            if(count($category->productSeries) > 0) {
+            if (count($category->productSeries) > 0) {
                 $category['hasChildren'] = true;
-            }else {
+            } else {
                 $category['hasChildren'] = false;
             }
 
             return $category;
-
         });
     }
 }

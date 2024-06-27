@@ -93,8 +93,8 @@
                             </select>
                             <div class="mt-5">
                                 <label class="form-label"> Dòng sản phẩm</label>
-                            <select name="product_seri"  class="form-select"  data-control="select2"
-                                data-placeholder="Chọn dòng sản phẩm" disabled></select>
+                                <select name="product_seri" class="form-select" data-control="select2"
+                                    data-placeholder="Chọn dòng sản phẩm" disabled></select>
                             </div>
                             <div class="text-muted fs-7 mb-7">Thêm sản phẩm vào danh mục.</div>
                             <a href="{{ route('category.index') }}" class="btn btn-light-primary btn-sm mb-10">
@@ -149,8 +149,8 @@
                                         </div>
                                         <div class="fv-row mb-10">
                                             <label class="required form-label">Mô tả ngắn</label>
-                                            <textarea type="text" name="short_description" class="form-control mb-2"
-                                                placeholder="Mô tả ngắn về sản phẩm" maxlength="255"></textarea>
+                                            <textarea type="text" name="short_description" class="form-control mb-2" placeholder="Mô tả ngắn về sản phẩm"
+                                                maxlength="255"></textarea>
                                             <div class="text-muted fs-7">Mô tả ngắn gọn, tổng quát về sản phẩm này</div>
                                         </div>
                                         <div>
@@ -175,7 +175,7 @@
                                             <div class="text-muted fs-7">một mẫu sản phẩm sẽ có rất
                                                 nhiều phiên bản khác nhau, có thể khác nhau về màu sắc,
                                                 dung lượng và giá thành.</div>
-                                           @include('product.components.product_option_form')
+                                            @include('product.components.product_option_form')
                                         </div>
                                     </div>
                                 </div>
@@ -208,6 +208,6 @@
     <script src="assets/js/custom/utilities/modals/create-app.js"></script>
     <script>
         var _token = "{{ csrf_token() }}";
-        @include('product.create.js')
     </script>
+    @include('product.create.js')
 @endsection

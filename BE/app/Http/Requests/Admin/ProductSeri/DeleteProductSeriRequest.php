@@ -24,7 +24,7 @@ class DeleteProductSeriRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:categories,id',
+            'id' => 'required|exists:product_series,id',
             'delete_type' => 'required|in:0,1'
         ];
     }

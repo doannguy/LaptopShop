@@ -44,7 +44,11 @@ class CategoryService extends Service
     {
         $category = Category::find($data['id']);
         if ($data['delete_type'] == Category::DELETE_TYPE['hard']) {
-            $category->productSeries()->product()->delete();
+            if ($category->productSeries) {
+                foreach ($category->productSeries as $productSeri) {
+                    $productSeri->products()->delete();
+                }
+            }
             $category->productSeries()->delete();
             return $category->delete();
         } else if ($data['delete_type'] == Category::DELETE_TYPE['soft']) {

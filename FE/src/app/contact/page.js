@@ -97,7 +97,7 @@ const ContactUs = () => {
                         <div className="axil-google-map-wrap axil-section-gap pb--0">
                             <div className="mapouter">
                                 <div className="gmap_canvas">
-                                    <iframe width={1080} height={500} id="gmap_canvas" src="https://maps.google.com/maps?q=ho+chi+minh+city+vietnam&t=&z=13&ie=UTF8&iwloc=&output=embed" />
+                                    <iframe width={1080} height={500} id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.485467534978!2d106.77191309999999!3d10.8506324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTxrAgcGjhuqFtIEvhu7kgdGh14bqtdCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1719591844558!5m2!1svi!2s" />
                                 </div>
                             </div>
                         </div>

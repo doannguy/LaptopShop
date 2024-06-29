@@ -231,6 +231,6 @@
     <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
     <script>
         var _token = "{{ csrf_token() }}";
-        @include('product.edit.js')
     </script>
+    @include('product.edit.js')
 @endsection

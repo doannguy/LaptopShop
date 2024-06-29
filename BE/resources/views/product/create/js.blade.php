@@ -1,6 +1,6 @@
 <script>
     $(document).ready(function() {
-        const listAttribute = JSON.parse('{!! json_encode($attributes) !!}');
+        const listAttribute = @json($attributes);
         const form = $('#product-save-form');
         let lastSelectValue = null;
 
@@ -80,7 +80,7 @@
                         } else {
                             html = html.concat(
                                 `<option value="${value.id}">${value.text}</option>`
-                                )
+                            )
                         }
                         variableValue.html(html);
                     })
@@ -159,6 +159,7 @@
         }
         // handle category select change
         form.find('select[name="category"]').on('select2:select', function(e) {
+            form.find('select[name="product_seri"]').prop('disabled', true);
             const categoryId = e.target.value;
             $.ajax({
                 url: "{{ route('product_seri.get_by_category_id') }}",
@@ -169,9 +170,7 @@
                 },
                 success: function(res) {
                     const html = res.data.map((seri) => {
-                        return ` < option value="${seri.id}" > $ {
-                                    seri.name
-                                } < /option>`
+                        return `<option value="${seri.id}">${seri.name}</option>`
                     })
                     form.find('select[name="product_seri"]').html(html);
                     form.find('select[name="product_seri"]').prop('disabled', false);

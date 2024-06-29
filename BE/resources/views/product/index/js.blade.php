@@ -91,9 +91,8 @@
                         data: 'name',
                         orderable: true,
                         render: function(data, type, row, meta) {
-                            console.log(row);
                             return `<div class="d-flex align-items-center">
-                                        <a href="apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
+                                        <a href="{{ route('product.edit','') }}/${row.id}" class="symbol symbol-50px">
                                             <span class="symbol-label" style="background-image:url('{{ url('/storage') }}/${row?.thumbnail_media?.path ?? ''}');"></span>
                                         </a>
                                         <div class="ms-5">
@@ -159,5 +158,4 @@
     KTUtil.onDOMContentLoaded((function() {
         poductIndex().initDatatable();
     }));
-    console.log("hello");
 </script>

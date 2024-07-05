@@ -20,7 +20,7 @@ class OrderService extends Service
     public function getByUserId()
     {
         $user = auth()->user();
-        return $this->model->where('user_id', $user->id)->get()->map(function ($order) {
+        return $this->model->where('user_id', $user->id)->orderBy('id', 'desc')->get()->map(function ($order) {
             return [
                 'id' => $order->id,
                 'code' => $order->code,
@@ -112,12 +112,12 @@ class OrderService extends Service
         try {
             $user = auth()->user();
             $orderData = [
-                'code' => 'DH-U' . $user->id . "T" . time() . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 1),
+                'code' => 'DH-LT' . $user->id . "T" . time() . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 1),
                 'user_id' => $user->id,
                 'note' => $data['notes'] ?? '',
                 'total_price' => $data['total_amount'],
                 'address' => $data['address'],
-                'status' => $this->model::STATUS_WAITING,
+                'status' => $data['payment_method'] == 0 ? $this->model::STATUS_WAITING_PAYMENT : $this->model::STATUS_WAITING,
                 'user_name' => $data['first_name'] . ' ' . $data['last_name'],
                 'phone' => $data['phone'],
                 'shipping_fee' => $data['shipping_fee'],
@@ -151,7 +151,10 @@ class OrderService extends Service
 
             DB::commit();
             dispatch(new UpdateOrderStatusJob($user->email, 'Bạn đã đặt hàng thành công, xin vui lòng chờ xác nhận. Mã đơn hàng của bạn là: #' . $order->code));
-            return true;
+            return [
+                "order_id" => $order->code,
+                "amount" => $order->total_price
+            ];
         } catch (\Exception $e) {
             \Log::error($e->getMessage());
             DB::rollBack();
@@ -185,6 +188,10 @@ class OrderService extends Service
         }
         return $order->update($data);
     }
+    public function updateByCode($code, $data) {
+        $order = $this->model->where('code', $code)->first();
+        return $order->update($data);
+    }
 
     public function userUpdate($data, $id)
     {
@@ -203,4 +210,6 @@ class OrderService extends Service
         $order->orderDetails()->delete();
         return $order->delete();
     }
+
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Order\UpdateOrderRequest;
+use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 
@@ -36,5 +37,14 @@ class OrderController extends Controller
     public function orderService()
     {
         return app(OrderService::class);
+    }
+    public function vnpayPaymentComplete(Request $request, $order_id)
+    {
+        $url_return = $request->url_return;
+        $this->orderService()->updateByCode($order_id, [
+            'status' => Order::STATUS_WAITING,
+        ]);
+
+        return redirect($url_return);
     }
 }

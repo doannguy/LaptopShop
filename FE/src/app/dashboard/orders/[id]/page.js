@@ -79,8 +79,24 @@ const OrderDetail = ({ params }) => {
             }
         })
     }
+    const handelVnpayPayment = async () => {
+        setIsLoading(true);
+        let dataSend = {
+            order_id: response.data.code,
+            amount: response.data.total_price,
+            url_return : window.location.href
+        }
+        const res = await OrderService.vnpayPayment(dataSend);
+        setIsLoading(false);
+        if (res.code == 0) {
+            window.location.href = res.data;
+        }
+    }
     return isLoading ? <Loading /> : (isFetching) ? <SkeletonCustom lines={10} /> : (<div className="axil-dashboard-order-view">
         <p>Đơn hàng <strong>{response.data.code}</strong> đã đặt vào <strong>{response.data.created_at}</strong> có trạng thái <strong>{response.data.status_label}</strong>.</p>
+        <div className="d-flex justify-content-center">
+            {response.data.status == 3 && <button className="btn btn-lg btn-warning w-50" style={{ fontSize: "20px", color: "white" }} onClick={handelVnpayPayment}>Thanh toán VNPAY ngay</button>}
+        </div>
         <div className="order-details">
             <h2 className="block-title">Thông tin đơn hàng</h2>
             <table className="table">
@@ -170,7 +186,7 @@ const OrderDetail = ({ params }) => {
             </table>
         </div>
         { 
-            response.data.status == 0 ? (
+            response.data.status == 0 || response.data.status == 3 ? (
                 
                     <>
                     <div className="order-address">

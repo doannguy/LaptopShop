@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\UpdateOrderStatusJob;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\ProductOption;
@@ -16,7 +17,8 @@ class OrderService extends Service
         return new Order();
     }
 
-    public function getByUserId() {
+    public function getByUserId()
+    {
         $user = auth()->user();
         return $this->model->where('user_id', $user->id)->get()->map(function ($order) {
             return [
@@ -29,7 +31,8 @@ class OrderService extends Service
         });
     }
 
-    public function getDetail($id) {
+    public function getDetail($id)
+    {
         $order = $this->model->find($id);
         return [
             'id' => $order->id,
@@ -49,7 +52,7 @@ class OrderService extends Service
             'order_details' => $order->orderDetails->map(function ($orderDetail) {
                 return [
                     'id' => $orderDetail->id,
-                    'product_name' => $orderDetail->productOption->product->name.' ('.$orderDetail->productOption->name.')',
+                    'product_name' => $orderDetail->productOption->product->name . ' (' . $orderDetail->productOption->name . ')',
                     'quantity' => $orderDetail->quantity,
                     'price' => $orderDetail->price
                 ];
@@ -103,11 +106,11 @@ class OrderService extends Service
             ->with(['orderDetails.productOption', 'user.orders'])
             ->first();
     }
-    public function store($data) {
+    public function store($data)
+    {
         DB::beginTransaction();
         try {
             $user = auth()->user();
-            \Log::info($user->id);
             $orderData = [
                 'code' => 'DH-U' . $user->id . "T" . time() . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 1),
                 'user_id' => $user->id,
@@ -125,13 +128,11 @@ class OrderService extends Service
             $order_details = [];
             foreach ($data['order_details'] as $item) {
                 $productOption = ProductOption::find($item['product_option_id']);
-                if($productOption->amount < $item['quantity']) {  // Kiem tra so luong
+                if ($productOption->amount < $item['quantity']) {  // Kiem tra so luong
                     return false;
                 }
                 $productOption->amount -= $item['quantity'];
                 $productOption->selled += $item['quantity'];
-
-
                 $productOption->save();
                 $order_details[] = [
                     'product_option_id' => $item['product_option_id'],
@@ -147,34 +148,59 @@ class OrderService extends Service
                 $cartIds[] = $item['id'];
             }
             Cart::whereIn('id', $cartIds)->delete();
+
             DB::commit();
+            dispatch(new UpdateOrderStatusJob($user->email, 'Bạn đã đặt hàng thành công, xin vui lòng chờ xác nhận. Mã đơn hàng của bạn là: #' . $order->code));
             return true;
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             \Log::error($e->getMessage());
             DB::rollBack();
             return false;
         }
-
     }
 
-    public function update( $id, $data) {
+    public function update($id, $data)
+    {
         $order = $this->model->find($id);
+        if ($order->status != $data['status']) {
+            switch ($data['status']) {
+                case $this->model::STATUS_CANCEL:
+                    $content = "Đơn hàng #$order->code của bạn đã bị hủy bỏ";
+                    break;
+                case $this->model::STATUS_WAITING:
+                    $content = "Đơn hàng #$order->code của bạn đang chờ xác nhận";
+                    break;
+                case $this->model::STATUS_SUCCESS:
+                    $content = "Đơn hàng #$order->code của bạn đã được giao thành công";
+                    break;
+                case $this->model::STATUS_CONFIRM:
+                    $content = "Đơn hàng #$order->code đã được xác nhận và sẽ sớm được giao tới bạn";
+                    break;
+                case $this->model::STATUS_SHIPPING:
+                    $content = "Đơn hàng #$order->code đang trên đường giao tới bạn";
+                    break;
+            }
+
+            dispatch(new UpdateOrderStatusJob($order->user->email, $order->user_name, $content));
+        }
         return $order->update($data);
     }
-    public function userUpdate($data, $id) {
+
+    public function userUpdate($data, $id)
+    {
         $order = $this->model->find($id);
         if ($order->status != $this->model::STATUS_WAITING) {
             return false;
         }
         return parent::update($id, $data);
     }
-    function delete($id) {
+    function delete($id)
+    {
         $order = $this->model->find($id);
-        if($order->status != $this->model::STATUS_WAITING) {
+        if ($order->status != $this->model::STATUS_WAITING) {
             return false;
         }
         $order->orderDetails()->delete();
         return $order->delete();
     }
-
 }

@@ -17,11 +17,15 @@ class Order extends Model
     public const STATUS_WAITING = 0;
     public const STATUS_SUCCESS = 1;
     public const STATUS_CANCEL = 2;
+    public const STATUS_CONFIRM = 3;
+    public const STATUS_SHIPPING = 4;
 
     public const STATUS_LABEL = [
         self::STATUS_WAITING => 'Đang chờ',
         self::STATUS_SUCCESS => 'Thành công',
         self::STATUS_CANCEL => 'Đã hủy',
+        self::STATUS_CONFIRM => 'Đã xác nhận',
+        self::STATUS_SHIPPING => 'Đang giao hàng',
     ];
 
     public const SHIPPING_LABEL = [

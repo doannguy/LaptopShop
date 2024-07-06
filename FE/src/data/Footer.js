@@ -61,7 +61,7 @@ const FooterData = {
         },
     ],
     footerInfo: {
-        address: "Số nhà 16, <br /> Đoàn Kết, Thuận Thành, <br /> Phổ Yên.",
+        address: "Nhà hàng 268, <br />Sơn Tiến, Quyết Thắng, TP Thái Nguyên<br /> tỉnh Thái Nguyên.",
         email: "ductrieuhoang@gmail.com",
         phone: "0793157708"
     },

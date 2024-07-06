@@ -14,7 +14,7 @@ const TestimonialOne = () => {
     <Section pClass="bg-vista-white">
       <SectionTitle
         title="Đánh giá từ khách hàng"
-        subtitle="Reviews"
+        subtitle="Đánh giá"
         subtitleIcon="fal fa-quote-left"
         subColor="highlighter-secondary"
       />

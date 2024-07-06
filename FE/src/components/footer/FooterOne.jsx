@@ -87,8 +87,7 @@ const FooterOne = (props) => {
                 <ul className="quick-link">
                   <li>
                     © {new Date().getFullYear()}. All rights reserved by {" "}
-                    Nguyễn Đoàn
-                    .
+                    Codetify
                   </li>
                 </ul>
               </div>

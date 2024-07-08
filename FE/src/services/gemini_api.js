@@ -13,7 +13,7 @@ const openai = new OpenAI({
 
 export const postDataToGPT = async ({ messenger = {} }) => {
     const completion = await openai.chat.completions.create({
-        messages: [{ role: "system", content: "Luôn trả lời bằng tiếng Việt, tôi tên là Đức, chỉ trả lời những câu hỏi về laptop" }, { role: "user", content: messenger },],
+        messages: [{ role: "system", content: "Luôn trả lời bằng tiếng Việt, tôi tên là Đoàn, chỉ trả lời những câu hỏi về laptop" }, { role: "user", content: messenger },],
         model: "gpt-3.5-turbo-1106",
     });
     console.log(completion?.choices[0].message.content);

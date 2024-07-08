@@ -182,6 +182,9 @@ class OrderService extends Service
                 case $this->model::STATUS_SHIPPING:
                     $content = "Đơn hàng #$order->code đang trên đường giao tới bạn";
                     break;
+                case $this->model::STATUS_WAITING_PAYMENT:
+                    $content = "Đơn hàng #$order->code đang đang chờ thanh toán, hãy thanh toán đơn hàng ngay";
+                    break;
             }
 
             dispatch(new UpdateOrderStatusJob($order->user->email, $order->user_name, $content));

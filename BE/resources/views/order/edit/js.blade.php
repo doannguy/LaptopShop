@@ -179,6 +179,8 @@
                                     return `<span class="badge badge-light-primary fw-bold">Đã xác nhận</span>`
                                 case 4:
                                     return `<span class="badge badge-light-info fw-bold">Đang giao hàng</span>`
+                                case 5:
+                                    return `<span class="badge badge-light-info fw-bold">Đang chờ thanh toán</span>`
                             }
                         }
                     },

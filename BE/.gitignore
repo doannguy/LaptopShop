@@ -1,6 +1,8 @@
 /.phpunit.cache
 /node_modules
 /public/build
+/public/assets
+public/assets/assets/plugins/global/fonts/keenicons
 /public/hot
 /public/storage
 /storage/*.key

@@ -75,7 +75,7 @@ const HeaderActions = (props) => {
     removeToken();
     dispatch(cartClear());
     dispatch(logOut());
-    router.push('/signin');
+    router.push('/sign-in');
   }
 
   return (

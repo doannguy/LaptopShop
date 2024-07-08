@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Admin\ProductSeri;
+namespace App\Http\Requests\Api\Order;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class DeleteProductSeriRequest extends FormRequest
+class VnpayPaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,24 +25,27 @@ class DeleteProductSeriRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:product_series,id',
-            'delete_type' => 'required|in:0,1'
+            'order_id' => 'required|exists:orders,code',
+            'amount' => 'required|integer',
+            'url_return' => 'required|url'
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'id.required' => 'Vui lòng chọn mục cần xóa',
-            'id.exists' => 'Vui lòng chọn mục cần xóa',
-            'delete_type.required' => 'Vui lòng chọn hình thức xóa',
-            'delete_type.in' => 'Vui lòng chọn hình thức xóa'
+            'order_id.required' => 'ID đơn hàng là bắt buộc.',
+            'order_id.exists' => 'ID đơn hàng không tồn tại.',
+            'amount.required' => 'Số tiền là bắt buộc.',
+            'amount.integer' => 'Số tiền phải là số nguyên.',
+            'url_return.required' => 'URL return là bắt buộc.',
+            'url_return.url' => 'URL return không hợp lệ.',
         ];
     }
-
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors()->all();
+
         throw new HttpResponseException(jsonResponse(1, $errors));
     }
 }

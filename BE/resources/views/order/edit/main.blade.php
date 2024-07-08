@@ -338,11 +338,11 @@
                                                             <div class="d-flex align-items-center">
                                                                 <a href="javascript:void(0)" class="symbol symbol-50px">
                                                                     <span class="symbol-label"
-                                                                        style="background-image:url('{{ url('/storage') . '/' . $orderDetail->productOption->product->thumbnailMedia?->path ?? '' }}')"></span>
+                                                                        style="background-image:url('{{ url('/storage') . '/' . $orderDetail->productOption->product?->thumbnailMedia?->path ?? '' }}')"></span>
                                                                 </a>
                                                                 <div class="ms-5">
                                                                     <a href="javascript:void(0)"
-                                                                        class="fw-bold text-gray-600 text-hover-primary">{{ $orderDetail->productOption->product->name }}</a>
+                                                                        class="fw-bold text-gray-600 text-hover-primary">{{ $orderDetail->productOption->product?->name }}</a>
                                                                 </div>
                                                             </div>
                                                         </td>

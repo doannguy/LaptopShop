@@ -79,7 +79,7 @@ const SingleLayouThree = ({ singleData, productId }) => {
 			}
 		} catch (error) {
 			console.log(error);
-			toast.error("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng");
+			toast.error("Bạn chưa đăng nhập");
 		}
 	};
 

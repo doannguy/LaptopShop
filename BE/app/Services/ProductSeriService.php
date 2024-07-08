@@ -47,7 +47,7 @@ class ProductSeriService
             $productSeri->products()->delete();
             return $productSeri->delete();
         } else if ($data['delete_type'] == ProductSeri::DELETE_TYPE['soft']) {
-            $productSeri->products()->update(['productSeri_id' => null]);
+            $productSeri->products()->update(['product_seri_id' => null]);
             return $productSeri->delete();
         }
     }

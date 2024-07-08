@@ -26,7 +26,7 @@ class UpdateOrderRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:orders,id',
-            'status' => ['required|in:' . Order::STATUS_SUCCESS . ',' . Order::STATUS_WAITING . ',' . Order::STATUS_CANCEL . ',' . Order::STATUS_CONFIRM . ',' . Order::STATUS_SHIPPING, Order::STATUS_WAITING_PAYMENT],
+            'status' => 'required|in:' . Order::STATUS_SUCCESS . ',' . Order::STATUS_WAITING . ',' . Order::STATUS_CANCEL . ',' . Order::STATUS_CONFIRM . ',' . Order::STATUS_SHIPPING.','.Order::STATUS_WAITING_PAYMENT,
             'note' => 'nullable|string|max:255',
         ];
     }

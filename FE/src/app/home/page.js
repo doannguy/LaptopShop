@@ -88,7 +88,7 @@ const Home = () => {
                     },
                   ]}
                 >
-                  {lastestProduct.data.products.map((data) => (
+                  {lastestProduct?.data.products.map((data) => (
                     <ProductTwo productOption={data} key={data.id} />
                   ))}
 

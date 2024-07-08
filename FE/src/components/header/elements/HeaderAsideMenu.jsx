@@ -74,7 +74,7 @@ const HeaderAsideMenu = () => {
 						<i className="fas fa-times" />
 					</button>
 					<ul className="nav-menu-list">
-						{data.map((menuItem, index) => (
+						{data?.map((menuItem, index) => (
 							<li key={index}>
 								<Link
 									href={'/shop?category=' + menuItem.id}

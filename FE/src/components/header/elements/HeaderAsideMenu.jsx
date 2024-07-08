@@ -95,7 +95,7 @@ const HeaderAsideMenu = () => {
 											<div className="department-megamenu-wrap">
 												<div className="department-submenu-wrap">
 													{menuItem.product_series
-														.slice(0, 3)
+														// .slice(0, 3)
 														.map((submenu, index) => (
 															<Link
 																href={`/shop?seri=${submenu.id}`}

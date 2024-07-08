@@ -50,7 +50,7 @@ const Checkout = () => {
             if (data) {
                 setIsLoading(true);
                 // router.push('checkout/order-received');
-                const dataSend = {
+                let dataSend = {
                     first_name: data.firstName,
                     last_name: data.lastName,
                     phone: data.phone,
@@ -65,15 +65,30 @@ const Checkout = () => {
                 const res = await OrderService.store(dataSend);
                 if (res.code == 0) {
                     setIsLoading(false);
-                    router.push('checkout/order-received');
                     dispatch(cartClear());
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        html: `<div>
-                        Đặt hàng thành công
-                    </div>`,
-                    })
+                    if(paymentMethod == 1){
+                        router.push('dashboard/orders');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            html: `<div>
+                            Đặt hàng thành công
+                        </div>`,
+                        })
+                    }else if (paymentMethod == 0) {
+                        let payment_res = res.data;
+                        setIsLoading(true);
+                        let dataSend = {
+                            order_id: payment_res.order_id,
+                            amount: payment_res.amount,
+                            url_return: window.location.origin + '/dashboard/orders',
+                        }
+                        const res_vnpay = await OrderService.vnpayPayment(dataSend);
+                        setIsLoading(false);
+                        if (res_vnpay.code == 0) {
+                            window.location.href = res_vnpay.data;
+                        }
+                    }
                 } else {
                     console.log(res);
                     setIsLoading(false);
@@ -273,7 +288,7 @@ const Checkout = () => {
                                             <div className="single-payment" onClick={() => setPaymentMethod(0)}>
                                                 <div className="input-group justify-content-between align-items-center" >
                                                     <input type="radio" {...register("paymentMethod")} checked={paymentMethod == 0} id="bank" value="bank" />
-                                                    <label htmlFor="bank">Thanh toán qua thẻ ngân hàng</label>
+                                                    <label htmlFor="bank">Thanh toán qua VNPAY</label>
                                                     <Image
                                                         src="/images/others/payment.png"
                                                         height={28}
@@ -281,7 +296,7 @@ const Checkout = () => {
                                                         alt="Paypal payment"
                                                     />
                                                 </div>
-                                                <p>Sử dụng thẻ ghi nợ nội địa để thanh toán đơn hàng của bạn.</p>
+                                                <p>Quét mã QR của VNPAY để thanh toán đơn hàng của bạn.</p>
                                             </div>
                                             <div className="single-payment" onClick={() => setPaymentMethod(1)}>
                                                 <div className="input-group">

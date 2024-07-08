@@ -36,6 +36,10 @@ const Home = () => {
     queryKey: ["get-lastest-product-list"],
     queryFn: () => ProductService.getListProduct({ limit: 8, orderBy: 'id', orderDir: 'desc', search: '' })
   })
+  const { data: sellestProduct, isFetched: isSellestFetched } = useQuery({
+    queryKey: ["get-sellest-product-list"],
+    queryFn: () => ProductService.getListProduct({ limit: 8, orderBy: 'selled', orderDir: 'desc', search: '' })
+  })
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setTimeout(() => {
@@ -88,7 +92,7 @@ const Home = () => {
                     },
                   ]}
                 >
-                  {lastestProduct.data.products.map((data) => (
+                  {lastestProduct?.data.products.map((data) => (
                     <ProductTwo productOption={data} key={data.id} />
                   ))}
 
@@ -100,47 +104,52 @@ const Home = () => {
           </Section>
 
 
-          {/* <Section pClass="pb--50 pb_sm--30">
+          <Section pClass="pb--50 pb_sm--30">
             <SectionTitle
               title="Sản phẩm bán chạy"
               subtitle="Sản phẩm tháng này"
               subtitleIcon="far fa-shopping-basket"
               subColor="highlighter-secondary"
             />
-            <SlickSlider
-              class="product-transparent-layout slick-layout-wrapper--15 axil-slick-arrow arrow-top-slide product-slide-mobile"
-              slidesToShow={4}
-              infinite={false}
-              responsive={[
-                {
-                  breakpoint: 1200,
-                  settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                  }
-                },
-                {
-                  breakpoint: 992,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                  }
-                },
-                {
-                  breakpoint: 576,
-                  settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                  }
-                },
-              ]}
-            >
-              {transparentProduct.slice(0, 8).map((data) => (
-                <ProductSeven product={data} key={data.id} />
-              ))}
+            {isSellestFetched ?
+              (
+                <SlickSlider
+                  class="slick-layout-wrapper--30 axil-slick-arrow arrow-top-slide"
+                  slidesToShow={4}
+                  responsive={[
+                    {
+                      breakpoint: 1400,
+                      settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                      }
+                    },
+                    {
+                      breakpoint: 992,
+                      settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                      }
+                    },
+                    {
+                      breakpoint: 575,
+                      settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                      }
+                    },
+                  ]}
+                >
+                  {sellestProduct?.data.products.map((data) => (
+                    <ProductTwo productOption={data} key={data.id} />
+                  ))}
 
-            </SlickSlider>
-          </Section> */}
+                </SlickSlider>
+              )
+              :
+              <SkeletonCustom lines={8} />
+            }
+          </Section>
           <PosterOne
             subtitleIcon="far fa-shopping-basket"
             title="Khám phá cửa hàng hôm nay"

@@ -79,8 +79,24 @@ const OrderDetail = ({ params }) => {
             }
         })
     }
+    const handelVnpayPayment = async () => {
+        setIsLoading(true);
+        let dataSend = {
+            order_id: response.data.code,
+            amount: response.data.total_price,
+            url_return : window.location.href
+        }
+        const res = await OrderService.vnpayPayment(dataSend);
+        setIsLoading(false);
+        if (res.code == 0) {
+            window.location.href = res.data;
+        }
+    }
     return isLoading ? <Loading /> : (isFetching) ? <SkeletonCustom lines={10} /> : (<div className="axil-dashboard-order-view">
         <p>Đơn hàng <strong>{response.data.code}</strong> đã đặt vào <strong>{response.data.created_at}</strong> có trạng thái <strong>{response.data.status_label}</strong>.</p>
+        <div className="d-flex justify-content-center">
+            {response.data.status == 5 && <button className="btn btn-lg btn-warning w-50" style={{ fontSize: "20px", color: "white" }} onClick={handelVnpayPayment}>Thanh toán VNPAY ngay</button>}
+        </div>
         <div className="order-details">
             <h2 className="block-title">Thông tin đơn hàng</h2>
             <table className="table">
@@ -169,42 +185,51 @@ const OrderDetail = ({ params }) => {
                 </tbody>
             </table>
         </div>
-        <div className="order-address">
-            <h2 className="block-title">Sửa đơn hàng</h2>
-            <form className="account-details-form" onSubmit={handleSubmit(onSubmit)}>
-                <div className="row">
-                    <div className="col-lg-">
-                        <div className="form-group">
-                            <label>Ghi chú</label>
-                            <textarea type="text" name="note" {...register('note')} className="form-control" >{response.data.note}</textarea>
-                        </div>
+        { 
+            response.data.status == 0 || response.data.status == 3 ? (
+                
+                    <>
+                    <div className="order-address">
+                        <h2 className="block-title">Sửa đơn hàng</h2>
+                        <form className="account-details-form" onSubmit={handleSubmit(onSubmit)}>
+                            <div className="row">
+                                <div className="col-lg-">
+                                    <div className="form-group">
+                                        <label>Ghi chú</label>
+                                        <textarea type="text" name="note" {...register('note')} className="form-control" >{response.data.note}</textarea>
+                                    </div>
 
-                        <div className="form-group">
-                            <label>Địa chỉ <span>*</span></label>
-                            <input type="text" disabled={response.data.status !== 0} name="address" {...register('address', { required: true })} value={response.data.address} />
-                            {errors.address && <p className="error">Địa chỉ không được bỏ trống.</p>}
-                        </div>
-                        <div className="form-group">
-                            <label>Tên người nhận <span>*</span></label>
-                            <input type="text" {...register('name', { required: true })} value={response.data.name} />
-                            {errors.name && <p className="error">Tên người nhận không được bỏ trống.</p>}
-                        </div>
-                        <div className="form-group">
-                            <label>Số điện thoại <span>*</span></label>
-                            <input type="number" {...register('phone', { required: true, maxLength: 11 })} value={response.data.phone} />
-                            {errors.phone && <p className="error">Số điện thoại tối đa 11 số và không được bỏ trống.</p>}
-                        </div>
-                        <div className="form-group my--10">
-                            <input type="submit" className="axil-btn me-1" value="Cập nhật" />
-                        </div>
+                                    <div className="form-group">
+                                        <label>Địa chỉ <span>*</span></label>
+                                        <input type="text" disabled={response.data.status !== 0} name="address" {...register('address', { required: true })} defaultValue={response.data.address} />
+                                        {errors.address && <p className="error">Địa chỉ không được bỏ trống.</p>}
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Tên người nhận <span>*</span></label>
+                                        <input type="text" {...register('name', { required: true })} defaultValue={response.data.name} />
+                                        {errors.name && <p className="error">Tên người nhận không được bỏ trống.</p>}
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Số điện thoại <span>*</span></label>
+                                        <input type="number" {...register('phone', { required: true, maxLength: 11 })} defaultValue={response.data.phone} />
+                                        {errors.phone && <p className="error">Số điện thoại tối đa 11 số và không được bỏ trống.</p>}
+                                    </div>
+                                    <div className="form-group my--10">
+                                        <input type="submit" className="axil-btn me-1" value="Cập nhật" />
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+                        <button className="btn axil-btn btn-danger" disabled={response.data.status !== 0} onClick={() => handelDelete()}>Hủy đơn hàng</button>
 
                     </div>
-
-                </div>
-            </form>
-            <button className="btn axil-btn btn-danger" disabled={response.data.status !== 0} onClick={() => handelDelete()}>Hủy đơn hàng</button>
-
-        </div>
+                    </>
+                
+            ): ""
+        }
+        
     </div>);
 }
 

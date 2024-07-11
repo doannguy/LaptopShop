@@ -7,6 +7,7 @@ import SlickSlider from "../elements/SlickSlider";
 import RatingService from "@/services/rating_service";
 import SkeletonCustom from "../widget/Skeleton";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const TestimonialOne = () => {
   const { data: TestimonialData, isFetched } = useQuery({ queryKey: ["get-testimonial"], queryFn: () => RatingService.getReviews({ length: 6 }) });
@@ -14,7 +15,7 @@ const TestimonialOne = () => {
     <Section pClass="bg-vista-white">
       <SectionTitle
         title="Đánh giá từ khách hàng"
-        subtitle="Reviews"
+        subtitle="Đánh giá"
         subtitleIcon="fal fa-quote-left"
         subColor="highlighter-secondary"
       />

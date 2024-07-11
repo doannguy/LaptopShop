@@ -35,7 +35,13 @@ class ProductService extends Service
 
         if (isset($data['search'])) {
             $search = $data['search'];
-            $query->where('name', 'like', "%{$search}%");
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhereHas('productSeri', function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                })
+                ->orWhereHas('brand', function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                });
         }
 
         $query->orderBy('id', $sort);
@@ -111,7 +117,8 @@ class ProductService extends Service
             return false;
         }
     }
-    function update($id, $data) {
+    function update($id, $data)
+    {
         DB::beginTransaction();
         try {
             $product = $this->model->find($id);
@@ -157,7 +164,6 @@ class ProductService extends Service
             $query->whereHas('product', function ($query) use ($filterData) {
                 $query->where('product_seri_id', $filterData['product_seri']);
             });
-
         }
         if (isset($filterData['category'])) {
             $query->whereHas('product', function ($query) use ($filterData) {
@@ -175,20 +181,20 @@ class ProductService extends Service
         $totalProduct = $query->count();
         $productOptionTotal = $query->get();
         foreach ($productOptionTotal as $productOption) {
-            $brandId =$productOption->product->brand_id;
+            $brandId = $productOption->product->brand_id;
             $brandCount[$brandId] = isset($brandCount[$brandId])
-            ? [...$brandCount[$brandId], 'count' => $brandCount[$brandId]['count'] + 1]
-            :['count' => 1, 'label' => $productOption->product->brand->name, 'id' => $brandId];
+                ? [...$brandCount[$brandId], 'count' => $brandCount[$brandId]['count'] + 1]
+                : ['count' => 1, 'label' => $productOption->product->brand->name, 'id' => $brandId];
 
             $seriId = $productOption->product->product_seri_id;
             $seriCount[$seriId] = isset($seriCount[$seriId])
-            ? [...$seriCount[$seriId], 'count' => $seriCount[$seriId]['count'] + 1]
-            : ['count' => 1, 'label' => $productOption->product->productSeri->name, 'id' => $seriId];
+                ? [...$seriCount[$seriId], 'count' => $seriCount[$seriId]['count'] + 1]
+                : ['count' => 1, 'label' => $productOption->product->productSeri->name, 'id' => $seriId];
 
             $cate_id = $productOption->product->productSeri->category_id;
             $cateCount[$cate_id] = isset($cateCount[$cate_id])
-            ? [...$cateCount[$cate_id], 'count' => $cateCount[$cate_id]['count'] + 1]
-            : ['count' => 1, 'label' => $productOption->product->productSeri->category->name, 'id' => $cate_id];
+                ? [...$cateCount[$cate_id], 'count' => $cateCount[$cate_id]['count'] + 1]
+                : ['count' => 1, 'label' => $productOption->product->productSeri->category->name, 'id' => $cate_id];
         }
         // object to array
         $brandCount = array_values($brandCount);
@@ -209,7 +215,8 @@ class ProductService extends Service
             'cateCount' => $cateCount
         ];
     }
-    function getProductDetail($id) {
+    function getProductDetail($id)
+    {
         $product = Product::where('id', $id)->with(['productOptions' => function ($query) {
             $query->with(['productMedia', 'attributeValues' => function ($query) {
                 $query->with('attribute');
@@ -229,13 +236,14 @@ class ProductService extends Service
 
         return $product;
     }
-    function getReviews($data) {
+    function getReviews($data)
+    {
         $limit = $data['length'] ?? 10;
-        return ProductReview::with('product:id,name','user:id,name')->orderBy('rating', 'desc')->limit($limit)->get();
+        return ProductReview::with('product:id,name', 'user:id,name')->orderBy('rating', 'desc')->limit($limit)->get();
     }
-    function getReviewByProductId($product_id) {
+    function getReviewByProductId($product_id)
+    {
         return ProductReview::where('product_id', $product_id)->with('user:id,name')->get();
-
     }
     public function storeReview($data)
     {

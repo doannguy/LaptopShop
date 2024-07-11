@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\UpdateOrderStatusJob;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\ProductOption;
@@ -16,9 +17,10 @@ class OrderService extends Service
         return new Order();
     }
 
-    public function getByUserId() {
+    public function getByUserId()
+    {
         $user = auth()->user();
-        return $this->model->where('user_id', $user->id)->get()->map(function ($order) {
+        return $this->model->where('user_id', $user->id)->orderBy('id', 'desc')->get()->map(function ($order) {
             return [
                 'id' => $order->id,
                 'code' => $order->code,
@@ -29,7 +31,8 @@ class OrderService extends Service
         });
     }
 
-    public function getDetail($id) {
+    public function getDetail($id)
+    {
         $order = $this->model->find($id);
         return [
             'id' => $order->id,
@@ -44,12 +47,12 @@ class OrderService extends Service
             'message' => $order->message,
             'total_price' => $order->total_price,
             'phone' => $order->phone,
-            'name' => $order->name,
+            'name' => $order->user_name,
             'user' => $order->user,
             'order_details' => $order->orderDetails->map(function ($orderDetail) {
                 return [
                     'id' => $orderDetail->id,
-                    'product_name' => $orderDetail->productOption->product->name.' ('.$orderDetail->productOption->name.')',
+                    'product_name' => $orderDetail->productOption->product->name . ' (' . $orderDetail->productOption->name . ')',
                     'quantity' => $orderDetail->quantity,
                     'price' => $orderDetail->price
                 ];
@@ -103,18 +106,18 @@ class OrderService extends Service
             ->with(['orderDetails.productOption', 'user.orders'])
             ->first();
     }
-    public function store($data) {
+    public function store($data)
+    {
         DB::beginTransaction();
         try {
             $user = auth()->user();
-            \Log::info($user->id);
             $orderData = [
-                'code' => 'DH-U' . $user->id . "T" . time() . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 1),
+                'code' => 'DH-LT' . $user->id . "T" . time() . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 1),
                 'user_id' => $user->id,
                 'note' => $data['notes'] ?? '',
                 'total_price' => $data['total_amount'],
                 'address' => $data['address'],
-                'status' => $this->model::STATUS_WAITING,
+                'status' => $data['payment_method'] == 0 ? $this->model::STATUS_WAITING_PAYMENT : $this->model::STATUS_WAITING,
                 'user_name' => $data['first_name'] . ' ' . $data['last_name'],
                 'phone' => $data['phone'],
                 'shipping_fee' => $data['shipping_fee'],
@@ -125,16 +128,11 @@ class OrderService extends Service
             $order_details = [];
             foreach ($data['order_details'] as $item) {
                 $productOption = ProductOption::find($item['product_option_id']);
-                if($productOption->amount < $item['quantity']) {  // Kiem tra so luong
+                if ($productOption->amount < $item['quantity']) {  // Kiem tra so luong
                     return false;
                 }
                 $productOption->amount -= $item['quantity'];
                 $productOption->selled += $item['quantity'];
-                \Log::info($item);
-                \Log::info($productOption->amount);
-                \Log::info($productOption->selled);
-
-
                 $productOption->save();
                 $order_details[] = [
                     'product_option_id' => $item['product_option_id'],
@@ -150,30 +148,71 @@ class OrderService extends Service
                 $cartIds[] = $item['id'];
             }
             Cart::whereIn('id', $cartIds)->delete();
+
             DB::commit();
-            return true;
-        }catch (\Exception $e) {
+            dispatch(new UpdateOrderStatusJob($user->email, 'Bạn đã đặt hàng thành công, xin vui lòng chờ xác nhận. Mã đơn hàng của bạn là: #' . $order->code));
+            return [
+                "order_id" => $order->code,
+                "amount" => $order->total_price
+            ];
+        } catch (\Exception $e) {
             \Log::error($e->getMessage());
             DB::rollBack();
             return false;
         }
-
     }
 
-    public function update($data, $id) {
+    public function update($id, $data)
+    {
         $order = $this->model->find($id);
-        if($order->status != $this->model::STATUS_WAITING) {
+        if ($order->status != $data['status']) {
+            switch ($data['status']) {
+                case $this->model::STATUS_CANCEL:
+                    $content = "Đơn hàng #$order->code của bạn đã bị hủy bỏ";
+                    break;
+                case $this->model::STATUS_WAITING:
+                    $content = "Đơn hàng #$order->code của bạn đang chờ xác nhận";
+                    break;
+                case $this->model::STATUS_SUCCESS:
+                    $content = "Đơn hàng #$order->code của bạn đã được giao thành công";
+                    break;
+                case $this->model::STATUS_CONFIRM:
+                    $content = "Đơn hàng #$order->code đã được xác nhận và sẽ sớm được giao tới bạn";
+                    break;
+                case $this->model::STATUS_SHIPPING:
+                    $content = "Đơn hàng #$order->code đang trên đường giao tới bạn";
+                    break;
+                case $this->model::STATUS_WAITING_PAYMENT:
+                    $content = "Đơn hàng #$order->code đang đang chờ thanh toán, hãy thanh toán đơn hàng ngay";
+                    break;
+            }
+
+            dispatch(new UpdateOrderStatusJob($order->user->email, $order->user_name, $content));
+        }
+        return $order->update($data);
+    }
+    public function updateByCode($code, $data) {
+        $order = $this->model->where('code', $code)->first();
+        return $order->update($data);
+    }
+
+    public function userUpdate($data, $id)
+    {
+        $order = $this->model->find($id);
+        if ($order->status != $this->model::STATUS_WAITING) {
             return false;
         }
-        return parent::update( $id, $data);
+        return parent::update($id, $data);
     }
-    function delete($id) {
+    function delete($id)
+    {
         $order = $this->model->find($id);
-        if($order->status != $this->model::STATUS_WAITING) {
+        if ($order->status != $this->model::STATUS_WAITING) {
             return false;
         }
         $order->orderDetails()->delete();
         return $order->delete();
     }
+
 
 }

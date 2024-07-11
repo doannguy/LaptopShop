@@ -62,7 +62,7 @@
                     })
                     .then((result) => {
                         if (result.isConfirmed) {
-                            alert('Bạn có muốn xóa toàn bộ sản phẩm của danh mục này không?',
+                            alert('Bạn có muốn xóa toàn bộ dòng sản phẩm của danh mục này không?',
                                     'question', {
                                         showCancelButton: true,
                                         cancelButtonText: 'Đóng',

@@ -74,7 +74,7 @@ const HeaderAsideMenu = () => {
 						<i className="fas fa-times" />
 					</button>
 					<ul className="nav-menu-list">
-						{data.map((menuItem, index) => (
+						{data?.map((menuItem, index) => (
 							<li key={index}>
 								<Link
 									href={'/shop?category=' + menuItem.id}
@@ -95,7 +95,7 @@ const HeaderAsideMenu = () => {
 											<div className="department-megamenu-wrap">
 												<div className="department-submenu-wrap">
 													{menuItem.product_series
-														.slice(0, 3)
+														// .slice(0, 3)
 														.map((submenu, index) => (
 															<Link
 																href={`/shop?seri=${submenu.id}`}

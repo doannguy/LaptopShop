@@ -8,10 +8,6 @@ const FooterData = {
                     url: "/dashboard"
                 },
                 {
-                    name: "Đăng nhập",
-                    url: "/sign-in"
-                },
-                {
                     name: "Giỏ hàng",
                     url: "/cart"
                 },
@@ -61,9 +57,9 @@ const FooterData = {
         },
     ],
     footerInfo: {
-        address: "Số nhà 16, <br /> Đoàn Kết, Thuận Thành, <br /> Phổ Yên.",
-        email: "ductrieuhoang@gmail.com",
-        phone: "0793157708"
+        address: "01 Đ. Võ Văn Ngân, Linh Chiểu <br/> Thủ Đức, Hồ Chí Minh",
+        email: "doannguyen2905@gmail.com",
+        phone: "0876782905"
     },
     footerAppInfo: {
         title: "Save $3 With App & New User only",

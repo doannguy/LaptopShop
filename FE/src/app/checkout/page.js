@@ -75,7 +75,7 @@ const Checkout = () => {
                             Đặt hàng thành công
                         </div>`,
                         })
-                    }else if (paymentMethod == 0) {
+                    }else if (paymentMethod == 0) { // thanh toan vnpay
                         let payment_res = res.data;
                         setIsLoading(true);
                         let dataSend = {

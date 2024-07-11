@@ -6,6 +6,8 @@ import SectionTitle from "@/components/elements/SectionTitle";
 import SlickSlider from "@/components/elements/SlickSlider";
 import FooterTwo from "@/components/footer/FooterTwo";
 import HeaderTwo from "@/components/header/HeaderTwo";
+import BannerLeft from "@/components/hero-banner/BannerLeft";
+import BannerRight from "@/components/hero-banner/BannerRight";
 import BannerThree from "@/components/hero-banner/BannerThree";
 import NewsLetter from "@/components/newsletter/NewsLetter";
 import PosterOne from '@/components/poster/PosterOne';
@@ -55,6 +57,8 @@ const Home = () => {
         <HeaderTwo />
         <main className="main-wrapper">
           <BannerThree />
+          <BannerLeft/>
+          <BannerRight/>
           <ServiceOne />
 
           <Section pClass="pb--50">
@@ -158,10 +162,7 @@ const Home = () => {
             thumbHeight={502}
 
           />
-
           <TestimonialOne />
-
-
           <NewsLetter bgImage="bg_image--12" />
           <ServiceTwo />
         </main>

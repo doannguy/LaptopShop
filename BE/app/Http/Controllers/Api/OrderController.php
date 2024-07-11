@@ -37,7 +37,7 @@ class OrderController extends Controller
     function vnpayPayment(VnpayPaymentRequest $request) {
 
     $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    $vnp_Returnurl = route('order.vnpay_payment_complete', ['id' => $request->order_id]) . '?url_return=' . $request->url_return;
+    $vnp_Returnurl = route('order.vnpay_payment_complete', ['id' => $request->order_id]) . '?url_return=' . $request->url_return; // đường dẫn khi thành công
     $vnp_TmnCode = env('VNPAY_TMMCODE');//Mã website tại VNPAY
     $vnp_HashSecret = env('VNPAY_HASH_SECRET'); //Chuỗi bí mật
 
@@ -46,7 +46,6 @@ class OrderController extends Controller
     $vnp_OrderType = 'billpayment';
     $vnp_Amount = $request->amount * 100;
     $vnp_Locale = 'vn';
-    $vnp_BankCode = 'NCB';
     $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
     //Add Params of 2.0.1 Version
     // $vnp_ExpireDate = $_POST['txtexpire'];

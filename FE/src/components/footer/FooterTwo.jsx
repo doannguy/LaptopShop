@@ -84,7 +84,7 @@ const FooterTwo = () => {
                   <ul className="quick-link">
                     <li>
                       © {new Date().getFullYear()}. All rights reserved by {" "}
-                      Codetify
+                      Đoàn Nguyễn
                     </li>
                   </ul>
                 </div>

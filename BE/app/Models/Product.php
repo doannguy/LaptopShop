@@ -20,9 +20,6 @@ class Product extends Model
         'hard' => 1,
     ];
 
-    public function category() {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
-    }
     /**
      * Get all of the ProductOptions for the Product
      *

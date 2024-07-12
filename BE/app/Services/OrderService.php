@@ -124,13 +124,19 @@ class OrderService extends Service
         try {
             $user = auth()->user();
 
-            $orderCode = 'DH-';
             if (count($data['order_details']) > 1) {
-                $orderCode .= 'PK';
+                $orderCode = 'DH-PK';
+                foreach ($data['order_details'] as $item) {
+                    $productOption = ProductOption::find($item['product_option_id']);
+                    $categoryName = $productOption->product->productSeri->category->name;
+                    if (strtolower($categoryName) === 'laptop') {
+                        $orderCode = 'DH-LT';
+                    }
+                }
             } else {
                 $productOption = ProductOption::find($data['order_details'][0]['product_option_id']);
                 $categoryName = $productOption->product->productSeri->category->name ?? 'P K';
-                $orderCode .= $this->getInitials($categoryName);
+                $orderCode = 'DH-' . $this->getInitials($categoryName);
             }
 
             $orderData = [

@@ -106,13 +106,41 @@ class OrderService extends Service
             ->with(['orderDetails.productOption', 'user.orders'])
             ->first();
     }
+
+    public function getInitials($string)
+    {
+        $words = explode(' ', $string);
+
+        $initials = array_map(function ($word) {
+            return strtoupper($word[0]);
+        }, $words);
+
+        return implode('', $initials);
+    }
+
     public function store($data)
     {
         DB::beginTransaction();
         try {
             $user = auth()->user();
+
+            if (count($data['order_details']) > 1) {
+                $orderCode = 'DH-PK';
+                foreach ($data['order_details'] as $item) {
+                    $productOption = ProductOption::find($item['product_option_id']);
+                    $categoryName = $productOption->product->productSeri->category->name;
+                    if (strtolower($categoryName) === 'laptop') {
+                        $orderCode = 'DH-LT';
+                    }
+                }
+            } else {
+                $productOption = ProductOption::find($data['order_details'][0]['product_option_id']);
+                $categoryName = $productOption->product->productSeri->category->name ?? 'P K';
+                $orderCode = 'DH-' . $this->getInitials($categoryName);
+            }
+
             $orderData = [
-                'code' => 'DH-LT' . $user->id . "T" . time() . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 1),
+                'code' => $orderCode . $user->id . "T" . time() . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 1),
                 'user_id' => $user->id,
                 'note' => $data['notes'] ?? '',
                 'total_price' => $data['total_amount'],
@@ -156,7 +184,7 @@ class OrderService extends Service
                 "amount" => $order->total_price
             ];
         } catch (\Exception $e) {
-            \Log::error($e->getMessage());
+            \Log::error($e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
             DB::rollBack();
             return false;
         }
@@ -191,7 +219,8 @@ class OrderService extends Service
         }
         return $order->update($data);
     }
-    public function updateByCode($code, $data) {
+    public function updateByCode($code, $data)
+    {
         $order = $this->model->where('code', $code)->first();
         return $order->update($data);
     }

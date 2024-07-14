@@ -1,16 +1,27 @@
 
+
 .banner_left {
    position: fixed;
    top: 200px;
-   z-index: 1000;
+   z-index: 100;
+  width: 14%;
 }
 .banner_right {
    position: fixed;
    top: 200px;
    right: 0;
-   z-index: 1000;
+   z-index: 100;
+  width: 14%;
 }
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1850px) {
+    .banner_left {
+        width: 10%;
+    }
+    .banner_right {
+        width: 10%;
+    }
+}
+@media only screen and (max-width: 1650px) {
     .banner_left {
         display: none;
     }

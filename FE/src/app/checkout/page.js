@@ -150,51 +150,7 @@ const Checkout = () => {
                                             </div>
 
 
-                                            {/* <div className="col-lg-12">
-                                        <div className="form-group">
-                                            <label>Tỉnh thành<span>*</span></label>
-                                            <select {...register('country', { required: true })}>
-                                                <option value="">Chọn tỉnh của bạn</option>
-                                                <option value="Australia">Australia</option>
-                                                <option value="Australia">England</option>
-                                                <option value="New Zealand">New Zealand</option>
-                                                <option value="Switzerland">Switzerland</option>
-                                                <option value="United Kindom (UK)">United Kindom (UK)</option>
-                                                <option value="United States (USA)">United States (USA)</option>
-                                            </select>
-                                            {errors.country && <p className="error">Country Name is required.</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-12">
-                                        <div className="form-group">
-                                            <label>Huyện<span>*</span></label>
-                                            <select {...register('country', { required: true })}>
-                                                <option value="">Chọn huyện của bạn</option>
-                                                <option value="Australia">Australia</option>
-                                                <option value="Australia">England</option>
-                                                <option value="New Zealand">New Zealand</option>
-                                                <option value="Switzerland">Switzerland</option>
-                                                <option value="United Kindom (UK)">United Kindom (UK)</option>
-                                                <option value="United States (USA)">United States (USA)</option>
-                                            </select>
-                                            {errors.country && <p className="error">Country Name is required.</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-12">
-                                        <div className="form-group">
-                                            <label>Xã<span>*</span></label>
-                                            <select {...register('country', { required: true })}>
-                                                <option value="">Chọn xã của bạn</option>
-                                                <option value="Australia">Australia</option>
-                                                <option value="Australia">England</option>
-                                                <option value="New Zealand">New Zealand</option>
-                                                <option value="Switzerland">Switzerland</option>
-                                                <option value="United Kindom (UK)">United Kindom (UK)</option>
-                                                <option value="United States (USA)">United States (USA)</option>
-                                            </select>
-                                            {errors.country && <p className="error">Country Name is required.</p>}
-                                        </div>
-                                    </div> */}
+                                           
                                             <div className="col-lg-12">
                                                 <div className="form-group">
                                                     <label>Địa chỉ nhận hàng <span>*</span></label>
@@ -209,19 +165,7 @@ const Checkout = () => {
                                                     {errors.phone && <p className="error">Số điện thoại tối đa 11 số và không được bỏ trống.</p>}
                                                 </div>
                                             </div>
-                                            {/* <div className="col-lg-12">
-                                                <div className="form-group">
-                                                    <label>Địa chỉ Email <span>*</span></label>
-                                                    <input type="email" {...register('email', { required: true })} />
-                                                    {errors.email && <p className="error">Email không được bỏ trống.</p>}
-                                                </div>
-                                            </div> */}
-                                            {/* <div className="col-lg-12">
-                                        <div className="form-group input-group">
-                                        <input {...register("createAccount")} id="accountCreate" type="checkbox" value="true" />
-                                        <label htmlFor="accountCreate">Create an account</label>
-                                        </div>
-                                    </div>     */}
+                                            
                                             <div className="col-lg-12">
                                                 <div className="form-group">
                                                     <label>Ghi chú (optional)</label>
@@ -305,19 +249,6 @@ const Checkout = () => {
                                                     
                                                 </div>
                                             </div>
-                                            {/* <div className="single-payment">
-                                        <div className="input-group justify-content-between align-items-center">
-                                            <input type="radio" {...register("paymentMethod")} id="paypal" value="paypal" />
-                                            <label htmlFor="paypal">Paypal</label>
-                                            <Image 
-                                                src="/images/others/payment.png" 
-                                                height={28}
-                                                width={156}
-                                                alt="Paypal payment"
-                                            />
-                                        </div>
-                                        <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                    </div> */}
                                         </div>
                                         <button type="submit" className="axil-btn btn-bg-primary checkout-btn">Đặt hàng ngay</button>
                                     </div>

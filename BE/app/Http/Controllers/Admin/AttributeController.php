@@ -14,6 +14,7 @@ class AttributeController extends Controller
 {
     public function index()
     {
+       
         return view('attribute.index.main');
     }
 

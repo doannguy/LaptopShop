@@ -11,8 +11,8 @@ class ProductSeriService
         $pageNumber = ($data['start'] ?? 0) / ($data['length'] ?? 1) + 1;
         $pageLength = $data['length'] ?? 10;
         $skip = ($pageNumber - 1) * $pageLength;
-        $orderBy = $data['columns'][$data['order'][0]['column']]['data'] ?? 'id';
-        $orderDir = $data['order'][0]['dir'] ?? 'desc';
+        $orderBy = $data['columns'][$data['order'][0]['column']]['data'] ?? 'id'; // cột cần sắp xếp
+        $orderDir = $data['order'][0]['dir'] ?? 'desc'; // cách sắp xếp tăng dần hoặc giảm dẩn
 
         $query = ProductSeri::query();
 

@@ -61,6 +61,6 @@ class UpdateUserRequest extends FormRequest
     {
         $errors = $validator->errors()->all();
 
-        throw new HttpResponseException(jsonResponse(0, $errors));
+        throw new HttpResponseException(jsonResponse(1, $errors));
     }
 }

@@ -7,10 +7,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useGetDetailedUser from '@/app/hook/use-get-details-user';
 import { useEffect, useMemo } from 'react';
+import useLocalStorage from '@/app/hook/use-local-storage';
+import { cartClear } from '@/store/slices/productSlice';
+import { logOut } from '@/store/slices/authSlice';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 const AccountDetails = () => {
     const { refetch,data } = useGetDetailedUser();
-
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const [token,setToken,removeToken] = useLocalStorage("token",null);
     const schema = Yup.object().shape({
         phone: Yup.string()
             .min(10, 'Vui lòng nhập đúng số điện thoại')
@@ -23,19 +30,19 @@ const AccountDetails = () => {
             .oneOf(["0", "1"], 'Giới tính không hợp lệ')
     });
 
-    const schemaChangePassword =  Yup.object().shape({
-        password: Yup.string()
-            .min(8, 'Mật khẩu phải trên 8 ký tự')
-            .required('Vui lòng nhập mật khẩu'),
-        new_password: Yup.string()
-            .min(7, 'Mật khẩu phải trên 8 ký tự')
-            .required('Mật khẩu phải trên 8 ký tự'),
+    // const schemaChangePassword =  Yup.object().shape({
+    //     password: Yup.string()
+    //         .min(8, 'Mật khẩu phải trên 8 ký tự')
+    //         .required('Vui lòng nhập mật khẩu'),
+    //     new_password: Yup.string()
+    //         .min(8, 'Mật khẩu phải trên 8 ký tự')
+    //         .required('Vui lòng nhập mật khẩu mới'),
 
-        password_confirmation: Yup.string()
-            .min(8, 'Mật khẩu phải trên 8 ký tự')
-            .oneOf([Yup.ref('new_password'), null], 'Mật khẩu không trùng khớp')
-            .required('Vui lòng nhập mật khẩu'),
-    });
+    //     password_confirmation: Yup.string()
+    //         .min(8, 'Mật khẩu phải trên 8 ký tự')
+    //         .oneOf([Yup.ref('new_password'), null], 'Mật khẩu không trùng khớp')
+    //         .required('Vui lòng nhập lại mật khẩu'),
+    // });
 
     const {
         control,
@@ -58,7 +65,7 @@ const AccountDetails = () => {
         handleSubmit:handleSubmitChangePassword,
         reset:resetChangePassword,
         formState: { errors:errorsChangePassword },
-    } = useForm({ resolver: yupResolver(schemaChangePassword)});
+    } = useForm();
 
     const updateUserInfomation = async (data) => {
         console.log(data);
@@ -73,17 +80,26 @@ const AccountDetails = () => {
     }
 
     const changePassword = async (data) => {
-        console.log(data);
+        
         const res = await UserService.changeUserPassword(data);
         if (res.data.code == 0) {
-            toast.success(res.data.data[0, 1]);
-            resetChangePassword();
+            toast.success(res.data.message);
         } else {
-            toast.error(res.data.data.email[0]);
+            toast.error(res.data.data[0]);
+            if(res.data.message) {
+                toast.error(res.data.message);
+            }else {
+                toast.error(res.data.data[0]);
+            }
         }
-        console.log(res);
+        handleLogout();
     }
-
+    const handleLogout = () => {
+        removeToken();
+        dispatch(cartClear());
+        dispatch(logOut());
+        router.push('/sign-in');
+      }
 
     return (
         <div className="axil-dashboard-account">

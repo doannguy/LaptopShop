@@ -57,8 +57,8 @@ class AuthController extends Controller
         if (!Hash::check($data['current_password'], $user->password)) {
             return jsonResponse(2, message: "Mật khẩu cũ không chính xác.");
         }
-        $user->password = Hash::make($data['password']);
-        if ($user->save()) {
+        $user->update(['password' => Hash::make($data['password'])]);
+        if ($user) {
             $user->tokens()->delete();
             return jsonResponse(0, message: "Thay đổi mật khẩu thành công.");
         } else {

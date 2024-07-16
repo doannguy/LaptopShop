@@ -28,13 +28,24 @@ class ChangePasswordRequest extends FormRequest
             'password' => 'required|string|min:8|confirmed',
         ];
     }
-
+    public function messages(): array
+    {
+        return [
+            'current_password.required' => 'Mật khẩu hiện tại không được để trống',
+            'current_password.string' => 'Mật khẩu hiện tại phải là một chuỗi',
+            'current_password.min' => 'Mật khẩu hiện tại phải có ít nhất 8 ký tự',
+            'password.required' => 'Mật khẩu mới không được để trống',
+            'password.string' => 'Mật khẩu mới phải là một chuỗi',
+            'password.min' => 'Mật khẩu mới phải có ít nhất 8 ký tự',
+            'password.confirmed' => 'Mật khẩu xác nhận không khớp',
+        ];
+    }
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors()->all();
 
         throw new HttpResponseException(
-            jsonResponse(0, $errors)
+            jsonResponse(1, $errors)
         );
     }
 }

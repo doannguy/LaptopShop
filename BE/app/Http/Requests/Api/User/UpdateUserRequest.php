@@ -30,7 +30,7 @@ class UpdateUserRequest extends FormRequest
             'phone' => [
                 'required',
                 'numeric',
-                'unique:users,phone',
+                'unique:users,phone,'.request()->id,
                 function ($attribute, $value, $fail) {
                     if (strlen($value) != 10) {
                         $fail('Số điện thoại khách hàng phải gồm 10 chữ số.');

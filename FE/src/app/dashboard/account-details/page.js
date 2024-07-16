@@ -6,9 +6,10 @@ import UserService from '@/services/user_service';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useGetDetailedUser from '@/app/hook/use-get-details-user';
+import { useEffect, useMemo } from 'react';
 
 const AccountDetails = () => {
-    const { refetch } = useGetDetailedUser();
+    const { refetch,data } = useGetDetailedUser();
 
     const schema = Yup.object().shape({
         phone: Yup.string()
@@ -19,7 +20,10 @@ const AccountDetails = () => {
             .required('Vui lòng nhập tên người dùng'),
         gender: Yup.string()
             .required('Vui lòng chọn giới tính')
-            .oneOf(["0", "1"], 'Giới tính không hợp lệ'),
+            .oneOf(["0", "1"], 'Giới tính không hợp lệ')
+    });
+
+    const schemaChangePassword =  Yup.object().shape({
         password: Yup.string()
             .min(8, 'Mật khẩu phải trên 8 ký tự')
             .required('Vui lòng nhập mật khẩu'),
@@ -36,9 +40,25 @@ const AccountDetails = () => {
     const {
         control,
         handleSubmit,
+        reset,
         formState: { errors },
-    } = useForm({ resolver: yupResolver(schema) });
+    } = useForm({ resolver: yupResolver(schema),
+        defaultValues: useMemo(() => {
+            return data?.user;
+        }, [data])
 
+     });
+
+     useEffect(() => {
+        reset(data?.user);
+    }, [data]);
+
+    const {
+        control: controlChangePassword,
+        handleSubmit:handleSubmitChangePassword,
+        reset:resetChangePassword,
+        formState: { errors:errorsChangePassword },
+    } = useForm({ resolver: yupResolver(schemaChangePassword)});
 
     const updateUserInfomation = async (data) => {
         console.log(data);
@@ -56,8 +76,8 @@ const AccountDetails = () => {
         console.log(data);
         const res = await UserService.changeUserPassword(data);
         if (res.data.code == 0) {
-
             toast.success(res.data.data[0, 1]);
+            resetChangePassword();
         } else {
             toast.error(res.data.data.email[0]);
         }
@@ -75,14 +95,14 @@ const AccountDetails = () => {
 
                         <div className="form-group">
                             <label>Tên người dùng</label>
-                            <Controller name="name" control={control} render={({ field }) => <input type="text" className="form-control" {...field} defaultValue="Annie" />} />
+                            <Controller name="name" control={control} render={({ field }) => <input type="text" className="form-control" {...field}  />} />
                             {errors.name && <p className="error">{errors.name.message}</p>}
                         </div>
 
 
                         <div className="form-group">
                             <label>Số điện thoại</label>
-                            <Controller name="phone" control={control} render={({ field }) => <input type="number" className="form-control" {...field} defaultValue="0123123123" />} />
+                            <Controller name="phone" control={control} render={({ field }) => <input type="number" className="form-control" {...field}  />} />
                             {errors.phone && <p className="error">{errors.phone.message}</p>}
                         </div>
 
@@ -90,7 +110,7 @@ const AccountDetails = () => {
                         <div class="form-group">
                             <label>Giới tính</label>
 
-                            <Controller defaultValue='1' name="gender" control={control} render={({ field }) => <select className='form-select' style={{ paddingLeft: "3rem", fontSize: "14px" }} {...field}>
+                            <Controller   name="gender" control={control} render={({ field }) => <select className='form-select' style={{ paddingLeft: "3rem", fontSize: "14px" }} {...field}>
                                 <option value="1">Nam</option>
                                 <option value="0">Nữ</option>
                             </select>} />
@@ -109,7 +129,7 @@ const AccountDetails = () => {
             </form>
 
 
-            <form className="account-details-form-change-password" onSubmit={handleSubmit(changePassword)}>
+            <form className="account-details-form-change-password" onSubmit={handleSubmitChangePassword(changePassword)}>
 
                 <div className="col-12">
 
@@ -117,22 +137,22 @@ const AccountDetails = () => {
                     <h5 className="title">Đổi mật khẩu</h5>
                     <div className="form-group">
                         <label>Mật khẩu hiện tại</label>
-                        <Controller name="current_password" control={control} render={({ field }) => <input type="password" className="form-control" {...field} />} />
-                        {errors.password && <small className="error text-danger">{errors.password.message}.</small>}
+                        <Controller name="current_password" control={controlChangePassword} render={({ field }) => <input type="password" className="form-control" {...field} />} />
+                        {errorsChangePassword.password && <small className="error text-danger">{errorsChangePassword?.password.message}.</small>}
 
                     </div>
 
                     <div className="form-group">
                         <label>Mật khẩu mới</label>
-                        <Controller name="password" control={control} render={({ field }) => <input type="password" className="form-control" {...field} />} />
-                        {errors.new_password && <small className="error text-danger">{errors.new_password.message}.</small>}
+                        <Controller name="password" control={controlChangePassword} render={({ field }) => <input type="password" className="form-control" {...field} />} />
+                        {errorsChangePassword.new_password && <small className="error text-danger">{errorsChangePassword?.new_password.message}.</small>}
                     </div>
 
 
                     <div className="form-group">
                         <label>Xác nhận mật khẩu</label>
-                        <Controller name="password_confirmation" control={control} render={({ field }) => <input type="password" className="form-control" {...field} />} />
-                        {errors.password_confirmation && <small className="error text-danger">{errors.password_confirmation.message}.</small>}
+                        <Controller name="password_confirmation" control={controlChangePassword} render={({ field }) => <input type="password" className="form-control" {...field} />} />
+                        {errorsChangePassword.password_confirmation && <small className="error text-danger">{errorsChangePassword?.password_confirmation.message}.</small>}
                     </div>
 
 

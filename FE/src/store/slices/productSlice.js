@@ -37,11 +37,14 @@ const productSlice = createSlice({
         cartQuantityIncrease(state, action) {
             const findItem = state.cartItems.findIndex((item) => item.id === action.payload.id);
             state.cartItems[findItem].quantity = parseInt(state.cartItems[findItem].quantity) + 1;
+            console.log(state.cartItems[findItem].quantity);
+
         },
         cartQuantityDecrease(state, action) {
             const findItem = state.cartItems.findIndex((item) => item.id === action.payload.id);
             if (state.cartItems[findItem].quantity > 1) {
                 state.cartItems[findItem].quantity = parseInt(state.cartItems[findItem].quantity) - 1;
+                console.log(state.cartItems[findItem].quantity);
             }
 
         },

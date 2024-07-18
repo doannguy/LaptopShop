@@ -146,6 +146,7 @@
                         data: 'status',
                         className: 'text-center',
                         render: function(data, type, row) {
+                            data = parseInt(data);
                             switch (data) {
                                 case 0:
                                     return `<span class="badge badge-light-warning fw-bold">Đang chờ</span>`

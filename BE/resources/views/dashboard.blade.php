@@ -42,13 +42,13 @@
                             <div class="d-flex align-items-center flex-column mt-3 w-100">
                                 <div class="d-flex justify-content-between w-100 mt-auto mb-2">
                                     <span class="fw-bolder fs-6 text-gray-900">Tháng này:
-                                        {{ $user['currentMonthUsers'] }}</span>
+                                        {{ $user['currentMonthUsers']  }}</span>
                                     <span class="fw-bold fs-6 text-gray-500">Tháng trước:
                                         {{ $user['lastMonthUsers'] }}</span>
                                 </div>
                                 <div class="h-8px mx-3 w-100 bg-light-success rounded">
                                     <div class="bg-success rounded h-8px" role="progressbar"
-                                        style="width: {{ $user['percentageChange'] }}%;" aria-valuenow="50"
+                                        style="width: {{ $user['percentageChange'] > 100 ? 100: $user['percentageChange'] }}%;" aria-valuenow="50"
                                         aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                                             class="ki-duotone {{ $order['percentageChange'] >= 100 ? 'ki-arrow-up text-success' : 'ki-arrow-down text-danger' }} fs-5  ms-n1">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
-                                        </i>{{ $order['percentageChange'] }}%</span>
+                                        </i>{{ $order['percentageChange']  }}%</span>
                                 </div>
                                 <span class="text-gray-500 pt-1 fw-semibold fs-6">Đơn hàng tháng này</span>
                             </div>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="h-8px mx-3 w-100 bg-light-success rounded">
                                     <div class="bg-success rounded h-8px" role="progressbar"
-                                        style="width: {{ $order['percentageChange'] }}%;" aria-valuenow="50"
+                                        style="width: {{ $order['percentageChange'] > 100 ? 100 : $order['percentageChange']}}%;" aria-valuenow="50"
                                         aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
